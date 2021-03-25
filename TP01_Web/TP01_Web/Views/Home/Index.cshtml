@@ -1,2 +1,16 @@
-﻿@{
-}
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <div>
+        @foreach (Utilisateur u in Model)
+        {
+            <div>
+                <h4>@u.IdUtilisateur @u.NomUtilisateur</h4>
+            </div>
+        }
+    </div>
+</body>
+</html>
