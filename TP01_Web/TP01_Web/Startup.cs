@@ -27,7 +27,7 @@ namespace TP01_Web
             services.AddScoped<IDépôt, DépôtDéveloppement>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
+        public void Configure(IApplicationBuilder app) {
 
             app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
