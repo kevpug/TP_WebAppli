@@ -6,7 +6,12 @@
 
   <ItemGroup>
     <Folder Include="Views\Utilisateur\" />
-    <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\img\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
