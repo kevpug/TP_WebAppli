@@ -6,7 +6,7 @@
     <div class="card-body">
         <h4 class="card-title">Veuillez entrer vos informations d'authentification</h4>
         <form asp-action="Authentification" method="post" class="m-2">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
             <div class="form-group">
                 <label asp-for="NomUtilisateur">Nom d'utilisateur :</label>
                 <input asp-for="NomUtilisateur" class="form-control" />
@@ -14,7 +14,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="MotDePasse">Mot de passe :</label>
-                <input asp-for="MotDePasse" class="form-control" />
+                <input asp-for="MotDePasse" type="password" class="form-control" />
                 <div><span asp-validation-for="NomUtilisateur" class="text-danger"></span></div>
             </div>
             <button type="submit" class="btn btn-primary">Connexion</button>

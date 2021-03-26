@@ -9,6 +9,8 @@ namespace TP01_Web.Models
     {
         private List<Utilisateur> utilisateurs = new List<Utilisateur>();
 
+        public static bool UtilisateurConnecté { get; set; }
+
         public DépôtDéveloppement()
         {
             utilisateurs.Add(new Utilisateur {
@@ -16,11 +18,12 @@ namespace TP01_Web.Models
                 MotDePasse= "Inimda23"
             });
         }
-        public IEnumerable<Utilisateur> Utilisateurs => utilisateurs.AsQueryable<Utilisateur>();
-
         public void AjouterUtilisateur(Utilisateur p_utilisateur)
         {
             utilisateurs.Add(p_utilisateur);
         }
+        public IEnumerable<Utilisateur> Utilisateurs => utilisateurs.AsEnumerable<Utilisateur>();
+
+
     }
 }

@@ -34,9 +34,10 @@ namespace TP01_Web.Controllers
                 ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur.");
             if (string.IsNullOrEmpty(p_utilisateur.MotDePasse))
                 ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Entrez un mot de passe.");
-            if (ModelState.IsValid)
+            if (dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur && u.MotDePasse == p_utilisateur.MotDePasse))
             {
-                return View();
+                DépôtDéveloppement.UtilisateurConnecté = true;
+                return View("../Home/Index");
             }
             else
                 return View();
