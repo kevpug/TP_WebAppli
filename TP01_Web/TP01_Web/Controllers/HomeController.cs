@@ -16,7 +16,6 @@ namespace TP01_Web.Controllers
         }
         public IActionResult Index()
         {
-            //return View("Index");
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
             return View(dépôt.Utilisateurs);
         }

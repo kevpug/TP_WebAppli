@@ -24,7 +24,7 @@ namespace TP01_Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddScoped<IDépôt, DépôtDéveloppement>();
+            services.AddSingleton<IDépôt, DépôtDéveloppement>(); //Singleton pour qu'il soit la même liste pour le site au complet.
         }
 
         public void Configure(IApplicationBuilder app)
