@@ -9,11 +9,11 @@ namespace TP01_Web.Models
     public sealed class Utilisateur
     {
         enum Type {Administrateur, Gérant, Commis }
-        [Key]
-        public int IdUtilisateur { get; set; }
-        public string Prénom { get; set; }
-        public string Nom { get; set; }
+
+        [Required(ErrorMessage = "Entrez votre nom svp.")]
         public string NomUtilisateur { get; set; }
+
+        [Required]
         public string MotDePasse { get; set; }
     }
 }

@@ -12,9 +12,7 @@ namespace TP01_Web.Models
         public DépôtDéveloppement()
         {
             utilisateurs.Add(new Utilisateur {
-                IdUtilisateur = 1,
-                Nom = "Heyo",
-                Prénom = "Pogo",
+                
                 NomUtilisateur = "AdminI",
                 MotDePasse= "Inimda23"
             });
