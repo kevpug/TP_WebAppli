@@ -2,12 +2,11 @@
 @{
 
 }
-<partial name="_Validation"   />
 
 <div class="card">
     <div class="card-body">
         <h4 class="card-title">Création d'un utilisateur</h4>
-        <form asp-action="FormulaireAjouterUtilisateur" method="post" class="htmlform">
+        <form asp-action="FormulaireAjouterUtilisateur" method="post" class="m-2">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="NomUtilisateur">Nom d'utilisateur :</label>

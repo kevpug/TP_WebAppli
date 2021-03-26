@@ -27,15 +27,17 @@ namespace TP01_Web
             services.AddScoped<IDépôt, DépôtDéveloppement>();
         }
 
-        public void Configure(IApplicationBuilder app) {
+        public void Configure(IApplicationBuilder app)
+        {
 
             app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
-                endpoints.MapDefaultControllerRoute();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}");
             });
         }
     }
