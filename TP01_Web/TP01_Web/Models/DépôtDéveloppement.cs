@@ -12,7 +12,6 @@ namespace TP01_Web.Models
         public DépôtDéveloppement()
         {
             utilisateurs.Add(new Utilisateur {
-                
                 NomUtilisateur = "AdminI",
                 MotDePasse= "Inimda23"
             });
