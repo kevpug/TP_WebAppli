@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TP01_Web;
+﻿using TP01_Web;
 using TP01_Web.Controllers;
 using TP01_Web.Models;
 using Xunit;
