@@ -10,6 +10,12 @@ namespace TP01_Web.Controllers
     {
         public IActionResult Authentification()
         {
+            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+            return View();
+        }
+        public IActionResult AjouterUtilisateur()
+        {
+            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
             return View();
         }
     }
