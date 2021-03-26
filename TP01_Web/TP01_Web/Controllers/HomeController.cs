@@ -9,15 +9,11 @@ namespace TP01_Web.Controllers
 {
     public class HomeController : Controller
     {
-        private IDépôt dépôt;
-        public HomeController(IDépôt p_dépôt)
-        {
-            dépôt = p_dépôt;
-        }
         public IActionResult Index()
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
-            return View(dépôt.Utilisateurs);
+            ViewBag.Title = "Accueil";
+            return View();
         }
     }
 }

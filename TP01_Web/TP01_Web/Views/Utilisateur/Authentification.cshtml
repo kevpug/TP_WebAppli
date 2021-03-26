@@ -1,6 +1,4 @@
 ﻿@model Utilisateur
-@{ }
-
 
 <div class="card">
     <div class="card-body">
@@ -15,7 +13,7 @@
             <div class="form-group">
                 <label asp-for="MotDePasse">Mot de passe :</label>
                 <input asp-for="MotDePasse" type="password" class="form-control" />
-                <div><span asp-validation-for="NomUtilisateur" class="text-danger"></span></div>
+                <div><span asp-validation-for="MotDePasse" class="text-danger"></span></div>
             </div>
             <button type="submit" class="btn btn-primary">Connexion</button>
         </form>

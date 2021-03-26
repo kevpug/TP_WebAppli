@@ -18,12 +18,40 @@ namespace TP01_Web.Controllers
 
         public IActionResult Authentification()
         {
+            ViewBag.Title = "Page d'authentification";
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Authentification(Utilisateur p_utilisateur)
+        {
+            ViewBag.Title = "Page d'authentification";
+            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+            if (string.IsNullOrEmpty(p_utilisateur.NomUtilisateur))
+                ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur.");
+            if (string.IsNullOrEmpty(p_utilisateur.MotDePasse))
+                ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Entrez un mot de passe.");
+            if (dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur))
+            {
+                if (!dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur && u.MotDePasse == p_utilisateur.MotDePasse))
+                    ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Le mot de passe est incorrect.");
+            }
+            else
+                ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Le nom d'utilisateur entré n'existe pas.");
+
+            if (ModelState.IsValid)
+            {
+                DépôtDéveloppement.UtilisateurConnecté = true;
+                return View("../Home/Index");
+            }
+            else
+                return View();
+        }
+
         public IActionResult AjouterUtilisateur()
         {
+            ViewBag.Title = "Création d'un utilisateur";
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
             return View();
         }
@@ -32,8 +60,9 @@ namespace TP01_Web.Controllers
         public IActionResult AjouterUtilisateur(Utilisateur p_utilisateur)
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+            ViewBag.Title = "Création d'un utilisateur";
 
-                if (string.IsNullOrEmpty(p_utilisateur.NomUtilisateur))
+            if (string.IsNullOrEmpty(p_utilisateur.NomUtilisateur))
                 ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur.");
             else
             {
@@ -66,24 +95,5 @@ namespace TP01_Web.Controllers
                 return View();
 
         }
-
-        [HttpPost]
-        public IActionResult Authentification(Utilisateur p_utilisateur)
-        {
-            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
-            if (string.IsNullOrEmpty(p_utilisateur.NomUtilisateur))
-                ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur.");
-            if (string.IsNullOrEmpty(p_utilisateur.MotDePasse))
-                ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Entrez un mot de passe.");
-            if (dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur && u.MotDePasse == p_utilisateur.MotDePasse))
-            {
-                DépôtDéveloppement.UtilisateurConnecté = true;
-                return View("../Home/Index");
-            }
-            else
-                return View();
-        }
-
-        
     }
 }
