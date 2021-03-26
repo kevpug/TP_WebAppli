@@ -8,7 +8,7 @@ namespace TP01_Web.Controllers
 {
     public class UtilisateurController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Authentification()
         {
             return View();
         }
