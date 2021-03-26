@@ -1,10 +1,13 @@
 ﻿@model Utilisateur
+@{
+    ViewData["Title"] = "Page d'authentification";
+}
 
 <div class="card">
     <div class="card-body">
         <h4 class="card-title">Veuillez entrer vos informations d'authentification</h4>
         <form asp-action="Authentification" method="post" class="m-2">
-            
+
             <div class="form-group">
                 <label asp-for="NomUtilisateur">Nom d'utilisateur :</label>
                 <input asp-for="NomUtilisateur" class="form-control" />

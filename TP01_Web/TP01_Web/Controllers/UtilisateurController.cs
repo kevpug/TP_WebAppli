@@ -15,7 +15,6 @@ namespace TP01_Web.Controllers
 
         public IActionResult Authentification()
         {
-            ViewBag.Title = "Page d'authentification";
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
             return View();
         }
@@ -23,7 +22,6 @@ namespace TP01_Web.Controllers
         [HttpPost]
         public IActionResult Authentification(Utilisateur p_utilisateur)
         {
-            ViewBag.Title = "Page d'authentification";
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
             if (string.IsNullOrEmpty(p_utilisateur.NomUtilisateur))
                 ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur.");
@@ -48,7 +46,6 @@ namespace TP01_Web.Controllers
 
         public IActionResult AjouterUtilisateur()
         {
-            ViewBag.Title = "Création d'un utilisateur";
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
             return View();
         }
@@ -57,7 +54,6 @@ namespace TP01_Web.Controllers
         public IActionResult AjouterUtilisateur(Utilisateur p_utilisateur)
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
-            ViewBag.Title = "Création d'un utilisateur";
 
             if (string.IsNullOrEmpty(p_utilisateur.NomUtilisateur))
                 ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur.");
