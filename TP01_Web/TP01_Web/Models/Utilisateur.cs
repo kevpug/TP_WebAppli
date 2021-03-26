@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TP01_Web.Models
 {
-    public sealed class Utilisateur
+    public sealed class Utilisateur : ReadMe
     {
         public enum TypeUtilisateur {Administrateur, Gérant, Commis }
 

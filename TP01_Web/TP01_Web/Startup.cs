@@ -12,7 +12,7 @@ using TP01_Web.Models;
 
 namespace TP01_Web
 {
-    public class Startup
+    public class Startup : ReadMe
     {
         public IConfiguration Configuration { get; }
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace TP01_Web
 {
-    public class Program
+    public class Program : ReadMe
     {
         public static void Main(string[] args)
         {

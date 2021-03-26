@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TP01_Web.Models
 {
-    public class DépôtDéveloppement : IDépôt
+    public class DépôtDéveloppement : IDépôt, ReadMe
     {
         private List<Utilisateur> utilisateurs = new List<Utilisateur>();
 
@@ -22,7 +22,7 @@ namespace TP01_Web.Models
         {
             utilisateurs.Add(p_utilisateur);
         }
-        public IEnumerable<Utilisateur> Utilisateurs => utilisateurs.AsEnumerable<Utilisateur>();
+        public IEnumerable<Utilisateur> Utilisateurs => utilisateurs.AsQueryable<Utilisateur>();
 
 
     }

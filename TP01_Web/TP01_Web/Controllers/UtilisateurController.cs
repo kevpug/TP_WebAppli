@@ -8,7 +8,7 @@ using TP01_Web.Models;
 
 namespace TP01_Web.Controllers
 {
-    public class UtilisateurController : Controller
+    public class UtilisateurController : Controller, ReadMe
     {
         IDépôt dépôt;
         public UtilisateurController( IDépôt p_dépôt)

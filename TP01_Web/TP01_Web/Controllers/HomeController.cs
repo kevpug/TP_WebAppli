@@ -7,7 +7,7 @@ using TP01_Web.Models;
 
 namespace TP01_Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : Controller, ReadMe
     {
         public IActionResult Index()
         {
