@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>TP_Web</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

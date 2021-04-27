@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <AssemblyName>TP_WebAppli.Tests</AssemblyName>
+
+    <RootNamespace>TP_WebAppli.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TP01_Web\TP01_Web.csproj" />
+    <ProjectReference Include="..\TP_Web\TP_Web.csproj" />
   </ItemGroup>
 
 </Project>
