@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace TP01_Web.Controllers
+namespace TP_Web.Controllers
 {
-    public class HomeController : Controller, ReadMe
+    public class SuccursaleController : Controller
     {
         public IActionResult Index()
         {

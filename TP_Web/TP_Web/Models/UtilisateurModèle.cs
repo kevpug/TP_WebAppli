@@ -1,6 +1,6 @@
 ﻿namespace TP01_Web.Models
 {
-    public sealed class Utilisateur : ReadMe
+    public sealed class UtilisateurModèle : ReadMe
     {
         public enum TypeUtilisateur {Administrateur, Gérant, Commis }
 

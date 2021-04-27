@@ -13,11 +13,11 @@ namespace TP01_WebAppli.Tests
             IDépôt dépôt = new DépôtDéveloppement();
             UtilisateurController utillisateurController = new UtilisateurController(dépôt);
 
-            Utilisateur utilisateur = new Utilisateur
+            UtilisateurModèle utilisateur = new UtilisateurModèle
             {
                 NomUtilisateur = "Admin2", //Mauvais code utilisateur
                 MotDePasse = "Inimda23",
-                Rôle = Utilisateur.TypeUtilisateur.Administrateur
+                Rôle = UtilisateurModèle.TypeUtilisateur.Administrateur
             };
 
             //Act, faire le test
@@ -34,11 +34,11 @@ namespace TP01_WebAppli.Tests
             IDépôt dépôt = new DépôtDéveloppement();
             UtilisateurController utillisateurController = new UtilisateurController(dépôt);
 
-            Utilisateur utilisateur = new Utilisateur
+            UtilisateurModèle utilisateur = new UtilisateurModèle
             {
                 NomUtilisateur = "AdminI", //Code déjà existant par notre admin
-                MotDePasse = "Insd1223",
-                Rôle = Utilisateur.TypeUtilisateur.Commis
+                MotDePasse = "Inimda23",
+                Rôle = UtilisateurModèle.TypeUtilisateur.Commis
             };
 
             //Act, faire le test
@@ -55,11 +55,11 @@ namespace TP01_WebAppli.Tests
             IDépôt dépôt = new DépôtDéveloppement();
             UtilisateurController utillisateurController = new UtilisateurController(dépôt);
 
-            Utilisateur utilisateur = new Utilisateur
+            UtilisateurModèle utilisateur = new UtilisateurModèle
             {
                 NomUtilisateur = "AdminI", 
                 MotDePasse = "Insd1223", //Mot de passe incorrect.
-                Rôle = Utilisateur.TypeUtilisateur.Commis
+                Rôle = UtilisateurModèle.TypeUtilisateur.Commis
             };
 
             //Act, faire le test
