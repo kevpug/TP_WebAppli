@@ -21,9 +21,9 @@ namespace TP01_Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ContexteIdentité>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ChainesConnexion:ConnexionIdentite")));
+                options.UseSqlServer(Configuration["ChainesConnexion:ConnexionIdentite"]));
             services.AddDbContext<ContexteLocoAuto>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ChainesConnexion:ConnexionLocoAuto")));
+                options.UseSqlServer(Configuration["ChainesConnexion:ConnexionLocoAuto"]));
 
             services.AddIdentity<IdentityUser, IdentityRole>(opts =>
             {
