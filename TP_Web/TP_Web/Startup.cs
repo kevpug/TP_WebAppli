@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TP_Web;
 using TP_Web.Models;
-using TP01_Web.Models;
 
-namespace TP01_Web
+namespace TP_Web
 {
     public class Startup : ReadMe
     {

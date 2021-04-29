@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TP01_Web.Models
+namespace TP_Web.Models
 {
     public interface IDépôt : ReadMe
     {

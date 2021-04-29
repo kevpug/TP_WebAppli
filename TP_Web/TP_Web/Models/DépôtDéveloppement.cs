@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace TP01_Web.Models
+namespace TP_Web.Models
 {
     public class DépôtDéveloppement : IDépôt, ReadMe
     {

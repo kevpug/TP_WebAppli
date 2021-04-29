@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Text.RegularExpressions;
-using TP01_Web.Models;
+using TP_Web.Models;
 
-namespace TP01_Web.Controllers
+namespace TP_Web.Controllers
 {
     public class UtilisateurController : Controller, ReadMe
     {

@@ -1,4 +1,4 @@
-﻿namespace TP01_Web.Models
+﻿namespace TP_Web.Models
 {
     public sealed class Utilisateur : ReadMe
     {

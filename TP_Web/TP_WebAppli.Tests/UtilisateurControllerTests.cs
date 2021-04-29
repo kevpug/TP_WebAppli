@@ -1,7 +1,7 @@
-﻿using TP01_Web;
-using TP01_Web.Controllers;
-using TP01_Web.Models;
+﻿using TP_Web.Controllers;
+using TP_Web;
 using Xunit;
+using TP_Web.Models;
 
 namespace TP01_WebAppli.Tests
 {
