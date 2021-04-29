@@ -5,22 +5,22 @@ namespace TP01_Web.Models
 {
     public class DépôtDéveloppement : IDépôt, ReadMe
     {
-        private List<UtilisateurModèle> utilisateurs = new List<UtilisateurModèle>();
+        private List<Utilisateur> utilisateurs = new List<Utilisateur>();
 
         public static bool UtilisateurConnecté { get; set; }
 
         public DépôtDéveloppement()
         {
-            utilisateurs.Add(new UtilisateurModèle {
+            utilisateurs.Add(new Utilisateur {
                 NomUtilisateur = "AdminI",
                 MotDePasse= "Inimda23"
             });
         }
-        public void AjouterUtilisateur(UtilisateurModèle p_utilisateur)
+        public void AjouterUtilisateur(Utilisateur p_utilisateur)
         {
             utilisateurs.Add(p_utilisateur);
         }
-        public IEnumerable<UtilisateurModèle> Utilisateurs => utilisateurs.AsQueryable<UtilisateurModèle>();
+        public IEnumerable<Utilisateur> Utilisateurs => utilisateurs.AsQueryable<Utilisateur>();
 
 
     }

@@ -1,4 +1,4 @@
-﻿@model UtilisateurModèle
+﻿@model Utilisateur
 @{
     ViewData["Title"] = "Création d'un utilisateur";
 }
@@ -21,9 +21,9 @@
             <div class="form-group">
                 <label>Type d'utilisateur :</label>
                 <select asp-for="Rôle" class="form-control">
-                    <option value="@UtilisateurModèle.TypeUtilisateur.Administrateur">Choisissez un rôle</option>
-                    <option value="@UtilisateurModèle.TypeUtilisateur.Commis">Commis</option>
-                    <option value="@UtilisateurModèle.TypeUtilisateur.Gérant">Gérant</option>
+                    <option value="@Utilisateur.TypeUtilisateur.Administrateur">Choisissez un rôle</option>
+                    <option value="@Utilisateur.TypeUtilisateur.Commis">Commis</option>
+                    <option value="@Utilisateur.TypeUtilisateur.Gérant">Gérant</option>
                 </select>
                 <div><span asp-validation-for="Rôle" class="text-danger"></span></div>
             </div>

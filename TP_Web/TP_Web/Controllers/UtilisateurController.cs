@@ -20,20 +20,20 @@ namespace TP01_Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Authentification(UtilisateurModèle p_utilisateur)
+        public IActionResult Authentification(Utilisateur p_utilisateur)
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
             if (string.IsNullOrEmpty(p_utilisateur.NomUtilisateur))
-                ModelState.AddModelError(nameof(UtilisateurModèle.NomUtilisateur), "Entrez un nom d'utilisateur.");
+                ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur.");
             if (string.IsNullOrEmpty(p_utilisateur.MotDePasse))
-                ModelState.AddModelError(nameof(UtilisateurModèle.MotDePasse), "Entrez un mot de passe.");
+                ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Entrez un mot de passe.");
             if (dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur))
             {
                 if (!dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur && u.MotDePasse == p_utilisateur.MotDePasse))
-                    ModelState.AddModelError(nameof(UtilisateurModèle.MotDePasse), "Le mot de passe est incorrect.");
+                    ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Le mot de passe est incorrect.");
             }
             else
-                ModelState.AddModelError(nameof(UtilisateurModèle.NomUtilisateur), "Le nom d'utilisateur entré n'existe pas.");
+                ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Le nom d'utilisateur entré n'existe pas.");
 
             if (ModelState.IsValid)
             {
@@ -51,32 +51,32 @@ namespace TP01_Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult AjouterUtilisateur(UtilisateurModèle p_utilisateur)
+        public IActionResult AjouterUtilisateur(Utilisateur p_utilisateur)
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
 
             if (string.IsNullOrEmpty(p_utilisateur.NomUtilisateur))
-                ModelState.AddModelError(nameof(UtilisateurModèle.NomUtilisateur), "Entrez un nom d'utilisateur.");
+                ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur.");
             else
             {
                 if (!Regex.Match(p_utilisateur.NomUtilisateur, @"^([a-zA-Z0-9]){6}$").Success)
-                    ModelState.AddModelError(nameof(UtilisateurModèle.NomUtilisateur), "Entrez un nom d'utilisateur valide. (6 caractères, lettres et chiffres obligatoire)");
+                    ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur valide. (6 caractères, lettres et chiffres obligatoire)");
             }
 
             if (dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur))
-                ModelState.AddModelError(nameof(UtilisateurModèle.NomUtilisateur), "Entrez un nom d'utilisateur qui n'existe pas déjà.");
+                ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur qui n'existe pas déjà.");
 
 
             if (string.IsNullOrEmpty(p_utilisateur.MotDePasse))
-                ModelState.AddModelError(nameof(UtilisateurModèle.MotDePasse), "Entrez un mot de passe.");
+                ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Entrez un mot de passe.");
             else
             {
                 if (!Regex.Match(p_utilisateur.MotDePasse, @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8}$").Success)
-                    ModelState.AddModelError(nameof(UtilisateurModèle.MotDePasse), "Entrez un mot de passe valide. (8 caractères, lettres et chiffres obligatoire)");
+                    ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Entrez un mot de passe valide. (8 caractères, lettres et chiffres obligatoire)");
             }
 
-            if (p_utilisateur.Rôle == UtilisateurModèle.TypeUtilisateur.Administrateur) //Si le choix est "Choisissez un rôle" retourne Administrateur
-                ModelState.AddModelError(nameof(UtilisateurModèle.Rôle), "Choisissez un type d'utilisateur."); //Alors on valide s'il n'est pas Admin.
+            if (p_utilisateur.Rôle == Utilisateur.TypeUtilisateur.Administrateur) //Si le choix est "Choisissez un rôle" retourne Administrateur
+                ModelState.AddModelError(nameof(Utilisateur.Rôle), "Choisissez un type d'utilisateur."); //Alors on valide s'il n'est pas Admin.
 
 
             if (ModelState.IsValid)
