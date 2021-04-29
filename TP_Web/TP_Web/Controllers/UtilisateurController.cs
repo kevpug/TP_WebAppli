@@ -1,47 +1,78 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Text.RegularExpressions;
 using TP_Web.Models;
+using System.Threading.Tasks;
+
 
 namespace TP_Web.Controllers
 {
     public class UtilisateurController : Controller, ReadMe
     {
-        IDépôt dépôt;
-        public UtilisateurController(IDépôt p_dépôt)
+
+        private UserManager<IdentityUser> gUtilisateur;
+        private SignInManager<IdentityUser> gEnregistrement;
+
+        public UtilisateurController(UserManager<IdentityUser> p_gu,
+        SignInManager<IdentityUser> p_ge)
         {
-            dépôt = p_dépôt;
+            gUtilisateur = p_gu;
+            gEnregistrement = p_ge;
         }
 
-        public IActionResult Authentification()
+        [AllowAnonymous]
+        public IActionResult Authentification(string returnUrl)
         {
-            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+            ViewBag.returnUrl = returnUrl;
             return View();
         }
 
+
         [HttpPost]
-        public IActionResult Authentification(Utilisateur p_utilisateur)
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Authentification(ModèleLogin p_login, string returnUrl)
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
-            if (string.IsNullOrEmpty(p_utilisateur.NomUtilisateur))
-                ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur.");
-            if (string.IsNullOrEmpty(p_utilisateur.MotDePasse))
-                ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Entrez un mot de passe.");
-            if (dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur))
-            {
-                if (!dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur && u.MotDePasse == p_utilisateur.MotDePasse))
-                    ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Le mot de passe est incorrect.");
-            }
-            else
-                ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Le nom d'utilisateur entré n'existe pas.");
+            //if (string.IsNullOrEmpty(p_utilisateur.NomUtilisateur))
+            //    ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur.");
+            //if (string.IsNullOrEmpty(p_utilisateur.MotDePasse))
+            //    ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Entrez un mot de passe.");
+            //if (dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur))
+            //{
+            //    if (!dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur && u.MotDePasse == p_utilisateur.MotDePasse))
+            //        ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Le mot de passe est incorrect.");
+            //}
+            //else
+            //    ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Le nom d'utilisateur entré n'existe pas.");
 
+            //if (ModelState.IsValid)
+            //{
+            //    DépôtDéveloppement.UtilisateurConnecté = true;
+            //    return View("../Utilisateur/Index"); // Ici on voudrait peut-être se connecter à l'index des utilisateurs pour voir Les Users Identity
+            //}
+            //else
+            //    return View();
             if (ModelState.IsValid)
             {
-                DépôtDéveloppement.UtilisateurConnecté = true;
-                return View("../Home/Index"); // Ici on voudrait peut-être se connecter à l'index des utilisateurs pour voir Les Users Identity
+                IdentityUser utilisateur = await gUtilisateur.FindByNameAsync(p_login.NomUtilisateur);
+                if (utilisateur != null)
+                {
+                    await gEnregistrement.SignOutAsync(); // Annule toutes les sessions de l'utilisateur.
+                    Microsoft.AspNetCore.Identity.SignInResult résultat =
+                        await gEnregistrement.PasswordSignInAsync(
+                            utilisateur, p_login.MDP, false, false);
+                    if (résultat.Succeeded)
+                    {
+                        return Redirect(returnUrl ?? "Index");
+                    }
+                }
+                ModelState.AddModelError(nameof(ModèleLogin.NomUtilisateur),
+                "Utilisateur ou mot de passe invalide.");
             }
-            else
-                return View();
+            return View(p_login);
         }
 
         public IActionResult AjouterUtilisateur()
@@ -50,43 +81,49 @@ namespace TP_Web.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult AjouterUtilisateur(Utilisateur p_utilisateur)
+        public IActionResult Index()
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
-
-            if (string.IsNullOrEmpty(p_utilisateur.NomUtilisateur))
-                ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur.");
-            else
-            {
-                if (!Regex.Match(p_utilisateur.NomUtilisateur, @"^([a-zA-Z0-9]){6}$").Success)
-                    ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur valide. (6 caractères, lettres et chiffres obligatoire)");
-            }
-
-            if (dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur))
-                ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur qui n'existe pas déjà.");
-
-
-            if (string.IsNullOrEmpty(p_utilisateur.MotDePasse))
-                ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Entrez un mot de passe.");
-            else
-            {
-                if (!Regex.Match(p_utilisateur.MotDePasse, @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8}$").Success)
-                    ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Entrez un mot de passe valide. (8 caractères, lettres et chiffres obligatoire)");
-            }
-
-            if (p_utilisateur.Rôle == Utilisateur.TypeUtilisateur.Administrateur) //Si le choix est "Choisissez un rôle" retourne Administrateur
-                ModelState.AddModelError(nameof(Utilisateur.Rôle), "Choisissez un type d'utilisateur."); //Alors on valide s'il n'est pas Admin.
-
-
-            if (ModelState.IsValid)
-            {
-                dépôt.AjouterUtilisateur(p_utilisateur);
-                return View("../Home/Index");
-            }
-            else
-                return View();
-
+            return View(gUtilisateur.Users);
         }
+
+        //[HttpPost]
+        //public IActionResult AjouterUtilisateur(Utilisateur p_utilisateur)
+        //{
+        //    ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+
+        //    if (string.IsNullOrEmpty(p_utilisateur.NomUtilisateur))
+        //        ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur.");
+        //    else
+        //    {
+        //        if (!Regex.Match(p_utilisateur.NomUtilisateur, @"^([a-zA-Z0-9]){6}$").Success)
+        //            ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur valide. (6 caractères, lettres et chiffres obligatoire)");
+        //    }
+
+        //    if (dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur))
+        //        ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur qui n'existe pas déjà.");
+
+
+        //    if (string.IsNullOrEmpty(p_utilisateur.MotDePasse))
+        //        ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Entrez un mot de passe.");
+        //    else
+        //    {
+        //        if (!Regex.Match(p_utilisateur.MotDePasse, @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8}$").Success)
+        //            ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Entrez un mot de passe valide. (8 caractères, lettres et chiffres obligatoire)");
+        //    }
+
+        //    if (p_utilisateur.Rôle == Utilisateur.TypeUtilisateur.Administrateur) //Si le choix est "Choisissez un rôle" retourne Administrateur
+        //        ModelState.AddModelError(nameof(Utilisateur.Rôle), "Choisissez un type d'utilisateur."); //Alors on valide s'il n'est pas Admin.
+
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        dépôt.AjouterUtilisateur(p_utilisateur);
+        //        return View("../Utilisateur/Index");
+        //    }
+        //    else
+        //        return View();
+
+        //}
     }
 }

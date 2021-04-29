@@ -1,4 +1,4 @@
-﻿@model Utilisateur
+﻿@model TP_Web.Models.CréerModèle
 @{
     ViewData["Title"] = "Création d'un utilisateur";
 }
@@ -8,17 +8,17 @@
         <h4 class="card-title">Création d'un utilisateur</h4>
         <form asp-action="AjouterUtilisateur" method="post" class="m-2">
             <div class="form-group">
-                <label asp-for="NomUtilisateur">Nom d'utilisateur :</label>
-                <input asp-for="NomUtilisateur" class="form-control" />
-                <div><span asp-validation-for="NomUtilisateur" class="text-danger"></span></div>
+                <label asp-for="Nom">Nom d'utilisateur :</label>
+                <input asp-for="Nom" class="form-control" />
+                <div><span asp-validation-for=" Nom" class="text-danger"></span></div>
             </div>
             <div class="form-group">
-                <label asp-for="MotDePasse">Mot de passe :</label>
-                <input asp-for="MotDePasse" class="form-control" />
-                <div><span asp-validation-for="MotDePasse" class="text-danger"></span></div>
+                <label asp-for="MDP">Mot de passe :</label>
+                <input asp-for="MDP" class="form-control" />
+                <div><span asp-validation-for="MDP" class="text-danger"></span></div>
 
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label>Type d'utilisateur :</label>
                 <select asp-for="Rôle" class="form-control">
                     <option value="@Utilisateur.TypeUtilisateur.Administrateur">Choisissez un rôle</option>
@@ -26,7 +26,7 @@
                     <option value="@Utilisateur.TypeUtilisateur.Gérant">Gérant</option>
                 </select>
                 <div><span asp-validation-for="Rôle" class="text-danger"></span></div>
-            </div>
+            </div>*@
             <button type="submit" class="btn btn-primary">Créer l'utilisateur</button>
         </form>
     </div>

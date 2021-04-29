@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TP_Web;
 using TP_Web.Models;
 
+
 namespace TP_Web
 {
     public class Startup : ReadMe
@@ -63,6 +64,8 @@ namespace TP_Web
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
             });
+
+            PeuplerIdentité.CréerCompteAdmin(app.ApplicationServices, Configuration);
         }
     }
 }
