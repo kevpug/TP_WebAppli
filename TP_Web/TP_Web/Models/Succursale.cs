@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,6 +8,7 @@ namespace TP_Web.Models
 {
     public sealed class Succursale
     {
+        [Key]
         public long SuccursaleId { get; set; }
         public long NuméroCivique { get; set; }
         public string NomRue { get; set; }

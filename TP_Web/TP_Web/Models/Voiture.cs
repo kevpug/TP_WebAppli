@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,6 +14,7 @@ namespace TP_Web.Models
         Luxe
         }
 
+        [Key]
         public long VoitureId { get; set; }
         public string Modèle { get; set; }
         public int Année { get; set; }
