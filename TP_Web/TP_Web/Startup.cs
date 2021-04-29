@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -10,12 +11,12 @@ namespace TP01_Web
 {
     public class Startup : ReadMe
     {
-        public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration p_config)
         {
             Configuration = p_config;
         }
+        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -33,7 +34,7 @@ namespace TP01_Web
                 opts.Password.RequireUppercase = false;
                 opts.Password.RequireDigit = false;
             })
-                    .AddEntityFrameworkStores<ContexteIdentité>();
+            .AddEntityFrameworkStores<ContexteIdentité>();
 
             //Page par défault pour l'authentification
             services.ConfigureApplicationCookie(options =>
@@ -43,10 +44,11 @@ namespace TP01_Web
                 options.AccessDeniedPath = "/Utilisateur/AccèsRefusé");
 
             services.AddControllersWithViews();
+            services.AddRazorPages();
             services.AddSingleton<IDépôt, DépôtDéveloppement>(); //Singleton pour qu'il soit la même liste pour le site au complet.
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
             app.UseDeveloperExceptionPage();
