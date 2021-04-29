@@ -8,7 +8,7 @@ namespace TP01_Web.Controllers
     public class UtilisateurController : Controller, ReadMe
     {
         IDépôt dépôt;
-        public UtilisateurController( IDépôt p_dépôt)
+        public UtilisateurController(IDépôt p_dépôt)
         {
             dépôt = p_dépôt;
         }
@@ -38,7 +38,7 @@ namespace TP01_Web.Controllers
             if (ModelState.IsValid)
             {
                 DépôtDéveloppement.UtilisateurConnecté = true;
-                return View("../Home/Index");
+                return View("../Home/Index"); // Ici on voudrait peut-être se connecter à l'index des utilisateurs pour voir Les Users Identity
             }
             else
                 return View();
