@@ -7,8 +7,8 @@ namespace TP_Web.Models
     {
         [Required(ErrorMessage = "Veuillez entrer un numéro de voiture.")]
         [Range(0, long.MaxValue,
-        ErrorMessage = "Le numéro de voiture doit être un chiffre positif.")]
-        public long? VoitureId { get; set; }
+        ErrorMessage = "Le numéro de la voiture doit être un chiffre positif.")]
+        public long? NuméroVoiture { get; set; }
         [Required(ErrorMessage = "Veuillez entrer un modèle de voiture.")]
         public string Modèle { get; set; }
         [Required(ErrorMessage = "Veuillez entrer une année.")]
