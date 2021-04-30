@@ -26,7 +26,6 @@ namespace TP_Web.Controllers
         public IActionResult Authentification(string returnUrl)
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
-
             ViewBag.returnUrl = returnUrl;
             return View();
         }
@@ -68,7 +67,7 @@ namespace TP_Web.Controllers
                             utilisateur, p_login.MDP, false, false);
                     if (résultat.Succeeded)
                     {
-                        DépôtDéveloppement.UtilisateurConnecté = true;
+                        DépôtEF.UtilisateurConnecté = true;
                         return Redirect(returnUrl ?? "/");
                     }
                 }

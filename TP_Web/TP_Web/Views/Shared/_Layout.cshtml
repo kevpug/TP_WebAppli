@@ -16,16 +16,22 @@
                 <a class="navbar-brand text-white " asp-area="" asp-controller="Home" asp-action="Index">Accueil</a>
                 <div class="navbar-collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav">
-                        @if (!DépôtDéveloppement.UtilisateurConnecté)
+                        @if (!DépôtEF.UtilisateurConnecté)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Utilisateur" asp-action="Authentification"><i class="fa fa-user"></i> AUTHENTIFICATION</a>
                             </li>
                         }
-                        @if (DépôtDéveloppement.UtilisateurConnecté)
+                        @if (DépôtEF.UtilisateurConnecté)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Utilisateur" asp-action="AjouterUtilisateur"><i class="fa fa-user-plus"></i> AJOUTER UN UTILISATEUR</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Succursale" asp-action="AjouterSuccursale"><i class="fa fa-building"></i> AJOUTER UNE SUCCURSALE</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Voiture" asp-action="AjouterVoiture"><i class="fa fa-car"></i> AJOUTER UNE VOITURE</a>
                             </li>
                         }
                     </ul>
@@ -36,7 +42,7 @@
 
     <div class="container pb-5">
         <main role="main">
-            @if (DépôtDéveloppement.UtilisateurConnecté)
+            @if (DépôtEF.UtilisateurConnecté)
             {
             <h2>@ViewBag.User session</h2>
             }
