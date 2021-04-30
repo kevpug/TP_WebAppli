@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace TP_Web.Models
@@ -6,25 +7,28 @@ namespace TP_Web.Models
     public class DépôtEF : IDépôt, ReadMe
     {
 
-        private ContexteAutoLoco contexte;
-        public DépôtEF(ContexteAutoLoco p_contexte)
+        private ContexteAutoLoco contexteAutoLoco;
+        private ContexteIdentité contexteIdendité;
+        public DépôtEF(ContexteAutoLoco p_autoloco, ContexteIdentité p_identité)
         {
-            contexte = p_contexte;
+            contexteAutoLoco = p_autoloco;
+            contexteIdendité = p_identité;
         }
 
         public static bool UtilisateurConnecté { get; set; }
 
-        public IQueryable<Succursale> Succursales => contexte.Succursales;
-        public IQueryable<Voiture> Voitures => contexte.Voitures;
+        public IQueryable<Succursale> Succursales => contexteAutoLoco.Succursales;
+        public IQueryable<IdentityUser> Utilisateurs => contexteIdendité.Users;
+        public IQueryable<Voiture> Voitures => contexteAutoLoco.Voitures;
         public void AjouterSuccursale(Succursale p_succursale)
         {
-            contexte.Succursales.Add(p_succursale);
-            contexte.SaveChanges();
+            contexteAutoLoco.Succursales.Add(p_succursale);
+            contexteAutoLoco.SaveChanges();
         }
         public void AjouterVoiture(Voiture p_voiture)
         {
-            contexte.Voitures.Add(p_voiture);
-            contexte.SaveChanges();
+            contexteAutoLoco.Voitures.Add(p_voiture);
+            contexteAutoLoco.SaveChanges();
         }
     }
 }

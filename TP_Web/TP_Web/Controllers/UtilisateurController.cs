@@ -14,10 +14,12 @@ namespace TP_Web.Controllers
 
         private UserManager<IdentityUser> gUtilisateur;
         private SignInManager<IdentityUser> gEnregistrement;
+        private IDépôt dépôt;
 
-        public UtilisateurController(UserManager<IdentityUser> p_gu,
+        public UtilisateurController(IDépôt p_dépôt, UserManager<IdentityUser> p_gu,
         SignInManager<IdentityUser> p_ge)
         {
+            dépôt = p_dépôt;
             gUtilisateur = p_gu;
             gEnregistrement = p_ge;
         }
@@ -98,38 +100,21 @@ namespace TP_Web.Controllers
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
 
-            //if (string.IsNullOrEmpty(p_utilisateur.NomUtilisateur))
-            //    ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur.");
-            //else
-            //{
-            //    if (!Regex.Match(p_utilisateur.NomUtilisateur, @"^([a-zA-Z0-9]){6}$").Success)
-            //        ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur valide. (6 caractères, lettres et chiffres obligatoire)");
-            //}
+            if (!string.IsNullOrEmpty(p_modèle.CodeUtilisateur))
+                if (!Regex.Match(p_modèle.CodeUtilisateur, @"^([a-zA-Z0-9]){6}$").Success)
+                    ModelState.AddModelError(nameof(CréerUtilisateurModèle.CodeUtilisateur), "Entrez un code d'utilisateur valide. (6 caractères, lettres et chiffres obligatoire)");
+            if (!string.IsNullOrEmpty(p_modèle.MDP))
+                if (!Regex.Match(p_modèle.MDP, @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8}$").Success)
+                    ModelState.AddModelError(nameof(CréerUtilisateurModèle.MDP), "Entrez un mot de passe valide. (8 caractères, lettres et chiffres obligatoire)");
 
-            //if (dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur))
-            //    ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur qui n'existe pas déjà.");
+            if (!string.IsNullOrEmpty(p_modèle.Courriel))
+                if (!Regex.Match(p_modèle.Courriel, @"^([\w.-]+)@([\w-]+)((.(\w){2,3})+)$").Success)
+                    ModelState.AddModelError(nameof(CréerUtilisateurModèle.Courriel), "Entrez un courriel valide. (xxxxx@xxxxx.xxx)");
 
-
-            //if (string.IsNullOrEmpty(p_utilisateur.MotDePasse))
-            //    ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Entrez un mot de passe.");
-            //else
-            //{
-            //    if (!Regex.Match(p_utilisateur.MotDePasse, @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8}$").Success)
-            //        ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Entrez un mot de passe valide. (8 caractères, lettres et chiffres obligatoire)");
-            //}
-
-            //if (p_utilisateur.Rôle == Utilisateur.TypeUtilisateur.Administrateur) //Si le choix est "Choisissez un rôle" retourne Administrateur
-            //    ModelState.AddModelError(nameof(Utilisateur.Rôle), "Choisissez un type d'utilisateur."); //Alors on valide s'il n'est pas Admin.
-
-
-            //if (ModelState.IsValid)
-            //{
-            //    dépôt.AjouterUtilisateur(p_utilisateur);
-            //    return View("../Utilisateur/Index");
-            //}
-            //else
-            //    return View();
-
+            if (dépôt.Utilisateurs.Any(u => u.UserName == p_modèle.CodeUtilisateur))
+                ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur qui n'existe pas déjà.");
+            
+            //@"^([\w.-]+)@([\w-]+)((.(\w){2,3})+)$"
             if (ModelState.IsValid)
             {
                 IdentityUser utilisateur = new IdentityUser
@@ -142,8 +127,7 @@ namespace TP_Web.Controllers
                 if (résultat.Succeeded)
                 {
                     await gUtilisateur.AddToRoleAsync(utilisateur, p_modèle.Rôle.ToString());
-                    return RedirectToAction("Index");
-                    //return Redirect(returnUrl ?? "/");
+                    return Redirect("../Home/Index");
                 }
                 else
                 {
@@ -154,9 +138,6 @@ namespace TP_Web.Controllers
                 }
             }
             return View(p_modèle);
-
-
-
         }
 
         [Authorize]
