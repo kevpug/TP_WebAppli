@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Text.RegularExpressions;
-using TP_Web.Models;
 using System.Threading.Tasks;
+using TP_Web.Models;
 
 
 namespace TP_Web.Controllers
@@ -94,7 +94,7 @@ namespace TP_Web.Controllers
 
             if (dépôt.Utilisateurs.Any(u => u.UserName == p_modèle.CodeUtilisateur))
                 ModelState.AddModelError(nameof(CréerUtilisateurModèle.CodeUtilisateur), "Ce code d'utilisateur est déjà utilisé.");
-            
+
             if (ModelState.IsValid)
             {
                 IdentityUser utilisateur = new IdentityUser

@@ -2,8 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace TP_Web.Models
@@ -27,7 +25,7 @@ namespace TP_Web.Models
             RoleManager<IdentityRole> gestionnaireRôle =
             p_serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             string nomUtilisateur = p_configuration["Données:UtilsateurAdmin:Nom"] ?? "AdminI";
-            string courriel= p_configuration["Données:UtilsateurAdmin:Courriel"] ?? "AdminI@toto.com";
+            string courriel = p_configuration["Données:UtilsateurAdmin:Courriel"] ?? "AdminI@toto.com";
             string MDP = p_configuration["Données:UtilsateurAdmin:MDP"] ?? "InimdA23";
             string rôle = p_configuration["Données:UtilsateurAdmin:Rôle"] ?? "Gerant";
             if (await gestionnaireUtilisateur.FindByNameAsync(nomUtilisateur) == null)

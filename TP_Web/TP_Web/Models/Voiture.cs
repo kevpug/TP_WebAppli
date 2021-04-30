@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TP_Web.Models
 {
     public sealed class Voiture : ReadMe
     {
-        public enum GroupeVoiture { 
-        Compact,
-        Sedan,
-        Luxe
+        public enum GroupeVoiture
+        {
+            Compact,
+            Sedan,
+            Luxe
         }
 
         [Key]

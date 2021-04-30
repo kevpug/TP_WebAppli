@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using TP_Web.Models;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using Microsoft.AspNetCore.Authorization;
+using TP_Web.Models;
 
 namespace TP_Web.Controllers
 {
@@ -36,7 +35,7 @@ namespace TP_Web.Controllers
                 ModelState.AddModelError(nameof(Succursale.CodeSuccursale), "Ce numéro de Succursale existe déjà!");
 
             if (dépôt.Succursales.Any(s => s.NomRue == p_succursale.NomRue && s.CodePostal == p_succursale.CodePostal))
-            { 
+            {
                 ModelState.AddModelError(nameof(Succursale.NomRue), "Il y a déjà une succursale avec le même nom de rue et code postal");
                 ModelState.AddModelError(nameof(Succursale.CodePostal), "Il y a déjà une succursale avec le même nom de rue et code postal");
             }

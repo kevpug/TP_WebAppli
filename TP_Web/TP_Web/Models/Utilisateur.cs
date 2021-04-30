@@ -2,7 +2,7 @@
 {
     public sealed class Utilisateur : ReadMe
     {
-        public enum TypeUtilisateur {Administrateur, Gérant, Commis }
+        public enum TypeUtilisateur { Administrateur, Gérant, Commis }
 
         public string NomUtilisateur { get; set; }
 
