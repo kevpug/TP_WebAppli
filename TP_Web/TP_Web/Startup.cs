@@ -23,7 +23,7 @@ namespace TP_Web
         {
             services.AddDbContext<ContexteIdentité>(options =>
                 options.UseSqlServer(Configuration["ChainesConnexion:ConnexionIdentite"]));
-            services.AddDbContext<ContexteLocoAuto>(options =>
+            services.AddDbContext<ContexteAutoLoco>(options =>
                 options.UseSqlServer(Configuration["ChainesConnexion:ConnexionLocoAuto"]));
 
             services.AddIdentity<IdentityUser, IdentityRole>(opts =>

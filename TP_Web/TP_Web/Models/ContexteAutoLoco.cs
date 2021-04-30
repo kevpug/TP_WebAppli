@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TP_Web.Models
 {
-    public class ContexteLocoAuto : DbContext
+    public class ContexteAutoLoco : DbContext
     {
-        public ContexteLocoAuto(DbContextOptions<ContexteLocoAuto> p_options) : base(p_options) { }
+        public ContexteAutoLoco(DbContextOptions<ContexteAutoLoco> p_options) : base(p_options) { }
 
        public DbSet<Voiture> Voitures { get; set; }
        public DbSet<Succursale> Succursales { get; set; }

@@ -6,8 +6,8 @@ namespace TP_Web.Models
     public class DépôtEF : IDépôt, ReadMe
     {
 
-        private ContexteLocoAuto contexte;
-        public DépôtEF(ContexteLocoAuto p_contexte)
+        private ContexteAutoLoco contexte;
+        public DépôtEF(ContexteAutoLoco p_contexte)
         {
             contexte = p_contexte;
         }
