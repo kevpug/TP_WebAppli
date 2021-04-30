@@ -16,6 +16,7 @@ namespace TP_Web.Models
 
         [Key]
         public long VoitureId { get; set; }
+        public long NuméroVoiture { get; set; }
         public string Modèle { get; set; }
         public int Année { get; set; }
         public GroupeVoiture Groupe { get; set; }

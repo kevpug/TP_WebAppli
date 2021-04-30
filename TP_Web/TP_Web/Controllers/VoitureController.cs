@@ -33,8 +33,8 @@ namespace TP_Web.Controllers
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
 
-            if (dépôt.Voitures.Any(v => v.VoitureId == p_voiture.VoitureId))
-                ModelState.AddModelError(nameof(CréerVoitureModèle.VoitureId), "Le numéro de la voiture existe déjà.");
+            if (dépôt.Voitures.Any(v => v.NuméroVoiture == p_voiture.NuméroVoiture))
+                ModelState.AddModelError(nameof(CréerVoitureModèle.NuméroVoiture), "Le numéro de la voiture existe déjà.");
             if (dépôt.Voitures.Any(v => v.Modèle == p_voiture.Modèle &&
                                         v.Groupe != p_voiture.Groupe))
             {
