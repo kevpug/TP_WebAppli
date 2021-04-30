@@ -64,6 +64,7 @@ namespace TP_Web.Controllers
         public IActionResult AjouterUtilisateur()
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+            ViewBag.User = HttpContext.User.Identity.Name;
             return View();
         }
 
@@ -72,6 +73,7 @@ namespace TP_Web.Controllers
         public async Task<IActionResult> AjouterUtilisateur(CréerUtilisateurModèle p_modèle)
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+
 
             if (!string.IsNullOrEmpty(p_modèle.CodeUtilisateur))
                 if (!Regex.Match(p_modèle.CodeUtilisateur, @"^([a-zA-Z0-9]){6}$").Success)
@@ -129,6 +131,7 @@ namespace TP_Web.Controllers
         [AllowAnonymous]
         public IActionResult AccèsRefusé()
         {
+            ViewBag.User = HttpContext.User.Identity.Name;
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
             return View();
         }

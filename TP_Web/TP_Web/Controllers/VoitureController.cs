@@ -21,6 +21,7 @@ namespace TP_Web.Controllers
         public ViewResult AjouterVoiture()
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+            ViewBag.User = HttpContext.User.Identity.Name;
             return View();
         }
 
