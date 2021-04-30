@@ -77,7 +77,7 @@ namespace TP_Web.Controllers
             return View(p_login);
         }
         [HttpGet]
-        [Authorize(Roles = "Gérant")]
+        [Authorize(Roles = "Gerant")]
         public IActionResult AjouterUtilisateur()
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
@@ -85,7 +85,7 @@ namespace TP_Web.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Gérant")]
+        [Authorize(Roles = "Gerant")]
         public IActionResult Index()
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
@@ -93,7 +93,7 @@ namespace TP_Web.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Gérant")]
+        [Authorize(Roles = "Gerant")]
         public async Task<IActionResult> AjouterUtilisateur(CréerUtilisateurModèle p_modèle)
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";

@@ -29,7 +29,7 @@ namespace TP_Web.Models
             string nomUtilisateur = p_configuration["Données:UtilsateurAdmin:Nom"] ?? "AdminI";
             string courriel= p_configuration["Données:UtilsateurAdmin:Courriel"] ?? "AdminI@toto.com";
             string MDP = p_configuration["Données:UtilsateurAdmin:MDP"] ?? "InimdA23";
-            string rôle = p_configuration["Données:UtilsateurAdmin:Rôle"] ?? "Gérant";
+            string rôle = p_configuration["Données:UtilsateurAdmin:Rôle"] ?? "Gerant";
             if (await gestionnaireUtilisateur.FindByNameAsync(nomUtilisateur) == null)
             {
                 if (await gestionnaireRôle.FindByNameAsync(rôle) == null)

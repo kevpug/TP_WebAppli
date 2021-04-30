@@ -18,7 +18,7 @@ namespace TP_Web.Controllers
 
 
         [HttpGet]
-        [Authorize(Roles = "Administrateur")]
+        [Authorize(Roles = "Gerant")]
         public ViewResult AjouterSuccursale()
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
@@ -27,7 +27,7 @@ namespace TP_Web.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Administrateur")]
+        [Authorize(Roles = "Gerant")]
         public IActionResult AjouterSuccursale(Succursale p_succursale)
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
