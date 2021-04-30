@@ -39,25 +39,6 @@ namespace TP_Web.Controllers
         public async Task<IActionResult> Authentification(ModèleLogin p_login, string returnUrl)
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
-            //if (string.IsNullOrEmpty(p_utilisateur.NomUtilisateur))
-            //    ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur.");
-            //if (string.IsNullOrEmpty(p_utilisateur.MotDePasse))
-            //    ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Entrez un mot de passe.");
-            //if (dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur))
-            //{
-            //    if (!dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur && u.MotDePasse == p_utilisateur.MotDePasse))
-            //        ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Le mot de passe est incorrect.");
-            //}
-            //else
-            //    ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Le nom d'utilisateur entré n'existe pas.");
-
-            //if (ModelState.IsValid)
-            //{
-            //    DépôtDéveloppement.UtilisateurConnecté = true;
-            //    return View("../Utilisateur/Index"); // Ici on voudrait peut-être se connecter à l'index des utilisateurs pour voir Les Users Identity
-            //}
-            //else
-            //    return View();
             if (ModelState.IsValid)
             {
                 IdentityUser utilisateur = await gUtilisateur.FindByNameAsync(p_login.CodeUtilisateur);
@@ -140,7 +121,6 @@ namespace TP_Web.Controllers
         [Authorize]
         public async Task<IActionResult> Logout()
         {
-            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
             await gEnregistrement.SignOutAsync();
             DépôtEF.UtilisateurConnecté = false;
             return Redirect("../Home/Index");
@@ -149,6 +129,7 @@ namespace TP_Web.Controllers
         [AllowAnonymous]
         public IActionResult AccèsRefusé()
         {
+            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
             return View();
         }
     }
