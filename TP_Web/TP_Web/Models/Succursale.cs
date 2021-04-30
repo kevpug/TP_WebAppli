@@ -8,7 +8,6 @@ namespace TP_Web.Models
 {
     public sealed class Succursale
     {
-        [Key]
         [Required(ErrorMessage = "Veuillez fournir un numéro de succursale")]
         [Range(0, long.MaxValue,
         ErrorMessage = "Le numéro de voiture doit être un chiffre positif.")]

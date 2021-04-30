@@ -54,9 +54,6 @@ namespace TP_Web.Controllers
                 ModelState.AddModelError(nameof(Succursale.CodePostal), "Il ne peut pas y avoir de Succursale à la même province et code postal");
             }
 
-
-
-
             if (ModelState.IsValid)
             {
                 dépôt.AjouterSuccursale(p_succursale);
