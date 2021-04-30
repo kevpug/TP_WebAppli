@@ -67,7 +67,7 @@ namespace TP_Web
                 endpoints.MapRazorPages();
             });
 
-            PeuplerIdentité.CréerCompteAdmin(app.ApplicationServices, Configuration);
+            PeuplerIdentité.CréerCompteBD(app.ApplicationServices, Configuration);
         }
     }
 }

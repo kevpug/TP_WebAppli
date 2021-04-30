@@ -20,7 +20,7 @@
          * Cette application est remis en format compressé .zip. Il faut le décompresser et ouvrir la solution afin de voir 
          * et tester le code. Touche F5 pour partir en mode debug une fois la solution ouverte.
          * Lors de l'ouverture du programme, pour se connecter en tant qu'administrateur, il faut entrer le nom d'utilisateur AdminI
-         * et le mot de passe Inimda23.
+         * et le mot de passe InimdA23.
          * 
          */
     }
