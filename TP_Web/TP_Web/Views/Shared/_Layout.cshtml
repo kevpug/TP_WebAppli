@@ -50,18 +50,21 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-center fixed-bottom">
+    <footer class="border-top footer text-center fixed-bottom pt-3">
 
-        <div class="flex-sm-row-reverse">
-            <p style="text-align:center">
-                @ViewBag.Noms
-
-            </p>
+        <div >
             @if (DépôtEF.UtilisateurConnecté)
-            {
+        {
+            <p>
+                @ViewBag.Noms
                 <a asp-controller="Utilisateur" asp-action="Logout"
-                   class="btn btn-danger float-right text-center">Logout</a>
-            }
+                   class="btn btn-danger float-right text-center pt-0 pb-0 border-top-0 border-bottom-0">Logout</a>
+            </p>
+        }
+        else
+        {
+            <p>@ViewBag.Noms</p>
+        }
         </div>
     </footer>
 </body>

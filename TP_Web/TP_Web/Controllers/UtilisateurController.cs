@@ -148,8 +148,10 @@ namespace TP_Web.Controllers
         [Authorize]
         public async Task<IActionResult> Logout()
         {
+            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
             await gEnregistrement.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            DépôtEF.UtilisateurConnecté = false;
+            return Redirect("../Home/Index");
         }
 
         [AllowAnonymous]
