@@ -1,34 +1,42 @@
 ﻿@model Voiture
 @{
-    ViewData["Title"] = "Création d'un utilisateur";
+    ViewData["Title"] = "Ajouter une voiture";
 }
 
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title">Création d'un utilisateur</h4>
-        <form asp-action="AjouterUtilisateur" method="post" class="m-2">
+        <h4 class="card-title">Création d'une succursale</h4>
+        <form asp-action="AjouterVoiture" method="post" class="m-2">
             <div class="form-group">
-                <label asp-for="NomUtilisateur">Nom d'utilisateur :</label>
-                <input asp-for="NomUtilisateur" class="form-control" />
-                <div><span asp-validation-for="NomUtilisateur" class="text-danger"></span></div>
+                <label asp-for="VoitureId">Numéro de voiture :</label>
+                <input asp-for="VoitureId" class="form-control" />
+                <div><span asp-validation-for="VoitureId" class="text-danger"></span></div>
             </div>
             <div class="form-group">
-                <label asp-for="MotDePasse">Mot de passe :</label>
-                <input asp-for="MotDePasse" class="form-control" />
-                <div><span asp-validation-for="MotDePasse" class="text-danger"></span></div>
-
+                <label asp-for="Année">Année :</label>
+                <input asp-for="Année" class="form-control" />
+                <div><span asp-validation-for="Année" class="text-danger"></span></div>
             </div>
             <div class="form-group">
-                <label>Type d'utilisateur :</label>
-                <select asp-for="Rôle" class="form-control">
-                    <option value="@Utilisateur.TypeUtilisateur.Administrateur">Choisissez un rôle</option>
-                    <option value="@Utilisateur.TypeUtilisateur.Commis">Commis</option>
-                    <option value="@Utilisateur.TypeUtilisateur.Gérant">Gérant</option>
+                <label>Type de la voiture :</label>
+                <select asp-for="Groupe" class="form-control">
+                    <option value="@Voiture.GroupeVoiture.Compact">Compact</option>
+                    <option value="@Voiture.GroupeVoiture.Luxe">Luxe</option>
+                    <option value="@Voiture.GroupeVoiture.Sedan">Sedan</option>
                 </select>
-                <div><span asp-validation-for="Rôle" class="text-danger"></span></div>
+                <div><span asp-validation-for="Groupe" class="text-danger"></span></div>
             </div>
-            <button type="submit" class="btn btn-primary">Créer l'utilisateur</button>
+            <div class="form-group">
+                <label asp-for="Millage">Millage à l'odomètre :</label>
+                <input asp-for="Millage" class="form-control" />
+                <div><span asp-validation-for="Millage" class="text-danger"></span></div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Succursale">Numéro de la succursale :</label>
+                <input asp-for="Succursale" class="form-control" />
+                <div><span asp-validation-for="Succursale" class="text-danger"></span></div>
+            </div>
+            <button type="submit" class="btn btn-primary">Créer la voiture</button>
         </form>
     </div>
 </div>
-

@@ -25,6 +25,8 @@ namespace TP_Web.Controllers
         [AllowAnonymous]
         public IActionResult Authentification(string returnUrl)
         {
+            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+
             ViewBag.returnUrl = returnUrl;
             return View();
         }

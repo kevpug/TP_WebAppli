@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace TP_Web.Models
 {
-    public class DépôtDéveloppement : IDépôt, ReadMe
+    public class DépôtDéveloppement :/* IDépôt,*/ ReadMe
     {
         private List<Utilisateur> utilisateurs = new List<Utilisateur>();
 

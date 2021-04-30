@@ -46,7 +46,9 @@ namespace TP_Web
 
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddSingleton<IDépôt, DépôtDéveloppement>(); //Singleton pour qu'il soit la même liste pour le site au complet.
+            // services.AddSingleton<IDépôt, DépôtDéveloppement>(); //Singleton pour qu'il soit la même liste pour le site au complet.
+            services.AddScoped<IDépôt, DépôtEF>();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -60,7 +62,7 @@ namespace TP_Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("controllers",
-                "controllers/{controller=Home}/{action=Index}/{id?}");
+                "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
             });

@@ -9,5 +9,12 @@ namespace TP_Web.Controllers
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
             return View();
         }
+
+        public ViewResult AjouterVoiture()
+        {
+            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+            return View();
+        }
+
     }
 }
