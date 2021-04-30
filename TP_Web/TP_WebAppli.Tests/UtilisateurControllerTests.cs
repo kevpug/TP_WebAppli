@@ -2,71 +2,44 @@
 using TP_Web;
 using Xunit;
 using TP_Web.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace TP01_WebAppli.Tests
 {
     public sealed class UtilisateurControllerTests : ReadMe
     {
+
         [Fact]
         public void ExceptionCodeIncorrect() {
             //Arrange, mettre en place les conditions du test
-            //IDépôt dépôt = new DépôtDéveloppement();
-            //UtilisateurController utillisateurController = new UtilisateurController(dépôt);
+            //DbContextOptions<ContexteAutoLoco> p_optionsAutoLoco = new DbContextOptionsBuilder<ContexteAutoLoco>()
+            //    .UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=AutoLoco;MultipleActiveResultSets=True")
+            //    .Options;
+            //DbContextOptions<ContexteIdentité> p_optionsIdentité = new DbContextOptionsBuilder<ContexteIdentité>()
+            //    .UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=IdentityUtilisateur;Trusted_Connection=True; MultipleActiveResultSets=True")
+            //    .Options;
 
-            Utilisateur utilisateur = new Utilisateur
+            //var contextAutoLoco = new ContexteAutoLoco(p_optionsAutoLoco);
+            //var contexteIdentité = new ContexteIdentité(p_optionsIdentité);
+            //IDépôt dépôt = new DépôtEF(contextAutoLoco, contexteIdentité);
+
+
+               // UtilisateurController uc = new UtilisateurController(dépôt,userManager, signManager);
+            ModèleLogin utilisateur = new ModèleLogin
             {
-                NomUtilisateur = "Admin2", //Mauvais code utilisateur
-                MotDePasse = "Inimda23",
-                Rôle = Utilisateur.TypeUtilisateur.Administrateur
+                CodeUtilisateur = "AdminI",
+                MDP = "InimdA24"
             };
 
             //Act, faire le test
-           // utillisateurController.Authentification(utilisateur);
+           //uc.Authentification(utilisateur, null);
 
             //Assert, vérifier le résultat du test
-            //Assert.True(utillisateurController.ModelState.ErrorCount > 0);
+            //Assert.True(uc.ModelState.ErrorCount > 0);
         }
 
-        [Fact]
-        public void ExceptionCodeExistant()
-        {
-            //Arrange, mettre en place les conditions du test
-            //IDépôt dépôt = new DépôtDéveloppement();
-            //UtilisateurController utillisateurController = new UtilisateurController(dépôt);
-
-            Utilisateur utilisateur = new Utilisateur
-            {
-                NomUtilisateur = "AdminI", //Code déjà existant par notre admin
-                MotDePasse = "Inimda23",
-                Rôle = Utilisateur.TypeUtilisateur.Commis
-            };
-
-            //Act, faire le test
-            //utillisateurController.AjouterUtilisateur(utilisateur);
-
-            //Assert, vérifier le résultat du test
-            //Assert.True(utillisateurController.ModelState.ErrorCount > 0);
-        }
-
-        [Fact]
-        public void ExceptionMdpIncorrect()
-        {
-            //Arrange, mettre en place les conditions du test
-            //IDépôt dépôt = new DépôtDéveloppement();
-            //UtilisateurController utillisateurController = new UtilisateurController(dépôt);
-
-            Utilisateur utilisateur = new Utilisateur
-            {
-                NomUtilisateur = "AdminI", 
-                MotDePasse = "Insd1223", //Mot de passe incorrect.
-                Rôle = Utilisateur.TypeUtilisateur.Commis
-            };
-
-            //Act, faire le test
-            //utillisateurController.Authentification(utilisateur);
-
-            //Assert, vérifier le résultat du test
-            //Assert.True(utillisateurController.ModelState.ErrorCount > 0);
-        }
     }
 }
