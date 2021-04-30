@@ -68,7 +68,8 @@ namespace TP_Web.Controllers
                             utilisateur, p_login.MDP, false, false);
                     if (résultat.Succeeded)
                     {
-                        return Redirect(returnUrl ?? "Index");
+                        DépôtDéveloppement.UtilisateurConnecté = true;
+                        return Redirect(returnUrl ?? "/");
                     }
                 }
                 ModelState.AddModelError(nameof(ModèleLogin.NomUtilisateur),

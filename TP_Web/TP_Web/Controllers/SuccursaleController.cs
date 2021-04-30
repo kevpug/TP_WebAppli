@@ -18,6 +18,7 @@ namespace TP_Web.Controllers
         public IActionResult Index()
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+            ViewBag.User = HttpContext.User.Identity.Name;
             return View();
         }
 
@@ -25,6 +26,7 @@ namespace TP_Web.Controllers
         public ViewResult AjouterSuccursale()
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+            ViewBag.User = HttpContext.User.Identity.Name;
             return View();
         }
 

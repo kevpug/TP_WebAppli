@@ -36,6 +36,10 @@
 
     <div class="container pb-5">
         <main role="main">
+            @if (DépôtDéveloppement.UtilisateurConnecté)
+            {
+            <h2>@ViewBag.User session</h2>
+            }
             @RenderBody()
         </main>
     </div>
