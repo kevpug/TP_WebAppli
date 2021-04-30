@@ -21,31 +21,31 @@ namespace TP_Web.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ViewResult AjouterVoiture()
-        {
-            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
-            if (string.IsNullOrEmpty(p_utilisateur.NomUtilisateur))
-                ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur.");
-            if (string.IsNullOrEmpty(p_utilisateur.MotDePasse))
-                ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Entrez un mot de passe.");
-            if (dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur))
-            {
-                if (!dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur && u.MotDePasse == p_utilisateur.MotDePasse))
-                    ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Le mot de passe est incorrect.");
-            }
-            else
-                ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Le nom d'utilisateur entré n'existe pas.");
+        //[HttpGet]
+        //public ViewResult AjouterVoiture()
+        //{
+        //    //ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+        //    //if (string.IsNullOrEmpty(p_utilisateur.NomUtilisateur))
+        //    //    ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur.");
+        //    //if (string.IsNullOrEmpty(p_utilisateur.MotDePasse))
+        //    //    ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Entrez un mot de passe.");
+        //    //if (dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur))
+        //    //{
+        //    //    if (!dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur && u.MotDePasse == p_utilisateur.MotDePasse))
+        //    //        ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Le mot de passe est incorrect.");
+        //    //}
+        //    //else
+        //    //    ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Le nom d'utilisateur entré n'existe pas.");
 
-            if (ModelState.IsValid)
-            {
-                DépôtDéveloppement.UtilisateurConnecté = true;
-                return View("../Utilisateur/Index"); // Ici on voudrait peut-être se connecter à l'index des utilisateurs pour voir Les Users Identity
-            }
-            else
-                return View();
-            return View();
-        }
+        //    //if (ModelState.IsValid)
+        //    //{
+        //    //    DépôtDéveloppement.UtilisateurConnecté = true;
+        //    //    return View("../Utilisateur/Index"); // Ici on voudrait peut-être se connecter à l'index des utilisateurs pour voir Les Users Identity
+        //    //}
+        //    //else
+        //    //    return View();
+        //    //return View();
+        //}
 
         //public IActionResult AjouterVoiture(Voiture voiture)
         //{
