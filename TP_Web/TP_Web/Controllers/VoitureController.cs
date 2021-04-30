@@ -17,7 +17,7 @@ namespace TP_Web.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Commis")]
+        [Authorize(Roles = "Gerant, Commis")]
         public ViewResult AjouterVoiture()
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
@@ -25,7 +25,7 @@ namespace TP_Web.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Commis")]
+        [Authorize(Roles = "Gerant, Commis")]
         public IActionResult AjouterVoiture(CréerVoitureModèle p_voiture)
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";

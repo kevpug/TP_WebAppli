@@ -86,14 +86,6 @@ namespace TP_Web.Controllers
             return View();
         }
 
-        [HttpGet]
-        [Authorize(Roles = "Gerant")]
-        public IActionResult Index()
-        {
-            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
-            return View(gUtilisateur.Users);
-        }
-
         [HttpPost]
         [Authorize(Roles = "Gerant")]
         public async Task<IActionResult> AjouterUtilisateur(CréerUtilisateurModèle p_modèle)
