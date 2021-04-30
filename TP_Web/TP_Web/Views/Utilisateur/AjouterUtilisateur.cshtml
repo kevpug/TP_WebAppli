@@ -13,20 +13,25 @@
                 <div><span asp-validation-for=" CodeUtilisateur" class="text-danger"></span></div>
             </div>
             <div class="form-group">
+                <label asp-for="Courriel">Courriel :</label>
+                <input asp-for="Courriel" class="form-control" />
+                <div><span asp-validation-for=" Courriel" class="text-danger"></span></div>
+            </div>
+            <div class="form-group">
                 <label asp-for="MDP">Mot de passe :</label>
                 <input asp-for="MDP" class="form-control" />
                 <div><span asp-validation-for="MDP" class="text-danger"></span></div>
 
             </div>
-            @*<div class="form-group">
+            <div class="form-group">
                 <label>Type d'utilisateur :</label>
                 <select asp-for="Rôle" class="form-control">
-                    <option value="@Utilisateur.TypeUtilisateur.Administrateur">Choisissez un rôle</option>
-                    <option value="@Utilisateur.TypeUtilisateur.Commis">Commis</option>
-                    <option value="@Utilisateur.TypeUtilisateur.Gérant">Gérant</option>
+                    <option value="@CréerUtilisateurModèle.TypeUtilisateur.Utilisateur">Utilisateur</option>
+                    <option value="@CréerUtilisateurModèle.TypeUtilisateur.Commis">Commis</option>
+                    <option value="@CréerUtilisateurModèle.TypeUtilisateur.Gérant">Gérant</option>
                 </select>
                 <div><span asp-validation-for="Rôle" class="text-danger"></span></div>
-            </div>*@
+            </div>
             <button type="submit" class="btn btn-primary">Créer l'utilisateur</button>
         </form>
     </div>
