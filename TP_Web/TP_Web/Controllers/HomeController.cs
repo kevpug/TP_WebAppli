@@ -6,7 +6,11 @@ namespace TP_Web.Controllers
 {
     public class HomeController : Controller, ReadMe
     {
-        public IActionResult Index() => View(ObtenirDonnées(nameof(Index)));
+        public IActionResult Index()
+        {
+            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+            return View(ObtenirDonnées(nameof(Index)));
+        }
 
         [Authorize(Roles = "Utilisateurs")]
         public IActionResult AutreAction() => View("Index",

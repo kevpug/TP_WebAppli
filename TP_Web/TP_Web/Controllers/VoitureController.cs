@@ -42,14 +42,23 @@ namespace TP_Web.Controllers
                                         v.Groupe != p_voiture.Groupe).Groupe.ToString();
                 ModelState.AddModelError(nameof(CréerVoitureModèle.Modèle), $"Le modèle de la voiture existe déjà pour le groupe {sNomGroupe}.");
             }
-            //}
-            //else
-            //    ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Le nom d'utilisateur entré n'existe pas.");
+            if (!dépôt.Succursales.Any(v => v.CodeSuccursale == p_voiture.Succursale))
+                ModelState.AddModelError(nameof(CréerVoitureModèle.Succursale), "Aucune succursale est associée au code saisie.");
 
             if (ModelState.IsValid)
             {
-                DépôtDéveloppement.UtilisateurConnecté = true;
-                return View("../Utilisateur/Index");
+                Voiture NouvelleVoiture = new Voiture()
+                {
+                    NuméroVoiture = p_voiture.NuméroVoiture,
+                    Modèle = p_voiture.Modèle,
+                    EstDisponible = true,
+                    Année = p_voiture.Année,
+                    Millage = p_voiture.Millage,
+                    Groupe = p_voiture.Groupe,
+                    Succursale = dépôt.Succursales.First(v => v.CodeSuccursale == p_voiture.Succursale)
+                };
+                dépôt.AjouterVoiture(NouvelleVoiture);
+                return View("../Home/Index");
             }
             return View();
         }
