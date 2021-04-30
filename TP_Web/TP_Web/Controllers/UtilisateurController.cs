@@ -110,11 +110,16 @@ namespace TP_Web.Controllers
             if (!string.IsNullOrEmpty(p_modèle.Courriel))
                 if (!Regex.Match(p_modèle.Courriel, @"^([\w.-]+)@([\w-]+)((.(\w){2,3})+)$").Success)
                     ModelState.AddModelError(nameof(CréerUtilisateurModèle.Courriel), "Entrez un courriel valide. (xxxxx@xxxxx.xxx)");
+                else
+                {
+                    if (dépôt.Utilisateurs.Any(u => u.Email == p_modèle.Courriel))
+                        ModelState.AddModelError(nameof(CréerUtilisateurModèle.Courriel), "Ce courriel est déjà utilisé.");
+
+                }
 
             if (dépôt.Utilisateurs.Any(u => u.UserName == p_modèle.CodeUtilisateur))
-                ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur qui n'existe pas déjà.");
+                ModelState.AddModelError(nameof(CréerUtilisateurModèle.CodeUtilisateur), "Ce code d'utilisateur est déjà utilisé.");
             
-            //@"^([\w.-]+)@([\w-]+)((.(\w){2,3})+)$"
             if (ModelState.IsValid)
             {
                 IdentityUser utilisateur = new IdentityUser
