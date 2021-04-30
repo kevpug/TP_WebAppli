@@ -9,9 +9,7 @@ namespace TP_Web.Models
         IQueryable<Succursale> Succursales { get; }
         IQueryable<Voiture> Voitures { get; }
         void AjouterSuccursale(Succursale p_succursale);
-        void EffacerSuccursale(Succursale p_succursale);
         void AjouterVoiture(Voiture p_voiture);
-        void EffacerVoiture(Voiture p_voiture);
 
     }
 }

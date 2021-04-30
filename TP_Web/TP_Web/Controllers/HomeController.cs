@@ -6,6 +6,7 @@ namespace TP_Web.Controllers
 {
     public class HomeController : Controller, ReadMe
     {
+        [AllowAnonymous]
         public IActionResult Index()
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
@@ -13,5 +14,4 @@ namespace TP_Web.Controllers
             return View();
         }
     }
-
 }

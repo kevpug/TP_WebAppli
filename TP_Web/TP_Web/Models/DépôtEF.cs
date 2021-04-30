@@ -21,22 +21,10 @@ namespace TP_Web.Models
             contexte.Succursales.Add(p_succursale);
             contexte.SaveChanges();
         }
-        public void EffacerSuccursale(Succursale p_succursale)
-        {
-            contexte.Succursales.Remove(p_succursale);
-            contexte.SaveChanges();
-        }
         public void AjouterVoiture(Voiture p_voiture)
         {
             contexte.Voitures.Add(p_voiture);
             contexte.SaveChanges();
         }
-        public void EffacerVoiture(Voiture p_voiture)
-        {
-            contexte.Voitures.Remove(p_voiture);
-            contexte.SaveChanges();
-        }
-
-
     }
 }

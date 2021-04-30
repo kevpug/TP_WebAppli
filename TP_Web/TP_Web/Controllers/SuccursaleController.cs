@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using TP_Web.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TP_Web.Controllers
 {
@@ -15,14 +16,9 @@ namespace TP_Web.Controllers
             dépôt = p_dépôt;
         }
 
-        public IActionResult Index()
-        {
-            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
-            ViewBag.User = HttpContext.User.Identity.Name;
-            return View();
-        }
 
         [HttpGet]
+        [Authorize(Roles = "Administrateur")]
         public ViewResult AjouterSuccursale()
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
@@ -31,7 +27,8 @@ namespace TP_Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AjouterSuccursale(Succursale p_succursale)
+        [Authorize(Roles = "Administrateur")]
+        public IActionResult AjouterSuccursale(Succursale p_succursale)
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
 
@@ -59,6 +56,7 @@ namespace TP_Web.Controllers
             if (ModelState.IsValid)
             {
                 dépôt.AjouterSuccursale(p_succursale);
+                return View("../Home/Index");
             }
 
             return View();

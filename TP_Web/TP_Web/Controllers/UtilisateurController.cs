@@ -77,7 +77,8 @@ namespace TP_Web.Controllers
             }
             return View(p_login);
         }
-
+        [HttpPost]
+        [Authorize(Roles = "Administrateur")]
         public IActionResult AjouterUtilisateur()
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
@@ -128,5 +129,18 @@ namespace TP_Web.Controllers
         //        return View();
 
         //}
+
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await gEnregistrement.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+        [AllowAnonymous]
+        public IActionResult AccèsRefusé()
+        {
+            return View();
+        }
     }
 }
