@@ -19,9 +19,8 @@ namespace TP_Web.Models
         public string Modèle { get; set; }
         public int Année { get; set; }
         public GroupeVoiture Groupe { get; set; }
-
         public long Millage { get; set; }
-
+        public bool EstDisponible { get; set; }
         public Succursale Succursale { get; set; }
 
 

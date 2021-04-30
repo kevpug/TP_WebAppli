@@ -21,43 +21,37 @@ namespace TP_Web.Controllers
             return View();
         }
 
-        //[HttpGet]
-        //public ViewResult AjouterVoiture()
-        //{
-        //    //ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
-        //    //if (string.IsNullOrEmpty(p_utilisateur.NomUtilisateur))
-        //    //    ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Entrez un nom d'utilisateur.");
-        //    //if (string.IsNullOrEmpty(p_utilisateur.MotDePasse))
-        //    //    ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Entrez un mot de passe.");
-        //    //if (dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur))
-        //    //{
-        //    //    if (!dépôt.Utilisateurs.Any(u => u.NomUtilisateur == p_utilisateur.NomUtilisateur && u.MotDePasse == p_utilisateur.MotDePasse))
-        //    //        ModelState.AddModelError(nameof(Utilisateur.MotDePasse), "Le mot de passe est incorrect.");
-        //    //}
-        //    //else
-        //    //    ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Le nom d'utilisateur entré n'existe pas.");
+        [HttpGet]
+        public ViewResult AjouterVoiture()
+        {
+            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+            return View();
+        }
 
-        //    //if (ModelState.IsValid)
-        //    //{
-        //    //    DépôtDéveloppement.UtilisateurConnecté = true;
-        //    //    return View("../Utilisateur/Index"); // Ici on voudrait peut-être se connecter à l'index des utilisateurs pour voir Les Users Identity
-        //    //}
-        //    //else
-        //    //    return View();
-        //    //return View();
-        //}
+        [HttpPost]
+        public ViewResult AjouterVoiture(CréerVoitureModèle p_voiture)
+        {
+            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
 
-        //public IActionResult AjouterVoiture(Voiture voiture)
-        //{
-        //    dépôt.AjouterVoiture(voiture);
-        //    return View();
-        //}
+            if (dépôt.Voitures.Any(v => v.VoitureId == p_voiture.VoitureId))
+                ModelState.AddModelError(nameof(CréerVoitureModèle.VoitureId), "Le numéro de la voiture existe déjà.");
+            if (dépôt.Voitures.Any(v => v.Modèle == p_voiture.Modèle &&
+                                        v.Groupe != p_voiture.Groupe))
+            {
+                string sNomGroupe = dépôt.Voitures.First(v => v.Modèle == p_voiture.Modèle &&
+                                        v.Groupe != p_voiture.Groupe).Groupe.ToString();
+                ModelState.AddModelError(nameof(CréerVoitureModèle.Modèle), $"Le modèle de la voiture existe déjà pour le groupe {sNomGroupe}.");
+            }
+            //}
+            //else
+            //    ModelState.AddModelError(nameof(Utilisateur.NomUtilisateur), "Le nom d'utilisateur entré n'existe pas.");
 
-        //[HttpPost]
-        //public Task<IActionResult> AjouterVoiture(Voiture p_voiture)
-        //{
-        //   dépôt.AjouterVoiture(p_voiture);
-        //    //return View(p_voiture);
-        //}
+            if (ModelState.IsValid)
+            {
+                DépôtDéveloppement.UtilisateurConnecté = true;
+                return View("../Utilisateur/Index");
+            }
+            return View();
+        }
     }
 }
