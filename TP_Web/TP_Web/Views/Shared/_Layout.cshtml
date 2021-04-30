@@ -44,16 +44,25 @@
         <main role="main">
             @if (DépôtEF.UtilisateurConnecté)
             {
-            <h2>@ViewBag.User session</h2>
+                <h2>@ViewBag.User session</h2>
             }
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-center fixed-bottom pt-3">
-        
-            <p>@ViewBag.Noms</p>
-        
+    <footer class="border-top footer text-center fixed-bottom">
+
+        <div class="flex-sm-row-reverse">
+            <p style="text-align:center">
+                @ViewBag.Noms
+
+            </p>
+            @if (DépôtEF.UtilisateurConnecté)
+            {
+                <a asp-controller="Utilisateur" asp-action="Logout"
+                   class="btn btn-danger float-right text-center">Logout</a>
+            }
+        </div>
     </footer>
 </body>
 </html>
