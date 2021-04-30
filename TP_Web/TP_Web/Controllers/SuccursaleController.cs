@@ -38,20 +38,20 @@ namespace TP_Web.Controllers
 
             if (dépôt.Succursales.Any(s => s.NomRue == p_succursale.NomRue && s.CodePostal == p_succursale.CodePostal))
             { 
-                ModelState.AddModelError(nameof(Succursale.NomRue), "Il ne peut pas y avoir de Succursale à la même rue et code postal");
-                ModelState.AddModelError(nameof(Succursale.CodePostal), "Il ne peut pas y avoir de Succursale à la même rue et code postal");
+                ModelState.AddModelError(nameof(Succursale.NomRue), "Il y a déjà une succursale avec le même nom de rue et code postal");
+                ModelState.AddModelError(nameof(Succursale.CodePostal), "Il y a déjà une succursale avec le même nom de rue et code postal");
             }
 
             if (dépôt.Succursales.Any(s => s.NomVille != p_succursale.NomVille && s.CodePostal == p_succursale.CodePostal))
             {
-                ModelState.AddModelError(nameof(Succursale.NomVille), "Il ne peut pas y avoir de Succursale à la même rue et code postal");
-                ModelState.AddModelError(nameof(Succursale.CodePostal), "Il ne peut pas y avoir de Succursale à la même rue et code postal");
+                ModelState.AddModelError(nameof(Succursale.NomVille), "Il y a un autre nom de ville avec le même code postal");
+                ModelState.AddModelError(nameof(Succursale.CodePostal), "Il y a un autre nom de ville avec le même code postal");
             }
 
             if (dépôt.Succursales.Any(s => s.NomProvince != p_succursale.NomProvince && s.CodePostal == p_succursale.CodePostal))
             {
-                ModelState.AddModelError(nameof(Succursale.NomProvince), "Il ne peut pas y avoir de Succursale à la même province et code postal");
-                ModelState.AddModelError(nameof(Succursale.CodePostal), "Il ne peut pas y avoir de Succursale à la même province et code postal");
+                ModelState.AddModelError(nameof(Succursale.NomProvince), "Il y a un autre nom de province avec le même code postal");
+                ModelState.AddModelError(nameof(Succursale.CodePostal), "Il y a un autre nom de province avec le même code postal");
             }
 
             if (ModelState.IsValid)
