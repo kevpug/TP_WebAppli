@@ -33,8 +33,8 @@ namespace TP_Web.Controllers
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
 
-            if (dépôt.Succursales.Any(s => s.SuccursaleId == p_succursale.SuccursaleId))
-                ModelState.AddModelError(nameof(Succursale.SuccursaleId), "Ce numéro de Succursale existe déjà!");
+            if (dépôt.Succursales.Any(s => s.CodeSuccursale == p_succursale.CodeSuccursale))
+                ModelState.AddModelError(nameof(Succursale.CodeSuccursale), "Ce numéro de Succursale existe déjà!");
 
             if (dépôt.Succursales.Any(s => s.NomRue == p_succursale.NomRue && s.CodePostal == p_succursale.CodePostal))
             { 
