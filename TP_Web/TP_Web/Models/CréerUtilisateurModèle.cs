@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TP_Web.Models
 {
-    public class CréerUtilisateurModèle
+    public class CréerUtilisateurModèle : ReadMe
     {
         public enum TypeUtilisateur { Administrateur, Gérant, Commis }
 

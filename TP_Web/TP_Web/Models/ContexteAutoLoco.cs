@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TP_Web.Models
 {
-    public class ContexteAutoLoco : DbContext
+    public class ContexteAutoLoco : DbContext, ReadMe
     {
         public ContexteAutoLoco(DbContextOptions<ContexteAutoLoco> p_options) : base(p_options) { }
 

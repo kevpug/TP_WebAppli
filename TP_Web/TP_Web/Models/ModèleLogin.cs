@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TP_Web.Models
 {
-    public class ModèleLogin
+    public class ModèleLogin : ReadMe
     {
         [Required]
         [UIHint("Username")]

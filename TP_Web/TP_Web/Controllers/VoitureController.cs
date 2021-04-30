@@ -8,7 +8,7 @@ using TP_Web.Models;
 
 namespace TP_Web.Controllers
 {
-    public class VoitureController : Controller
+    public class VoitureController : Controller, ReadMe
     {
         private IDépôt dépôt;
         public VoitureController(IDépôt p_dépôt)

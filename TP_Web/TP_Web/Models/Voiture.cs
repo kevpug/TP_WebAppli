@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TP_Web.Models
 {
-    public sealed class Voiture
+    public sealed class Voiture : ReadMe
     {
         public enum GroupeVoiture { 
         Compact,

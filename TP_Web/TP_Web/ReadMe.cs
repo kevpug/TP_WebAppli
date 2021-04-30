@@ -19,9 +19,9 @@
          * 
          * Cette application est remis en format compressé .zip. Il faut le décompresser et ouvrir la solution afin de voir 
          * et tester le code. Touche F5 pour partir en mode debug une fois la solution ouverte.
-         * Lors de l'ouverture du programme, pour se connecter en tant qu'administrateur, il faut entrer le nom d'utilisateur AdminI
-         * et le mot de passe InimdA23.
-         * 
+         * Lors de l'ouverture du programme, pour se connecter en tant que Gérant, il faut entrer le nom d'utilisateur : AdminI et le mot de passe InimdA23.
+         * Pour se connecter en tant que Commis, il faut entrer le nom d'utilisateur : CommisI et le mot de passe SimmoC23.
+         * Pour se connecter en tant que Utilisateur, il faut entrer le nom d'utilisateur : UtilisateurI et le mot de passe RuetasilitU23.
          */
     }
 }

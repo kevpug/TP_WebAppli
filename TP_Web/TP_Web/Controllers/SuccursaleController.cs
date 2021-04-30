@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TP_Web.Controllers
 {
-    public class SuccursaleController : Controller
+    public class SuccursaleController : Controller, ReadMe
     {
 
         private IDépôt dépôt;

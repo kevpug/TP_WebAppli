@@ -3,7 +3,7 @@ using static TP_Web.Models.Voiture;
 
 namespace TP_Web.Models
 {
-    public sealed class CréerVoitureModèle
+    public sealed class CréerVoitureModèle : ReadMe
     {
         [Required(ErrorMessage = "Veuillez entrer un numéro de voiture.")]
         [Range(0, long.MaxValue,

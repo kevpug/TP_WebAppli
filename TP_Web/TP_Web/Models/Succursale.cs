@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TP_Web.Models
 {
-    public sealed class Succursale
+    public sealed class Succursale : ReadMe
     {
         [Key]
         public int SuccursaleId { get; set; }

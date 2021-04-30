@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TP_Web.Models
 {
-    public class PeuplerIdentité
+    public class PeuplerIdentité : ReadMe
     {
 
         public static void CréerCompteBD(IServiceProvider p_serviceProvider,
