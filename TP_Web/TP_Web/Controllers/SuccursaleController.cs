@@ -22,7 +22,7 @@ namespace TP_Web.Controllers
         public ViewResult AjouterSuccursale()
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
-            ViewBag.User = HttpContext.User.Identity.Name;
+            ViewBag.User = DépôtEF.utilisateurName;
             return View();
         }
 
@@ -31,7 +31,7 @@ namespace TP_Web.Controllers
         public IActionResult AjouterSuccursale(Succursale p_succursale)
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
-            ViewBag.User = HttpContext.User.Identity.Name;
+            ViewBag.User = DépôtEF.utilisateurName;
 
             if (dépôt.Succursales.Any(s => s.CodeSuccursale == p_succursale.CodeSuccursale))
                 ModelState.AddModelError(nameof(Succursale.CodeSuccursale), "Ce numéro de Succursale existe déjà!");

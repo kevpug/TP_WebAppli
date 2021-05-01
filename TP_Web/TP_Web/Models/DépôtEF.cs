@@ -16,6 +16,8 @@ namespace TP_Web.Models
 
         public static bool UtilisateurConnecté { get; set; }
 
+        public static string utilisateurName { get; set; }
+
         public IQueryable<Succursale> Succursales => contexteAutoLoco.Succursales;
         public IQueryable<IdentityUser> Utilisateurs => contexteIdendité.Users;
         public IQueryable<Voiture> Voitures => contexteAutoLoco.Voitures;
