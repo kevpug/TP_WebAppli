@@ -37,8 +37,27 @@ namespace TP_Web.Controllers
                                         v.Groupe != p_voiture.Groupe).Groupe.ToString();
                 ModelState.AddModelError(nameof(CréerVoitureModèle.Modèle), $"Le modèle de la voiture existe déjà pour le groupe {sNomGroupe}.");
             }
+
+            if (p_voiture.Succursale < 0)
+                ModelState.AddModelError(nameof(CréerVoitureModèle.NuméroVoiture), "Le numéro de la succursale doit être un chiffre positif.");
+            
             if (!dépôt.Succursales.Any(v => v.CodeSuccursale == p_voiture.Succursale))
                 ModelState.AddModelError(nameof(CréerVoitureModèle.Succursale), "Aucune succursale est associée au code saisie.");
+
+
+            if (p_voiture.Millage != null)
+                if (p_voiture.Millage < 0)
+                    ModelState.AddModelError(nameof(CréerVoitureModèle.Millage), "Le millage doit être un chiffre positif.");
+
+            if (p_voiture.NuméroVoiture != null)
+                if (p_voiture.NuméroVoiture < 0)
+                    ModelState.AddModelError(nameof(CréerVoitureModèle.NuméroVoiture), "Le numéro de la voiture doit être un chiffre positif.");
+
+            if (p_voiture.Année != null)
+                if (p_voiture.Année > 9999 || p_voiture.Année < 1900)
+                    ModelState.AddModelError(nameof(CréerVoitureModèle.Année), "L'année de la voiture doit être entre 1900 et 9999");
+
+
 
             if (ModelState.IsValid)
             {
