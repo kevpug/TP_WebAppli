@@ -31,6 +31,7 @@ namespace TP_Web.Controllers
         public IActionResult AjouterSuccursale(Succursale p_succursale)
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+            ViewBag.User = HttpContext.User.Identity.Name;
 
             if (dépôt.Succursales.Any(s => s.CodeSuccursale == p_succursale.CodeSuccursale))
                 ModelState.AddModelError(nameof(Succursale.CodeSuccursale), "Ce numéro de Succursale existe déjà!");
@@ -41,10 +42,12 @@ namespace TP_Web.Controllers
             if (p_succursale.NuméroCivique < 0)
                 ModelState.AddModelError(nameof(Succursale.NuméroCivique), "Le numéro civique doit être positif.");
 
-            if (!Regex.Match(p_succursale.CodePostal, @"^[a-zA-Z][0-9][a-zA-Z][0-9][a-zA-Z][0-9]$").Success)
-                ModelState.AddModelError(nameof(Succursale.CodePostal), "Veuillez fournir un code postal dans un format valide (LCLCLC).");
+            if (!string.IsNullOrEmpty(p_succursale.CodePostal))
+                if (!Regex.Match(p_succursale.CodePostal, @"^[a-zA-Z][0-9][a-zA-Z][0-9][a-zA-Z][0-9]$").Success)
+                    ModelState.AddModelError(nameof(Succursale.CodePostal), "Veuillez fournir un code postal dans un format valide (LCLCLC).");
 
-            if (!Regex.Match(p_succursale.NuméroTéléphone, @"^[\d][\d][\d][\d][\d][\d][\d][\d][\d][\d]$").Success)
+            if (!string.IsNullOrEmpty(p_succursale.NuméroTéléphone))
+                if (!Regex.Match(p_succursale.NuméroTéléphone, @"^[\d][\d][\d][\d][\d][\d][\d][\d][\d][\d]$").Success)
                 ModelState.AddModelError(nameof(Succursale.NuméroTéléphone), "Veuillez fournir un numéro de téléphone valide.");
 
 

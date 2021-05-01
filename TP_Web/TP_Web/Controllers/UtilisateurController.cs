@@ -73,6 +73,7 @@ namespace TP_Web.Controllers
         public async Task<IActionResult> AjouterUtilisateur(CréerUtilisateurModèle p_modèle)
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+            ViewBag.User = HttpContext.User.Identity.Name;
 
 
             if (!string.IsNullOrEmpty(p_modèle.CodeUtilisateur))
