@@ -21,7 +21,7 @@ namespace TP_WebAppli.Tests
             mock.Setup(a => a.Succursales).Returns((new Succursale[] {
                 new Succursale {
                     SuccursaleId = 1, CodeSuccursale = 1, NomProvince = "QC",
-                    CodePostal = "J3A3G3E", NomRue = "Bélanger", NomVille="Boubou",
+                    CodePostal = "J3A3G3", NomRue = "Bélanger", NomVille="Boubou",
                     NuméroCivique = 10, NuméroTéléphone="4501231234", Voitures = new List<Voiture>()
                 }
             }).AsQueryable<Succursale>());
@@ -65,7 +65,7 @@ namespace TP_WebAppli.Tests
             mock.Setup(a => a.Succursales).Returns((new Succursale[] {
                 new Succursale {
                     SuccursaleId = 1, CodeSuccursale = 1, NomProvince = "QC",
-                    CodePostal = "J3A3G3E", NomRue = "Bélanger", NomVille="Boubou",
+                    CodePostal = "J3A3G3", NomRue = "Bélanger", NomVille="Boubou",
                     NuméroCivique = 10, NuméroTéléphone="4501231234", Voitures = new List<Voiture>()
                 }
             }).AsQueryable<Succursale>());
@@ -109,7 +109,7 @@ namespace TP_WebAppli.Tests
             mock.Setup(a => a.Succursales).Returns((new Succursale[] {
                 new Succursale {
                     SuccursaleId = 1, CodeSuccursale = 1, NomProvince = "QC",
-                    CodePostal = "J3A3G3E", NomRue = "Bélanger", NomVille="Boubou",
+                    CodePostal = "J3A3G3", NomRue = "Bélanger", NomVille="Boubou",
                     NuméroCivique = 10, NuméroTéléphone="4501231234", Voitures = new List<Voiture>()
                 }
             }).AsQueryable<Succursale>());
@@ -144,7 +144,7 @@ namespace TP_WebAppli.Tests
             mock.Setup(a => a.Succursales).Returns((new Succursale[] {
                 new Succursale {
                     SuccursaleId = 1, CodeSuccursale = 1, NomProvince = "QC",
-                    CodePostal = "J3A3G3E", NomRue = "Bélanger", NomVille="Boubou",
+                    CodePostal = "J3A3G3", NomRue = "Bélanger", NomVille="Boubou",
                     NuméroCivique = 10, NuméroTéléphone="4501231234", Voitures = new List<Voiture>()
                 }
             }).AsQueryable<Succursale>());
@@ -180,7 +180,7 @@ namespace TP_WebAppli.Tests
             mock.Setup(a => a.Succursales).Returns((new Succursale[] {
                 new Succursale {
                     SuccursaleId = 1, CodeSuccursale = 1, NomProvince = "QC",
-                    CodePostal = "J3A3G3E", NomRue = "Bélanger", NomVille="Boubou",
+                    CodePostal = "J3A3G3", NomRue = "Bélanger", NomVille="Boubou",
                     NuméroCivique = 10, NuméroTéléphone="4501231234", Voitures = new List<Voiture>()
                 }
             }).AsQueryable<Succursale>());
@@ -216,7 +216,7 @@ namespace TP_WebAppli.Tests
             mock.Setup(a => a.Succursales).Returns((new Succursale[] {
                 new Succursale {
                     SuccursaleId = 1, CodeSuccursale = 1, NomProvince = "QC",
-                    CodePostal = "J3A3G3E", NomRue = "Bélanger", NomVille="Boubou",
+                    CodePostal = "J3A3G3", NomRue = "Bélanger", NomVille="Boubou",
                     NuméroCivique = 10, NuméroTéléphone="4501231234", Voitures = new List<Voiture>()
                 }
             }).AsQueryable<Succursale>());
