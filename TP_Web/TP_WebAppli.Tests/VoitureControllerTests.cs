@@ -1,8 +1,6 @@
 ﻿using Moq;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TP_Web;
 using TP_Web.Controllers;
 using TP_Web.Models;
@@ -155,7 +153,7 @@ namespace TP_WebAppli.Tests
             CréerVoitureModèle CVM = new CréerVoitureModèle
             {
                 NuméroVoiture = 2,
-                Année = 2000, 
+                Année = 2000,
                 Groupe = Voiture.GroupeVoiture.Sedan,
                 Millage = -300000, // Millage négtif ici
                 Modèle = "Poche",
@@ -193,7 +191,7 @@ namespace TP_WebAppli.Tests
                 NuméroVoiture = -2, // Code négatif ici
                 Année = 2000,
                 Groupe = Voiture.GroupeVoiture.Sedan,
-                Millage = 300000, 
+                Millage = 300000,
                 Modèle = "Poche",
                 Succursale = 1
             };
@@ -226,7 +224,7 @@ namespace TP_WebAppli.Tests
             CréerVoitureModèle CVM = new CréerVoitureModèle
             {
                 NuméroVoiture = 2,
-                Année = 2000, 
+                Année = 2000,
                 Groupe = Voiture.GroupeVoiture.Sedan,
                 Millage = 300000,
                 Modèle = "Poche",

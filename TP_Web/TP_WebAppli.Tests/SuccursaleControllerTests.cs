@@ -1,8 +1,6 @@
 ﻿using Moq;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TP_Web;
 using TP_Web.Controllers;
 using TP_Web.Models;
@@ -100,7 +98,7 @@ namespace TP_WebAppli.Tests
             Succursale fun = new Succursale
             {
                 SuccursaleId = 2,
-                CodeSuccursale = 2, 
+                CodeSuccursale = 2,
                 NomProvince = "QC",
                 CodePostal = "J3A3G3", //Même code postal que succursale 1
                 NomRue = "Bélanger",  //Même nom de rue que succursale 1
@@ -135,9 +133,9 @@ namespace TP_WebAppli.Tests
             {
                 SuccursaleId = 2,
                 CodeSuccursale = 2,
-                NomProvince = "QC", 
+                NomProvince = "QC",
                 CodePostal = "J3A3G3", //Même code postal que succursale 1
-                NomRue = "SKLA",  
+                NomRue = "SKLA",
                 NomVille = "Blablaland", //Différent nom de ville
                 NuméroCivique = 20,
                 NuméroTéléphone = "4501235678",
@@ -171,7 +169,7 @@ namespace TP_WebAppli.Tests
                 NomProvince = "ABOUK", //Différent nom de province
                 CodePostal = "J3A3G3", //Même code postal que succursale 1
                 NomRue = "SKLA",
-                NomVille = "Boubou", 
+                NomVille = "Boubou",
                 NuméroCivique = 20,
                 NuméroTéléphone = "4501235678",
                 Voitures = new List<Voiture>()

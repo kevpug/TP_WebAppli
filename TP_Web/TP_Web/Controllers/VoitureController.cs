@@ -40,7 +40,7 @@ namespace TP_Web.Controllers
 
             if (p_voiture.Succursale < 0)
                 ModelState.AddModelError(nameof(CréerVoitureModèle.NuméroVoiture), "Le numéro de la succursale doit être un chiffre positif.");
-            
+
             if (!dépôt.Succursales.Any(v => v.CodeSuccursale == p_voiture.Succursale))
                 ModelState.AddModelError(nameof(CréerVoitureModèle.Succursale), "Aucune succursale est associée au code saisie.");
 
