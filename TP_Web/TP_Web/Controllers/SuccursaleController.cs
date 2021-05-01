@@ -22,7 +22,6 @@ namespace TP_Web.Controllers
         public ViewResult AjouterSuccursale()
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
-            ViewBag.User = DépôtEF.utilisateurName;
             return View();
         }
 

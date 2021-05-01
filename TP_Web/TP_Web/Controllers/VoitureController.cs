@@ -18,7 +18,6 @@ namespace TP_Web.Controllers
         public ViewResult AjouterVoiture()
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
-            ViewBag.User = DépôtEF.utilisateurName;
             return View();
         }
 
@@ -27,7 +26,6 @@ namespace TP_Web.Controllers
         public IActionResult AjouterVoiture(CréerVoitureModèle p_voiture)
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
-            ViewBag.User = DépôtEF.utilisateurName;
 
             if (dépôt.Voitures.Any(v => v.NuméroVoiture == p_voiture.NuméroVoiture))
                 ModelState.AddModelError(nameof(CréerVoitureModèle.NuméroVoiture), "Le numéro de la voiture existe déjà.");
