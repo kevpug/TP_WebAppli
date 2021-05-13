@@ -4,8 +4,16 @@
 <body>
     @if (DépôtEF.UtilisateurConnecté) { 
 
-        <div class="container">
-            <a class="nav-link text-black-50" asp-area="" asp-controller="Location" asp-action="LouerVoiture"><i class="fa fa-user"></i>LOCATION VOITURE</a>
+    <div class="container">
+        <div>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Location" asp-action="LouerVoiture"><i class="fa fa-car"></i>LOCATION DE VOITURE</a>
         </div>
+        <div>
+            <a class="nav-link text-dark" asp-area="" asp-controller="TraitementRetour" asp-action="RetournerVoiture"><i class="fa fa-undo-alt"></i>RETOUR D'UNE VOITURE</a>
+        </div>
+        <div>
+            <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action=""><i class="fa fa-folder"></i>DOSSIER D'ACCIDENT</a>
+        </div>
+    </div>
     }
 </body>
