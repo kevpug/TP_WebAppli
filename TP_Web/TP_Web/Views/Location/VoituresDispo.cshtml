@@ -8,10 +8,10 @@
         <h4 class="card-title">Début d'une location</h4>
         <form asp-action="VoituresDispo" method="post" class="m-2">
             <div class="form-group">
-            <label>Code de la Succursale : @ViewBag.CodeSuccursale</label>
+            <label>Code de la Succursale : <span class="font-weight-bold">@ViewBag.CodeSuccursale</span></label>
         </div>
         <div class="form-group">
-            <label>Modèle : @ViewBag.Modèle</label>
+            <label>Modèle : <span class="font-weight-bold">@ViewBag.Modèle</span></label>
         </div>
 
             <div class="form-group">
@@ -40,7 +40,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="NuméroPermisConduire">Numéro de permis du client : </label>
-                <input type="number" asp-for="NuméroPermisConduire" class="form-control" />
+                <input asp-for="NuméroPermisConduire" class="form-control" />
                 <div><span asp-validation-for="NuméroPermisConduire" class="text-danger"></span></div>
             </div>
             <button type="submit" class="btn btn-primary">Suivant</button>

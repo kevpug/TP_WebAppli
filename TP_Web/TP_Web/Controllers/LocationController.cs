@@ -148,7 +148,7 @@ namespace TP_Web.Controllers
             IEnumerable<string> locationInfo = (IEnumerable<string>)TempData["LocationInfo"];
             if (locationInfo is null)
                 return Redirect("../Location/ChoisirModele"); //Éviter le crash...
-
+            
             ViewBag.CodeSuccursale = locationInfo.ElementAt(0);
             ViewBag.Modèle = locationInfo.ElementAt(1);
             ViewBag.NuméroVoiture = locationInfo.ElementAt(2);

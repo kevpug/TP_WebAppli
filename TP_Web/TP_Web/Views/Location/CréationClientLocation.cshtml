@@ -8,40 +8,38 @@
         <h4 class="card-title">Début d'une location</h4>
         <form asp-action="VoituresDispo" method="post" class="m-2">
             <div class="form-group">
-                <label>Code de la Succursale : @ViewBag.CodeSuccursale </label>
+                <label>Code de la Succursale : <span class="font-weight-bold">@ViewBag.CodeSuccursale</span> </label>
             </div>
 
             <div class="form-group">
                 <label >Modèle : @ViewBag.Modèle</label>
             </div>
             <div class="form-group">
-                <label>Nombre de jours avant le retour : @ViewBag.NombreJoursLocation </label>
+                <label>Nombre de jours avant le retour : <span class="font-weight-bold">@ViewBag.NombreJoursLocation</span> </label>
             </div>
             <div class="form-group">
-                <label>Numéro de la voiture : @ViewBag.NuméroVoiture</label>
+                <label>Numéro de la voiture : <span class="font-weight-bold">@ViewBag.NuméroVoiture</span></label>
             </div>
             <div class="form-group">
-                <label>Code de la Succursale de retour : @ViewBag.CodeSuccursaleRetour</label>
+                <label>Code de la Succursale de retour : <span class="font-weight-bold">@ViewBag.CodeSuccursaleRetour</span></label>
             </div>
             <div class="form-group">
-                <label asp-for="NuméroPermisConduire">Numéro de permis du client : </label>
-                <input type="number" asp-for="NuméroPermisConduire" class="form-control" />
-                <div><span asp-validation-for="NuméroPermisConduire" class="text-danger"></span></div>
+                <label >Numéro de permis du client : <span class="font-weight-bold">@ViewBag.NuméroPermisConduire</span></label>
             </div>
 
             <div class="form-group">
                 <label asp-for="Prénom">Prénom du client : </label>
-                <input type="number" asp-for="Prénom" class="form-control" />
+                <input asp-for="Prénom" class="form-control" />
                 <div><span asp-validation-for="Prénom" class="text-danger"></span></div>
             </div>
             <div class="form-group">
                 <label asp-for="Nom">Nom du client : </label>
-                <input type="number" asp-for="Nom" class="form-control" />
+                <input asp-for="Nom" class="form-control" />
                 <div><span asp-validation-for="Nom" class="text-danger"></span></div>
             </div>
             <div class="form-group">
                 <label asp-for="NuméroTéléphone">Numéro de téléphone : </label>
-                <input type="number" asp-for="NuméroTéléphone" class="form-control" />
+                <input asp-for="NuméroTéléphone" class="form-control" />
                 <div><span asp-validation-for="NuméroTéléphone" class="text-danger"></span></div>
             </div>
             <button type="submit" class="btn btn-primary">Suivant</button>
