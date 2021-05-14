@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace TP_Web.Migrations.ContexteAutoLocoMigrations
+namespace TP_Web.Migrations
 {
     public partial class AutoLoco : Migration
     {
@@ -68,6 +68,34 @@ namespace TP_Web.Migrations.ContexteAutoLocoMigrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DossierAccidents",
+                columns: table => new
+                {
+                    DossierID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RapportAccident = table.Column<string>(nullable: true),
+                    DossierFermé = table.Column<bool>(nullable: false),
+                    ClientId = table.Column<long>(nullable: true),
+                    VoitureId = table.Column<long>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DossierAccidents", x => x.DossierID);
+                    table.ForeignKey(
+                        name: "FK_DossierAccidents_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "ClientId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_DossierAccidents_Voitures_VoitureId",
+                        column: x => x.VoitureId,
+                        principalTable: "Voitures",
+                        principalColumn: "VoitureId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Locations",
                 columns: table => new
                 {
@@ -103,6 +131,16 @@ namespace TP_Web.Migrations.ContexteAutoLocoMigrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_DossierAccidents_ClientId",
+                table: "DossierAccidents",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DossierAccidents_VoitureId",
+                table: "DossierAccidents",
+                column: "VoitureId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Locations_ClientId",
                 table: "Locations",
                 column: "ClientId");
@@ -125,6 +163,9 @@ namespace TP_Web.Migrations.ContexteAutoLocoMigrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "DossierAccidents");
+
             migrationBuilder.DropTable(
                 name: "Locations");
 

@@ -10,7 +10,6 @@ namespace TP_Web.Models
         public DbSet<Succursale> Succursales { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Location> Locations { get; set; }
-
         public DbSet<DossierAccident> DossierAccidents { get; set; }
     }
 }

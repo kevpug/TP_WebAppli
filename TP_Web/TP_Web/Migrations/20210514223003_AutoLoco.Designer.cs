@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TP_Web.Models;
 
-namespace TP_Web.Migrations.ContexteAutoLocoMigrations
+namespace TP_Web.Migrations
 {
     [DbContext(typeof(ContexteAutoLoco))]
-    partial class ContexteAutoLocoModelSnapshot : ModelSnapshot
+    [Migration("20210514223003_AutoLoco")]
+    partial class AutoLoco
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,6 +43,34 @@ namespace TP_Web.Migrations.ContexteAutoLocoMigrations
                     b.HasKey("ClientId");
 
                     b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("TP_Web.Models.DossierAccident", b =>
+                {
+                    b.Property<int>("DossierID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long?>("ClientId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("DossierFermé")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("RapportAccident")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("VoitureId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("DossierID");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("VoitureId");
+
+                    b.ToTable("DossierAccidents");
                 });
 
             modelBuilder.Entity("TP_Web.Models.Location", b =>
@@ -149,6 +179,17 @@ namespace TP_Web.Migrations.ContexteAutoLocoMigrations
                     b.HasIndex("SuccursaleId");
 
                     b.ToTable("Voitures");
+                });
+
+            modelBuilder.Entity("TP_Web.Models.DossierAccident", b =>
+                {
+                    b.HasOne("TP_Web.Models.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId");
+
+                    b.HasOne("TP_Web.Models.Voiture", "Voiture")
+                        .WithMany()
+                        .HasForeignKey("VoitureId");
                 });
 
             modelBuilder.Entity("TP_Web.Models.Location", b =>

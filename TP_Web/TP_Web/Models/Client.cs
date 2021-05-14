@@ -14,7 +14,6 @@ namespace TP_Web.Models
         public string Prénom { get; set; }
         public string Nom { get; set; }
         public string NuméroTéléphone { get; set; }
-        public DossierAccident DossierAccident { get; set; }
 
     }
 }

@@ -15,6 +15,7 @@ namespace TP_Web.Models
 
         public bool DossierFermé { get; set; }
 
+
         public Client Client { get; set; }
 
         public Voiture Voiture { get; set; }
