@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,21 @@ namespace TP_Web.Controllers
             dépôt = p_dépôt;
         }
 
-        public IActionResult RetournerVoiture()
+        [HttpGet]
+        [Authorize(Roles = "Gerant, Commis")]
+        public ViewResult RetournerVoiture()
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Gerant, Commis")]
+        public IActionResult RetournerVoiture(Voiture p_voiture)
+        {
+            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+
+
             return View();
         }
     }
