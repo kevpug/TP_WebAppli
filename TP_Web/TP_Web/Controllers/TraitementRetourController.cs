@@ -33,9 +33,9 @@ namespace TP_Web.Controllers
 
             List<string> TempDataVoiture = new List<string>();
             TempDataVoiture.Add(p_voiture.NuméroVoiture.ToString());
-            TempDataVoiture.Add(p_voiture.SuccursaleDeRetour.ToString());
             TempDataVoiture.Add(p_voiture.NouveauMillage.ToString());
             TempDataVoiture.Add(p_voiture.NuméroPermisConduire);
+            TempDataVoiture.Add(p_voiture.SuccursaleDeRetour.ToString());
 
             TempData["VoitureInfo"] = TempDataVoiture;
 
