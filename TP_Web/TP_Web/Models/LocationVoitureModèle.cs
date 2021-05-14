@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TP_Web.Models
 {
-    public sealed class ChoisirVoitureDispo
+    public sealed class LocationVoitureModèle
     {
         public long? CodeSuccursale { get; set; }
         public string Modèle { get; set; }

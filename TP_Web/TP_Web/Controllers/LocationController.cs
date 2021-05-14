@@ -40,7 +40,7 @@ namespace TP_Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Gerant, Commis")]
-        public IActionResult ChoisirModele(SelectionModèle p_SelecMod)
+        public IActionResult ChoisirModele(LocationVoitureModèle p_lvm)
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
             ViewBag.ListeSuccursales = dépôt.Succursales;
@@ -55,23 +55,14 @@ namespace TP_Web.Controllers
 
             
 
-            return View("VoituresDispo",p_SelecMod);
+            return View("VoituresDispo", p_lvm);
 
         }
 
         [HttpPost]
         [Authorize(Roles = "Gerant, Commis")]
-        public IActionResult VoituresDispo(SelectionModèle p_SelecMod)
+        public IActionResult VoituresDispo(LocationVoitureModèle p_lvm)
         {
-            ViewBag.ListeSuccursales = dépôt.Succursales;
-            try
-            {
-                ViewBag.ListeModèles = dépôt.Voitures.Select(v => v.Modèle).ToList().Distinct();
-            }
-            catch
-            {
-                ViewBag.ListeModèles = new List<string>();
-            }
             return View();
         }
 
