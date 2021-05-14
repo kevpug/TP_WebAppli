@@ -200,6 +200,7 @@ namespace TP_Web.Controllers
                     NombreJoursLocation = p_lvm.NombreJoursLocation,
                     Voiture = dépôt.Voitures.FirstOrDefault(v => v.NuméroVoiture == p_lvm.NuméroVoiture)
                 }); ;
+                return Redirect("../Home/Index");
             }
             else
                 return View(p_lvm);
@@ -269,7 +270,11 @@ namespace TP_Web.Controllers
             TempData["LocationInfo"] = TempDataModele;
 
             if (ModelState.IsValid)
+            {
+                //Faire la création d'un client avec les champs dans p_lvm
+                //Faire une location avec les champs plus haut pogné du tempdata
                 return Redirect("../Home/Index");
+            }
             return View(p_lvm);
         }
     }
