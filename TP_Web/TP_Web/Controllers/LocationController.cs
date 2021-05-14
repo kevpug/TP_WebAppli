@@ -53,16 +53,24 @@ namespace TP_Web.Controllers
                 ViewBag.ListeModèles = new List<string>();
             }
 
-
+            List<string> TempDataModele = new List<string>();
+            TempDataModele.Add(p_lvm.Modèle);
+            TempData["LocationInfo"] = TempDataModele; // Il manque les autres infos que tu voudrais
 
             return View("VoituresDispo", p_lvm);
-
+            //return RedirectToAction("VoituresDispo"); // A decommenter pour avoir le redirect sur l'action du VoitureDispo
         }
 
         [HttpPost]
         [Authorize(Roles = "Gerant, Commis")]
         public IActionResult VoituresDispo(LocationVoitureModèle p_lvm)
         {
+
+            // Ici tu peux t'en recervir de TempData Je pense qu'il va falloir un get,
+            // mais je suis pas encore sûre
+            IEnumerable<string> voiture = (IEnumerable<string>)TempData["LocationInfo"];
+
+            //Tu peux faire des viewBags pour afficher maintenant à l'aide du TempData
 
             var succursale = new Succursale();
 

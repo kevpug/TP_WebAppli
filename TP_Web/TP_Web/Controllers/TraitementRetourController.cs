@@ -54,8 +54,9 @@ namespace TP_Web.Controllers
         [HttpPost]
         public IActionResult FinaliserTraitement(RetourVoitureModèle p_voiture)
         {
-            List<string> voiture = (List<string>)TempData["VoitureInfo"];
-            voiture.
+            IEnumerable<string> voiture = (IEnumerable<string>)TempData["VoitureInfo"];
+            long voitureNumero = long.Parse(voiture.First()); // J'ai accès au numéro de la voiture avec ça
+
             return View();
         }
     }
