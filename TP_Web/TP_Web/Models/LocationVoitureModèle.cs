@@ -14,5 +14,8 @@ namespace TP_Web.Models
         public long? CodeSuccursaleRetour { get; set; }
         public DateTime DateLocation { get; set; }
         public string NuméroPermisConduire { get; set; }
+        public string Prénom { get; set; }
+        public string Nom { get; set; }
+        public string NuméroTéléphone { get; set; }
     }
 }
