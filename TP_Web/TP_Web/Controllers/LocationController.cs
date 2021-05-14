@@ -198,8 +198,8 @@ namespace TP_Web.Controllers
                     Client = dépôt.Clients.FirstOrDefault(c => c.NuméroPermisConduire == p_lvm.NuméroPermisConduire),
                     DateDeLocation = DateTime.Now,
                     NombreJoursLocation = p_lvm.NombreJoursLocation,
-                    Voiture = dépôt.Voitures.FirstOrDefault(v=>v.NuméroVoiture == p_lvm.NuméroVoiture)                   
-                });;
+                    Voiture = dépôt.Voitures.FirstOrDefault(v => v.NuméroVoiture == p_lvm.NuméroVoiture)
+                }); ;
             }
             else
                 return View(p_lvm);
@@ -241,6 +241,8 @@ namespace TP_Web.Controllers
         [Authorize(Roles = "Gerant, Commis")]
         public IActionResult CréationClientLocation(LocationVoitureModèle p_lvm)
         {
+            //TODO: Faire validation sur les champs restants iciIIIIIIIIIIIIIII
+
             IEnumerable<string> locationInfo = (IEnumerable<string>)TempData["LocationInfo"];
             if (locationInfo is null)
                 return Redirect("../Location/ChoisirModele"); //Éviter le crash...
@@ -266,6 +268,8 @@ namespace TP_Web.Controllers
             TempDataModele.Add(NuméroPermisConduire);
             TempData["LocationInfo"] = TempDataModele;
 
+            if (ModelState.IsValid)
+                return Redirect("../Home/Index");
             return View(p_lvm);
         }
     }
