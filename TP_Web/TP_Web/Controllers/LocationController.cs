@@ -54,25 +54,26 @@ namespace TP_Web.Controllers
             }
 
             List<string> TempDataModele = new List<string>();
-            TempDataModele.Add(p_lvm.Modèle);
             TempDataModele.Add(p_lvm.CodeSuccursale.ToString());
+            TempDataModele.Add(p_lvm.Modèle);
             TempData["LocationInfo"] = TempDataModele;
 
-            //return View("VoituresDispo", p_lvm);
-            return RedirectToAction("VoituresDispo"); // A decommenter pour avoir le redirect sur l'action du VoitureDispo
+            return RedirectToAction("VoituresDispo");
+            //not valid return View(p_lvm);
         }
 
         [HttpGet]
         [Authorize(Roles = "Gerant, Commis")]
         public IActionResult VoituresDispo()
         {
-            IEnumerable<string> locationInfo = (IEnumerable<string>)TempData["LocationInfo"];
-            string Modèle = locationInfo.ElementAt(0);
-            string CodeSuccursale = locationInfo.ElementAt(1);
-
-            //Tu peux faire des viewBags pour afficher maintenant à l'aide du TempData
-
-            var succursale = new Succursale();
+            IEnumerable<string> locationInfo = (IEnumerable<string>)TempData["LocationInfo"] ?? null;
+            string CodeSuccursale = locationInfo.ElementAt(0) ?? "";
+            string Modèle = locationInfo.ElementAt(1) ?? "";
+            List<string> TempDataModele = new List<string>();
+            TempDataModele.Add(CodeSuccursale);
+            TempDataModele.Add(Modèle);
+            TempData["LocationInfo"] = TempDataModele;
+           
 
             try
             {
@@ -95,26 +96,26 @@ namespace TP_Web.Controllers
         public IActionResult VoituresDispo(LocationVoitureModèle p_lvm)
         {
 
-            // Ici tu peux t'en recervir de TempData Je pense qu'il va falloir un get,
-            // mais je suis pas encore sûre
-            //List<string> TempDataModele = new List<string>();
-            //TempData["LocationInfo"] = TempDataModele;
             IEnumerable<string> locationInfo = (IEnumerable<string>)TempData["LocationInfo"];
-            string Modèle = locationInfo.ElementAt(0);
-            string CodeSuccursale = locationInfo.ElementAt(1);
 
-            //Tu peux faire des viewBags pour afficher maintenant à l'aide du TempData
+            List<string> TempDataModele = new List<string>();
+            TempDataModele.Add(locationInfo.ElementAt(0) ?? "");
+            TempDataModele.Add(locationInfo.ElementAt(0) ?? "");
+            TempDataModele.Add(p_lvm.NuméroVoiture.ToString() ?? "");
+            TempDataModele.Add(p_lvm.NombreJoursLocation.ToString() ?? "");
+            TempDataModele.Add(p_lvm.CodeSuccursaleRetour.ToString() ?? "");
+            TempDataModele.Add(p_lvm.NuméroPermisConduire.ToString() ?? "");
 
-            var succursale = new Succursale();
+            TempData["LocationInfo"] = TempDataModele;
+            locationInfo = (IEnumerable<string>)TempData["LocationInfo"];
+            string CodeSuccursale = locationInfo.ElementAt(0);
+            string Modèle = locationInfo.ElementAt(1);
 
             try
             {
                 ViewBag.ListeSuccursales = dépôt.Succursales;
                 ViewBag.ListeNumeroVoitures = dépôt.Voitures.Where(s => s.Modèle == Modèle && s.Succursale.CodeSuccursale.ToString() == CodeSuccursale && s.EstDisponible)
                 .Select(v => v.NuméroVoiture);
-                //.Where(v => v.EstDisponible && v.Modèle == p_lvm.Modèle)
-
-
             }
             catch
             {
@@ -123,6 +124,31 @@ namespace TP_Web.Controllers
                 .Select(v => v.NuméroVoiture); 
             }
             return View(p_lvm);
+
+            //not valid return View(p_lvm);
+
+            //Valid but client existe pas 
+            //return RedirectToAction("CréerClientLocation");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Gerant, Commis")]
+        public IActionResult CréerClientLocation()
+        {
+            IEnumerable<string> locationInfo = (IEnumerable<string>)TempData["LocationInfo"];
+            ViewBag.CodeSuccursale = locationInfo.ElementAt(0);
+            ViewBag.Modèle = locationInfo.ElementAt(1);
+            ViewBag.NuméroVoiture = locationInfo.ElementAt(2);
+            ViewBag.NombreJoursLocation = locationInfo.ElementAt(3);
+            ViewBag.CodeSuccursaleRetour = locationInfo.ElementAt(4);
+            ViewBag.NuméroPermisConduire = locationInfo.ElementAt(5);
+            //    <label asp-for="CodeSuccursale">Code de la Succursale : </label>
+            //    <label asp-for="Modèle">Modèle : </label>
+            //    <label asp-for="NombreJoursLocation">Nombre de jours avant le retour : </label>
+            //    <label asp-for="NuméroVoiture">Modèle :</label>
+            //    <label>Code de la Succursale de retour :</label>
+
+            return View();
         }
 
     }

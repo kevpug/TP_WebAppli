@@ -8,41 +8,20 @@
         <h4 class="card-title">Début d'une location</h4>
         <form asp-action="VoituresDispo" method="post" class="m-2">
             <div class="form-group">
-                <label asp-for="CodeSuccursale">Code de la Succursale : @Model.CodeSuccursale</label>
-                <input asp-for="CodeSuccursale" class="form-control" hidden />
-                <div><span asp-validation-for="CodeSuccursale" class="text-danger"></span></div>
+                <label>Code de la Succursale : @ViewBag.CodeSuccursale </label>
             </div>
 
             <div class="form-group">
-                <label asp-for="Modèle">Modèle : @Model.Modèle</label>
-                <input asp-for="Modèle" class="form-control" hidden />
-                <div><span asp-validation-for="Modèle" class="text-danger"></span></div>
-            </div>
-
-
-            <div class="form-group">
-                <label asp-for="NombreJoursLocation">Nombre de jours avant le retour : </label>
-                <input type="number" asp-for="NombreJoursLocation" class="form-control" />
-                <div><span asp-validation-for="NombreJoursLocation" class="text-danger"></span></div>
+                <label >Modèle : @ViewBag.Modèle</label>
             </div>
             <div class="form-group">
-                <label asp-for="NuméroVoiture">Modèle :</label>
-                <select asp-for="NuméroVoiture" class="form-control">
-                    @foreach (var num in ViewBag.ListeNumeroVoitures)
-                    {
-                        <option value="@num">@num</option>
-                    }
-                </select>
+                <label>Nombre de jours avant le retour : @ViewBag.NombreJoursLocation </label>
             </div>
             <div class="form-group">
-                <label>Code de la Succursale de retour :</label>
-                <select asp-for="CodeSuccursale" class="form-control">
-                    @foreach (Succursale succ in ViewBag.ListeSuccursales)
-                    {
-                        <option value="@succ.CodeSuccursale">@succ.CodeSuccursale</option>
-                    }
-                </select>
-                <div><span asp-validation-for="CodeSuccursale" class="text-danger"></span></div>
+                <label>Numéro de la voiture : @ViewBag.NuméroVoiture</label>
+            </div>
+            <div class="form-group">
+                <label>Code de la Succursale de retour : @ViewBag.CodeSuccursaleRetour</label>
             </div>
             <div class="form-group">
                 <label asp-for="NuméroPermisConduire">Numéro de permis du client : </label>
@@ -65,8 +44,6 @@
                 <input type="number" asp-for="NuméroTéléphone" class="form-control" />
                 <div><span asp-validation-for="NuméroTéléphone" class="text-danger"></span></div>
             </div>
-
-
             <button type="submit" class="btn btn-primary">Suivant</button>
         </form>
     </div>
