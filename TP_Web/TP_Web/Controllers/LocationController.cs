@@ -63,7 +63,8 @@ namespace TP_Web.Controllers
         [Authorize(Roles = "Gerant, Commis")]
         public IActionResult VoituresDispo(LocationVoitureModèle p_lvm)
         {
-            return View();
+            
+            return View(p_lvm);
         }
 
     }

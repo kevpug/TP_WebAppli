@@ -6,19 +6,20 @@
 <div class="card">
     <div class="card-body">
         <h4 class="card-title">Début d'une location</h4>
-        <form asp-action="ChoisirModele" method="post" class="m-2">
+        <form asp-action="VoituresDispo" method="post" class="m-2">
             <div class="form-group">
                 <label asp-for="CodeSuccursale">Code de la Succursale : @Model.CodeSuccursale</label>
-                <input asp-for="CodeSuccursale" class="form-control" value="@Model.CodeSuccursale" hidden disabled/>
+                <input asp-for="CodeSuccursale" class="form-control" hidden />
                 <div><span asp-validation-for="CodeSuccursale" class="text-danger"></span></div>
             </div>
 
             <div class="form-group">
                 <label asp-for="Modèle">Modèle : @Model.Modèle</label>
-                <input asp-for="Modèle" class="form-control" value="@Model.Modèle" hidden disabled/>
+                <input asp-for="Modèle" class="form-control" hidden />
                 <div><span asp-validation-for="Modèle" class="text-danger"></span></div>
             </div>
             <button type="submit" class="btn btn-primary">Suivant</button>
         </form>
     </div>
 </div>
+
