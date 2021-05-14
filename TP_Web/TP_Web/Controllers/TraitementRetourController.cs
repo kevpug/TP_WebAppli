@@ -27,9 +27,11 @@ namespace TP_Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Gerant, Commis")]
-        public IActionResult RetournerVoiture(Voiture p_voiture)
+        public IActionResult RetournerVoiture(RetourVoitureModèle p_voiture)
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+
+            TempData["Voiture"] = p_voiture;
 
 
             return View();

@@ -21,6 +21,6 @@ namespace TP_Web.Models
         public long? NouveauMillage { get; set; }
 
         [Required(ErrorMessage = "Veuillez entrer le numéro de la succursale.")]
-        public long? Succursale { get; set; }
+        public long? SuccursaleDeRetour { get; set; }
     }
 }
