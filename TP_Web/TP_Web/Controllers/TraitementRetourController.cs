@@ -67,6 +67,16 @@ namespace TP_Web.Controllers
             IEnumerable<string> voiture = (IEnumerable<string>)TempData["VoitureInfo"];
             long voitureNumero = long.Parse(voiture.First()); // J'ai accès au numéro de la voiture avec ça
 
+            var location = dépôt.Locations.Where(l => l.Voiture.NuméroVoiture == voitureNumero).FirstOrDefault();
+            string DateCourante = DateTime.Now.ToString();
+
+            string DateDeLocation = location.DateDeLocation.ToString();
+            ViewBag.LocationDate = DateDeLocation;
+            ViewBag.NbJourRetour = location.NombreJoursLocation;
+            ViewBag.SuccursalePrevu = location.SuccursaleDeRetour.SuccursaleId;
+
+
+
             return View();
         }
     }

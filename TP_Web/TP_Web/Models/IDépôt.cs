@@ -10,6 +10,8 @@ namespace TP_Web.Models
         IQueryable<IdentityUser> Utilisateurs { get; }
         IQueryable<Succursale> Succursales { get; }
         IQueryable<Voiture> Voitures { get; }
+        IQueryable<Client> Clients { get; }
+        IQueryable<Location> Locations { get; }
         void AjouterSuccursale(Succursale p_succursale);
         void AjouterVoiture(Voiture p_voiture);
 
