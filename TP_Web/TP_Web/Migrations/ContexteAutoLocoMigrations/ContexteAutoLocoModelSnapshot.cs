@@ -45,7 +45,7 @@ namespace TP_Web.Migrations.ContexteAutoLocoMigrations
 
             modelBuilder.Entity("TP_Web.Models.Location", b =>
                 {
-                    b.Property<int>("SuccursaleId")
+                    b.Property<int>("LocationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -65,7 +65,7 @@ namespace TP_Web.Migrations.ContexteAutoLocoMigrations
                     b.Property<long?>("VoitureId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("SuccursaleId");
+                    b.HasKey("LocationId");
 
                     b.HasIndex("ClientId");
 

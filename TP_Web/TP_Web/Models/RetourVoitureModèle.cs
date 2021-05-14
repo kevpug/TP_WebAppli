@@ -8,11 +8,19 @@ namespace TP_Web.Models
 {
     public class RetourVoitureModèle
     {
+
+
         [Required(ErrorMessage = "Veuillez entrer un numéro de voiture.")]
         public long? NuméroVoiture { get; set; }
 
+        [Required(ErrorMessage = "Veuillez entrer un numéro de permis.")]
+        public string NuméroPermisConduire { get; set; }
+
 
         [Required(ErrorMessage = "Veuillez entrer le millage.")]
-        public long? Millage { get; set; }
+        public long? NouveauMillage { get; set; }
+
+        [Required(ErrorMessage = "Veuillez entrer le numéro de la succursale.")]
+        public long? Succursale { get; set; }
     }
 }

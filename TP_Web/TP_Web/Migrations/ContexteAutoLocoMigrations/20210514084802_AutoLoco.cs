@@ -71,7 +71,7 @@ namespace TP_Web.Migrations.ContexteAutoLocoMigrations
                 name: "Locations",
                 columns: table => new
                 {
-                    SuccursaleId = table.Column<int>(nullable: false)
+                    LocationId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NombreJoursLocation = table.Column<int>(nullable: false),
                     DateDeLocation = table.Column<DateTime>(nullable: false),
@@ -81,7 +81,7 @@ namespace TP_Web.Migrations.ContexteAutoLocoMigrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Locations", x => x.SuccursaleId);
+                    table.PrimaryKey("PK_Locations", x => x.LocationId);
                     table.ForeignKey(
                         name: "FK_Locations_Clients_ClientId",
                         column: x => x.ClientId,

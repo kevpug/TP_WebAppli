@@ -10,7 +10,7 @@ using TP_Web.Models;
 namespace TP_Web.Migrations.ContexteAutoLocoMigrations
 {
     [DbContext(typeof(ContexteAutoLoco))]
-    [Migration("20210514001206_AutoLoco")]
+    [Migration("20210514084802_AutoLoco")]
     partial class AutoLoco
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,7 +47,7 @@ namespace TP_Web.Migrations.ContexteAutoLocoMigrations
 
             modelBuilder.Entity("TP_Web.Models.Location", b =>
                 {
-                    b.Property<int>("SuccursaleId")
+                    b.Property<int>("LocationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -67,7 +67,7 @@ namespace TP_Web.Migrations.ContexteAutoLocoMigrations
                     b.Property<long?>("VoitureId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("SuccursaleId");
+                    b.HasKey("LocationId");
 
                     b.HasIndex("ClientId");
 

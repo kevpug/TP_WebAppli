@@ -1,0 +1,36 @@
+﻿@model ChoisirVoitureDispo
+@{
+    ViewData["Title"] = "Louer une voiture";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Début d'une location</h4>
+        <form asp-action="ChoisirModele" method="post" class="m-2">
+            <div class="form-group">
+                <label>Code de la Succursale :</label>
+                <select asp-for="CodeSuccursale" class="form-control">
+                    @foreach (Succursale succ in ViewBag.ListeSuccursales)
+                    {
+                        <option value="@succ.CodeSuccursale">@succ.CodeSuccursale</option>
+                    }
+                </select>
+                <div><span asp-validation-for="CodeSuccursale" class="text-danger"></span></div>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Modèle">Modèle :</label>
+                <select asp-for="Modèle" class="form-control">
+                    @foreach (var mod in ViewBag.ListeModèles)
+                    {
+
+                        <option value="@mod">@mod</option>
+                    }
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Suivant</button>
+        </form>
+    </div>
+</div>

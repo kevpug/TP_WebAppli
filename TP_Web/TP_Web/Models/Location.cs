@@ -9,7 +9,7 @@ namespace TP_Web.Models
     public sealed class Location
     {
         [Key]
-        public int SuccursaleId { get; set; }
+        public int LocationId { get; set; }
 
         public int NombreJoursLocation { get; set; }
         public DateTime DateDeLocation { get; set; }
