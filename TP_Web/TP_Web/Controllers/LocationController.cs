@@ -68,6 +68,7 @@ namespace TP_Web.Controllers
 
             try
             {
+                ViewBag.ListeSuccursales = dépôt.Succursales;
                 succursale = dépôt.Succursales.Where(s => s.CodeSuccursale == p_lvm.CodeSuccursale)
                 .First();
                 ViewBag.ListeNumeroVoitures = succursale.Voitures
@@ -78,9 +79,10 @@ namespace TP_Web.Controllers
             }
             catch
             {
+                Voiture.GroupeVoiture grpVoiture = (Voiture.GroupeVoiture)succursale.Voitures.First(v => v.Modèle == p_lvm.Modèle).Groupe;
                 ViewBag.ListeNumeroVoitures = succursale.Voitures
-                .Where(v => v.EstDisponible && v.Modèle == p_lvm.Modèle)
-                .Select(v => v.NuméroVoiture); //VA FALLOIR FAIRE CA
+                .Where(v => v.EstDisponible && v.Groupe == grpVoiture)
+                .Select(v => v.NuméroVoiture); 
             }
             return View(p_lvm);
         }

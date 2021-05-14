@@ -1,6 +1,6 @@
 ﻿@model LocationVoitureModèle
 @{
-    ViewData["Title"] = "Louer une voiture";
+    ViewData["Title"] = "Créer client et location de la voiture";
 }
 
 <div class="card">
@@ -49,6 +49,7 @@
                 <input type="number" asp-for="NuméroPermisConduire" class="form-control" />
                 <div><span asp-validation-for="NuméroPermisConduire" class="text-danger"></span></div>
             </div>
+
             <div class="form-group">
                 <label asp-for="Prénom">Prénom du client : </label>
                 <input type="number" asp-for="Prénom" class="form-control" />
@@ -64,6 +65,7 @@
                 <input type="number" asp-for="NuméroTéléphone" class="form-control" />
                 <div><span asp-validation-for="NuméroTéléphone" class="text-danger"></span></div>
             </div>
+
 
             <button type="submit" class="btn btn-primary">Suivant</button>
         </form>
