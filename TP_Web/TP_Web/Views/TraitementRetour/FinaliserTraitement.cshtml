@@ -1,0 +1,37 @@
+﻿@model Location
+@{
+    ViewData["Title"] = "Retourner une voiture";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Traitement du retour</h4>
+        <form asp-action="FinaliserTraitement" method="post" class="m-2">
+            <div class="form-group">
+                <div class="form-group">
+                    <label asp-for="DateDeLocation">Numéro de la voiture:</label>
+                    <input asp-for="DateDeLocation" class="form-control" />
+                    <div><span asp-validation-for="DateDeLocation" class="text-danger"></span></div>
+                </div>
+                <div><span asp-validation-for="DateDeLocation" class="text-danger"></span></div>
+            </div>
+            <div class="form-group">
+                <div class="form-group">
+                    <label asp-for="NombreJoursLocation">Jour location:</label>
+                    <input asp-for="NombreJoursLocation" class="form-control" />
+                    <div><span asp-validation-for="NombreJoursLocation" class="text-danger"></span></div>
+                </div>
+                <div><span asp-validation-for="NombreJoursLocation" class="text-danger"></span></div>
+            </div>
+            <div class="form-group">
+                <div class="form-group">
+                    <label asp-for="SuccursaleDeRetour.SuccursaleId">Numéro du permis de conduire:</label>
+                    <input asp-for="SuccursaleDeRetour.SuccursaleId" class="form-control" />
+                    <div><span asp-validation-for="SuccursaleDeRetour.SuccursaleId" class="text-danger"></span></div>
+                </div>
+                <div><span asp-validation-for="SuccursaleDeRetour.SuccursaleId" class="text-danger"></span></div>
+            </div>
+            <button type="submit" class="btn btn-primary">Suivant</button>
+        </form>
+    </div>
+</div>

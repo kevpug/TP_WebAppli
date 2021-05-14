@@ -31,9 +31,31 @@ namespace TP_Web.Controllers
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
 
-            TempData["Voiture"] = p_voiture;
+            List<string> TempDataVoiture = new List<string>();
+            TempDataVoiture.Add(p_voiture.NuméroVoiture.ToString());
+            TempDataVoiture.Add(p_voiture.SuccursaleDeRetour.ToString());
+            TempDataVoiture.Add(p_voiture.NouveauMillage.ToString());
+            TempDataVoiture.Add(p_voiture.NuméroPermisConduire);
+
+            TempData["VoitureInfo"] = TempDataVoiture;
 
 
+            return RedirectToAction("FinaliserTraitement");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Gerant, Commis")]
+        public ViewResult FinaliserTraitement()
+        {
+            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult FinaliserTraitement(RetourVoitureModèle p_voiture)
+        {
+            List<string> voiture = (List<string>)TempData["VoitureInfo"];
+            voiture.
             return View();
         }
     }
