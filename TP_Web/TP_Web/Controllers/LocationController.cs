@@ -55,20 +55,20 @@ namespace TP_Web.Controllers
 
             List<string> TempDataModele = new List<string>();
             TempDataModele.Add(p_lvm.Modèle);
-            TempData["LocationInfo"] = TempDataModele; // Il manque les autres infos que tu voudrais
+            TempDataModele.Add(p_lvm.CodeSuccursale.ToString());
+            TempData["LocationInfo"] = TempDataModele;
 
-            return View("VoituresDispo", p_lvm);
-            //return RedirectToAction("VoituresDispo"); // A decommenter pour avoir le redirect sur l'action du VoitureDispo
+            //return View("VoituresDispo", p_lvm);
+            return RedirectToAction("VoituresDispo"); // A decommenter pour avoir le redirect sur l'action du VoitureDispo
         }
 
-        [HttpPost]
+        [HttpGet]
         [Authorize(Roles = "Gerant, Commis")]
-        public IActionResult VoituresDispo(LocationVoitureModèle p_lvm)
+        public IActionResult VoituresDispo()
         {
-
-            // Ici tu peux t'en recervir de TempData Je pense qu'il va falloir un get,
-            // mais je suis pas encore sûre
-            IEnumerable<string> voiture = (IEnumerable<string>)TempData["LocationInfo"];
+            IEnumerable<string> locationInfo = (IEnumerable<string>)TempData["LocationInfo"];
+            string Modèle = locationInfo.ElementAt(0);
+            string CodeSuccursale = locationInfo.ElementAt(1);
 
             //Tu peux faire des viewBags pour afficher maintenant à l'aide du TempData
 
@@ -77,19 +77,49 @@ namespace TP_Web.Controllers
             try
             {
                 ViewBag.ListeSuccursales = dépôt.Succursales;
-                succursale = dépôt.Succursales.Where(s => s.CodeSuccursale == p_lvm.CodeSuccursale)
-                .First();
-                ViewBag.ListeNumeroVoitures = succursale.Voitures
-                .Where(v => v.EstDisponible && v.Modèle == p_lvm.Modèle)
+                ViewBag.ListeNumeroVoitures = dépôt.Voitures.Where(s => s.Modèle == Modèle && s.Succursale.CodeSuccursale.ToString() == CodeSuccursale && s.EstDisponible)
                 .Select(v => v.NuméroVoiture);
+            }
+            catch
+            {
+                Voiture.GroupeVoiture grpVoiture = (Voiture.GroupeVoiture)dépôt.Voitures.First(v => v.Modèle == Modèle).Groupe;
+                ViewBag.ListeNumeroVoitures = dépôt.Voitures.Where(s => s.Groupe == grpVoiture && s.Succursale.CodeSuccursale.ToString() == CodeSuccursale && s.EstDisponible)
+                .Select(v => v.NuméroVoiture);
+            }
+            return View();
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = "Gerant, Commis")]
+        public IActionResult VoituresDispo(LocationVoitureModèle p_lvm)
+        {
+
+            // Ici tu peux t'en recervir de TempData Je pense qu'il va falloir un get,
+            // mais je suis pas encore sûre
+            //List<string> TempDataModele = new List<string>();
+            //TempData["LocationInfo"] = TempDataModele;
+            IEnumerable<string> locationInfo = (IEnumerable<string>)TempData["LocationInfo"];
+            string Modèle = locationInfo.ElementAt(0);
+            string CodeSuccursale = locationInfo.ElementAt(1);
+
+            //Tu peux faire des viewBags pour afficher maintenant à l'aide du TempData
+
+            var succursale = new Succursale();
+
+            try
+            {
+                ViewBag.ListeSuccursales = dépôt.Succursales;
+                ViewBag.ListeNumeroVoitures = dépôt.Voitures.Where(s => s.Modèle == Modèle && s.Succursale.CodeSuccursale.ToString() == CodeSuccursale && s.EstDisponible)
+                .Select(v => v.NuméroVoiture);
+                //.Where(v => v.EstDisponible && v.Modèle == p_lvm.Modèle)
 
 
             }
             catch
             {
-                Voiture.GroupeVoiture grpVoiture = (Voiture.GroupeVoiture)succursale.Voitures.First(v => v.Modèle == p_lvm.Modèle).Groupe;
-                ViewBag.ListeNumeroVoitures = succursale.Voitures
-                .Where(v => v.EstDisponible && v.Groupe == grpVoiture)
+                Voiture.GroupeVoiture grpVoiture = (Voiture.GroupeVoiture)dépôt.Voitures.First(v => v.Modèle == Modèle).Groupe;
+                ViewBag.ListeNumeroVoitures = dépôt.Voitures.Where(s => s.Groupe == grpVoiture && s.Succursale.CodeSuccursale.ToString() == CodeSuccursale && s.EstDisponible)
                 .Select(v => v.NuméroVoiture); 
             }
             return View(p_lvm);
