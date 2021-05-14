@@ -75,7 +75,7 @@ namespace TP_Web.Controllers
             ViewBag.NbJourRetour = location.NombreJoursLocation;
             ViewBag.SuccursalePrevu = location.SuccursaleDeRetour.SuccursaleId;
 
-
+            
 
             return View();
         }

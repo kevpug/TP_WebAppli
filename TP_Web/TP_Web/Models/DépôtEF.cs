@@ -23,6 +23,8 @@ namespace TP_Web.Models
         public IQueryable<Voiture> Voitures => contexteAutoLoco.Voitures;
         public IQueryable<Location> Locations => contexteAutoLoco.Locations;
         public IQueryable<Client> Clients => contexteAutoLoco.Clients;
+        public IQueryable<DossierAccident> DossierAccidents => contexteAutoLoco.DossierAccidents;
+
 
         public void AjouterSuccursale(Succursale p_succursale)
         {
@@ -42,6 +44,11 @@ namespace TP_Web.Models
         public void AjouterClient(Client p_client)
         {
             contexteAutoLoco.Clients.Add(p_client);
+            contexteAutoLoco.SaveChanges();
+        }
+        public void AjouterDossier(DossierAccident p_dossier)
+        {
+            contexteAutoLoco.DossierAccidents.Add(p_dossier);
             contexteAutoLoco.SaveChanges();
         }
     }

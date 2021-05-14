@@ -12,8 +12,13 @@ namespace TP_Web.Models
         IQueryable<Voiture> Voitures { get; }
         IQueryable<Client> Clients { get; }
         IQueryable<Location> Locations { get; }
+        IQueryable<DossierAccident> DossierAccidents { get; }
+
         void AjouterSuccursale(Succursale p_succursale);
         void AjouterVoiture(Voiture p_voiture);
+        void AjouterClient(Client p_client);
+        void AjouterLocation(Location p_location);
+        void AjouterDossier(DossierAccident p_dossier);
 
     }
 }
