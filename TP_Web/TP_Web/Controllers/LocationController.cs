@@ -77,7 +77,7 @@ namespace TP_Web.Controllers
             TempDataModele.Add(CodeSuccursale);
             TempDataModele.Add(Modèle);
             TempData["LocationInfo"] = TempDataModele;
-           
+
 
             try
             {
@@ -103,8 +103,10 @@ namespace TP_Web.Controllers
             IEnumerable<string> locationInfo = (IEnumerable<string>)TempData["LocationInfo"];
             if (locationInfo is null)
                 return Redirect("../Location/ChoisirModele"); //Éviter le crash...
-
-
+            string CodeSuccursale = locationInfo.ElementAt(0);
+            ViewBag.CodeSuccursale = CodeSuccursale;
+            string Modèle = locationInfo.ElementAt(1);
+            ViewBag.Modèle = Modèle;
             List<string> TempDataModele = new List<string>();
             TempDataModele.Add(locationInfo.ElementAt(0));
             TempDataModele.Add(locationInfo.ElementAt(1));
@@ -112,13 +114,8 @@ namespace TP_Web.Controllers
             TempDataModele.Add(p_lvm.NombreJoursLocation.ToString());
             TempDataModele.Add(p_lvm.CodeSuccursaleRetour.ToString());
             TempDataModele.Add(p_lvm.NuméroPermisConduire.ToString());
-
             TempData["LocationInfo"] = TempDataModele;
-            locationInfo = (IEnumerable<string>)TempData["LocationInfo"];
-            string CodeSuccursale = locationInfo.ElementAt(0);
-            ViewBag.CodeSuccursale = CodeSuccursale;
-            string Modèle = locationInfo.ElementAt(1);
-            ViewBag.Modèle = Modèle;
+
 
             try
             {
@@ -130,7 +127,7 @@ namespace TP_Web.Controllers
             {
                 Voiture.GroupeVoiture grpVoiture = (Voiture.GroupeVoiture)dépôt.Voitures.First(v => v.Modèle == Modèle).Groupe;
                 ViewBag.ListeNumeroVoitures = dépôt.Voitures.Where(s => s.Groupe == grpVoiture && s.Succursale.CodeSuccursale.ToString() == CodeSuccursale && s.EstDisponible)
-                .Select(v => v.NuméroVoiture); 
+                .Select(v => v.NuméroVoiture);
             }
 
             // return View(p_lvm);
@@ -148,21 +145,61 @@ namespace TP_Web.Controllers
             IEnumerable<string> locationInfo = (IEnumerable<string>)TempData["LocationInfo"];
             if (locationInfo is null)
                 return Redirect("../Location/ChoisirModele"); //Éviter le crash...
-            
-            ViewBag.CodeSuccursale = locationInfo.ElementAt(0);
-            ViewBag.Modèle = locationInfo.ElementAt(1);
-            ViewBag.NuméroVoiture = locationInfo.ElementAt(2);
-            ViewBag.NombreJoursLocation = locationInfo.ElementAt(3);
-            ViewBag.CodeSuccursaleRetour = locationInfo.ElementAt(4);
-            ViewBag.NuméroPermisConduire = locationInfo.ElementAt(5);
-            //    <label asp-for="CodeSuccursale">Code de la Succursale : </label>
-            //    <label asp-for="Modèle">Modèle : </label>
-            //    <label asp-for="NombreJoursLocation">Nombre de jours avant le retour : </label>
-            //    <label asp-for="NuméroVoiture">Modèle :</label>
-            //    <label>Code de la Succursale de retour :</label>
+            string CodeSuccursale = locationInfo.ElementAt(0);
+            ViewBag.CodeSuccursale = CodeSuccursale;
+            string Modèle = locationInfo.ElementAt(1);
+            ViewBag.Modèle = Modèle;
+            string NuméroVoiture = locationInfo.ElementAt(2);
+            ViewBag.NuméroVoiture = NuméroVoiture;
+            string NombreJoursLocation = locationInfo.ElementAt(3);
+            ViewBag.NombreJoursLocation = NombreJoursLocation;
+            string CodeSuccursaleRetour = locationInfo.ElementAt(4);
+            ViewBag.CodeSuccursaleRetour = CodeSuccursaleRetour;
+            string NuméroPermisConduire = locationInfo.ElementAt(5);
+            ViewBag.NuméroPermisConduire = NuméroPermisConduire;
+
+            List<string> TempDataModele = new List<string>();
+            TempDataModele.Add(CodeSuccursale);
+            TempDataModele.Add(Modèle);
+            TempDataModele.Add(NuméroVoiture);
+            TempDataModele.Add(NombreJoursLocation);
+            TempDataModele.Add(CodeSuccursaleRetour);
+            TempDataModele.Add(NuméroPermisConduire);
+            TempData["LocationInfo"] = TempDataModele;
+
 
             return View();
         }
+        [HttpPost]
+        [Authorize(Roles = "Gerant, Commis")]
+        public IActionResult CréationClientLocation(LocationVoitureModèle p_lvm)
+        {
+            IEnumerable<string> locationInfo = (IEnumerable<string>)TempData["LocationInfo"];
+            if (locationInfo is null)
+                return Redirect("../Location/ChoisirModele"); //Éviter le crash...
+            string CodeSuccursale = locationInfo.ElementAt(0);
+            ViewBag.CodeSuccursale = CodeSuccursale;
+            string Modèle = locationInfo.ElementAt(1);
+            ViewBag.Modèle = Modèle;
+            string NuméroVoiture = locationInfo.ElementAt(2);
+            ViewBag.NuméroVoiture = NuméroVoiture;
+            string NombreJoursLocation = locationInfo.ElementAt(3);
+            ViewBag.NombreJoursLocation = NombreJoursLocation;
+            string CodeSuccursaleRetour = locationInfo.ElementAt(4);
+            ViewBag.CodeSuccursaleRetour = CodeSuccursaleRetour;
+            string NuméroPermisConduire = locationInfo.ElementAt(5);
+            ViewBag.NuméroPermisConduire = NuméroPermisConduire;
 
+            List<string> TempDataModele = new List<string>();
+            TempDataModele.Add(CodeSuccursale);
+            TempDataModele.Add(Modèle);
+            TempDataModele.Add(NuméroVoiture);
+            TempDataModele.Add(NombreJoursLocation);
+            TempDataModele.Add(CodeSuccursaleRetour);
+            TempDataModele.Add(NuméroPermisConduire);
+            TempData["LocationInfo"] = TempDataModele;
+
+            return View(p_lvm);
+        }
     }
 }
