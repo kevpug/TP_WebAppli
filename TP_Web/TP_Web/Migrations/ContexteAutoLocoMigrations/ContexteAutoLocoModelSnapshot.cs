@@ -19,6 +19,63 @@ namespace TP_Web.Migrations.ContexteAutoLocoMigrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("TP_Web.Models.Client", b =>
+                {
+                    b.Property<long?>("ClientId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nom")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NuméroPermisConduire")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NuméroTéléphone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Prénom")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ClientId");
+
+                    b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("TP_Web.Models.Location", b =>
+                {
+                    b.Property<int>("SuccursaleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long?>("ClientId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("DateDeLocation")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("NombreJoursLocation")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SuccursaleDeRetourSuccursaleId")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("VoitureId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("SuccursaleId");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("SuccursaleDeRetourSuccursaleId");
+
+                    b.HasIndex("VoitureId");
+
+                    b.ToTable("Locations");
+                });
+
             modelBuilder.Entity("TP_Web.Models.Succursale", b =>
                 {
                     b.Property<int>("SuccursaleId")
@@ -61,27 +118,27 @@ namespace TP_Web.Migrations.ContexteAutoLocoMigrations
 
             modelBuilder.Entity("TP_Web.Models.Voiture", b =>
                 {
-                    b.Property<long>("VoitureId")
+                    b.Property<long?>("VoitureId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Année")
+                    b.Property<int?>("Année")
                         .HasColumnType("int");
 
                     b.Property<bool>("EstDisponible")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Groupe")
+                    b.Property<int?>("Groupe")
                         .HasColumnType("int");
 
-                    b.Property<long>("Millage")
+                    b.Property<long?>("Millage")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Modèle")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("NuméroVoiture")
+                    b.Property<long?>("NuméroVoiture")
                         .HasColumnType("bigint");
 
                     b.Property<int?>("SuccursaleId")
@@ -92,6 +149,21 @@ namespace TP_Web.Migrations.ContexteAutoLocoMigrations
                     b.HasIndex("SuccursaleId");
 
                     b.ToTable("Voitures");
+                });
+
+            modelBuilder.Entity("TP_Web.Models.Location", b =>
+                {
+                    b.HasOne("TP_Web.Models.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId");
+
+                    b.HasOne("TP_Web.Models.Succursale", "SuccursaleDeRetour")
+                        .WithMany()
+                        .HasForeignKey("SuccursaleDeRetourSuccursaleId");
+
+                    b.HasOne("TP_Web.Models.Voiture", "Voiture")
+                        .WithMany()
+                        .HasForeignKey("VoitureId");
                 });
 
             modelBuilder.Entity("TP_Web.Models.Voiture", b =>
