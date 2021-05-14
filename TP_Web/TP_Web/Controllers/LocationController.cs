@@ -42,6 +42,18 @@ namespace TP_Web.Controllers
         [Authorize(Roles = "Gerant, Commis")]
         public IActionResult ChoisirModele(LocationVoitureModèle p_lvm)
         {
+            if (p_lvm.Modèle is object)
+                if (!dépôt.Voitures.Any(s => s.Modèle == p_lvm.Modèle))
+                    ModelState.AddModelError(nameof(LocationVoitureModèle.Modèle), "Ce modèle de voiture n'existe pas!");
+                else
+                    ModelState.AddModelError(nameof(LocationVoitureModèle.Modèle), "Veuillez entrer un modèle.");
+
+            if (p_lvm.CodeSuccursale is object)
+                if (!dépôt.Succursales.Any(s => s.CodeSuccursale == p_lvm.CodeSuccursale))
+                    ModelState.AddModelError(nameof(LocationVoitureModèle.CodeSuccursale), "Ce code de succursale n'existe pas!");
+                else
+                    ModelState.AddModelError(nameof(LocationVoitureModèle.CodeSuccursale), "Veuillez entrer un code de succursale.");
+
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
             ViewBag.ListeSuccursales = dépôt.Succursales;
             try
@@ -58,8 +70,11 @@ namespace TP_Web.Controllers
             TempDataModele.Add(p_lvm.Modèle);
             TempData["LocationInfo"] = TempDataModele;
 
-            return RedirectToAction("VoituresDispo");
-            //not valid return View(p_lvm);
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("VoituresDispo");
+            }
+            return View(p_lvm);
         }
 
         [HttpGet]
@@ -87,9 +102,19 @@ namespace TP_Web.Controllers
             }
             catch
             {
-                Voiture.GroupeVoiture grpVoiture = (Voiture.GroupeVoiture)dépôt.Voitures.First(v => v.Modèle == Modèle).Groupe;
-                ViewBag.ListeNumeroVoitures = dépôt.Voitures.Where(s => s.Groupe == grpVoiture && s.Succursale.CodeSuccursale.ToString() == CodeSuccursale && s.EstDisponible)
-                .Select(v => v.NuméroVoiture);
+
+                try
+                {
+                    Voiture.GroupeVoiture grpVoiture = (Voiture.GroupeVoiture)dépôt.Voitures.First(v => v.Modèle == Modèle).Groupe;
+                    ViewBag.ListeNumeroVoitures = dépôt.Voitures.Where(s => s.Groupe == grpVoiture && s.Succursale.CodeSuccursale.ToString() == CodeSuccursale && s.EstDisponible)
+                    .Select(v => v.NuméroVoiture);
+                    if (ViewBag.ListeNumeroVoitures.Count > 0)
+                        ModelState.AddModelError(nameof(LocationVoitureModèle.NuméroVoiture), $"Il n'y a pas de voiture disponible du modèle {Modèle}... affichage des autres voitures du groupe {grpVoiture}.");
+                }
+                catch
+                {
+                    ModelState.AddModelError(nameof(LocationVoitureModèle.NuméroVoiture), $"Aucune voiture disponible.");
+                }
             }
             return View();
         }
@@ -99,6 +124,27 @@ namespace TP_Web.Controllers
         [Authorize(Roles = "Gerant, Commis")]
         public IActionResult VoituresDispo(LocationVoitureModèle p_lvm)
         {
+            if (p_lvm.NuméroVoiture is object)
+                if (!dépôt.Voitures.Any(s => s.NuméroVoiture == p_lvm.NuméroVoiture))
+                    ModelState.AddModelError(nameof(LocationVoitureModèle.NuméroVoiture), "Aucune voiture existe avec ce numéro!");
+
+            if (p_lvm.NombreJoursLocation <= 0)
+                ModelState.AddModelError(nameof(LocationVoitureModèle.NombreJoursLocation), "Veuillez entrer un nombre de jour positif.");
+
+            if (!dépôt.Succursales.Any(s => s.CodeSuccursale == p_lvm.CodeSuccursaleRetour))
+            {
+                ModelState.AddModelError(nameof(LocationVoitureModèle.CodeSuccursaleRetour), "Ce code de succursale n'existe pas!");
+            }
+
+            if (dépôt.Locations.Any(l => l.DateDeLocation.Date.ToShortDateString() == DateTime.Now.Date.ToShortDateString()))
+                ModelState.AddModelError(nameof(LocationVoitureModèle.Modèle), "Ce véhicule a déjà été loué aujourd'hui.");
+
+            if (dépôt.DossierAccidents.Any(l => l.Client.NuméroPermisConduire == p_lvm.NuméroPermisConduire && !l.DossierFermé))
+                ModelState.AddModelError(nameof(LocationVoitureModèle.NuméroPermisConduire), "Ce client a un dossier accident toujours ouvert!");
+
+            if (dépôt.Locations.Any(l => l.Client.NuméroPermisConduire == p_lvm.NuméroPermisConduire && !l.Voiture.EstDisponible))
+                ModelState.AddModelError(nameof(LocationVoitureModèle.NuméroPermisConduire), "Ce client a déjà une location de voiture en cours!");
+
 
             IEnumerable<string> locationInfo = (IEnumerable<string>)TempData["LocationInfo"];
             if (locationInfo is null)
@@ -125,17 +171,38 @@ namespace TP_Web.Controllers
             }
             catch
             {
-                Voiture.GroupeVoiture grpVoiture = (Voiture.GroupeVoiture)dépôt.Voitures.First(v => v.Modèle == Modèle).Groupe;
-                ViewBag.ListeNumeroVoitures = dépôt.Voitures.Where(s => s.Groupe == grpVoiture && s.Succursale.CodeSuccursale.ToString() == CodeSuccursale && s.EstDisponible)
-                .Select(v => v.NuméroVoiture);
+
+                try
+                {
+                    Voiture.GroupeVoiture grpVoiture = (Voiture.GroupeVoiture)dépôt.Voitures.First(v => v.Modèle == Modèle).Groupe;
+                    ViewBag.ListeNumeroVoitures = dépôt.Voitures.Where(s => s.Groupe == grpVoiture && s.Succursale.CodeSuccursale.ToString() == CodeSuccursale && s.EstDisponible)
+                    .Select(v => v.NuméroVoiture);
+                    if (ViewBag.ListeNumeroVoitures.Count > 0)
+                        ModelState.AddModelError(nameof(LocationVoitureModèle.NuméroVoiture), $"Il n'y a pas de voiture disponible du modèle {Modèle}... affichage des autres voitures du groupe {grpVoiture}.");
+                }
+                catch
+                {
+                    ModelState.AddModelError(nameof(LocationVoitureModèle.NuméroVoiture), $"Aucune voiture disponible.");
+                }
             }
 
-            // return View(p_lvm);
 
-            //not valid return View(p_lvm);
-
-            //Valid but client existe pas 
-            return RedirectToAction("CréationClientLocation");
+            bool bClientExiste = dépôt.Clients.Any(c => c.NuméroPermisConduire == p_lvm.NuméroPermisConduire);
+            if (ModelState.IsValid && !bClientExiste)
+                return RedirectToAction("CréationClientLocation");
+            else if (ModelState.IsValid && bClientExiste)
+            {
+                dépôt.AjouterLocation(new Location()
+                {
+                    SuccursaleDeRetour = dépôt.Succursales.FirstOrDefault(s => s.CodeSuccursale == p_lvm.CodeSuccursaleRetour),
+                    Client = dépôt.Clients.FirstOrDefault(c => c.NuméroPermisConduire == p_lvm.NuméroPermisConduire),
+                    DateDeLocation = DateTime.Now,
+                    NombreJoursLocation = p_lvm.NombreJoursLocation,
+                    Voiture = dépôt.Voitures.FirstOrDefault(v=>v.NuméroVoiture == p_lvm.NuméroVoiture)                   
+                });;
+            }
+            else
+                return View(p_lvm);
         }
 
         [HttpGet]
