@@ -31,16 +31,26 @@ namespace TP_Web.Controllers
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
 
-            List<string> TempDataVoiture = new List<string>();
-            TempDataVoiture.Add(p_voiture.NuméroVoiture.ToString());
-            TempDataVoiture.Add(p_voiture.NouveauMillage.ToString());
-            TempDataVoiture.Add(p_voiture.NuméroPermisConduire);
-            TempDataVoiture.Add(p_voiture.SuccursaleDeRetour.ToString());
 
-            TempData["VoitureInfo"] = TempDataVoiture;
+            if (!dépôt.Voitures.Any(v => v.NuméroVoiture == p_voiture.NuméroVoiture))
+                ModelState.AddModelError(nameof(RetourVoitureModèle.NuméroVoiture), "Aucune voiture trouvé associé à ce numéro");
 
 
-            return RedirectToAction("FinaliserTraitement");
+            if (ModelState.IsValid)
+            {
+                List<string> TempDataVoiture = new List<string>();
+                TempDataVoiture.Add(p_voiture.NuméroVoiture.ToString());
+                TempDataVoiture.Add(p_voiture.NouveauMillage.ToString());
+                TempDataVoiture.Add(p_voiture.NuméroPermisConduire);
+                TempDataVoiture.Add(p_voiture.SuccursaleDeRetour.ToString());
+
+                TempData["VoitureInfo"] = TempDataVoiture;
+                return RedirectToAction("FinaliserTraitement");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         [HttpGet]
