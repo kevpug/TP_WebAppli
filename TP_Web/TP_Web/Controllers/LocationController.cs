@@ -20,6 +20,7 @@ namespace TP_Web.Controllers
         public IActionResult LouerVoiture()
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+            ViewBag.ListeSuccursales = dépôt.Succursales;
             return View();
         }
 

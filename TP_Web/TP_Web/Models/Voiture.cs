@@ -20,7 +20,5 @@ namespace TP_Web.Models
         public long? Millage { get; set; }
         public bool EstDisponible { get; set; }
         public Succursale Succursale { get; set; }
-
-
     }
 }
