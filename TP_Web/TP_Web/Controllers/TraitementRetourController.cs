@@ -91,6 +91,14 @@ namespace TP_Web.Controllers
             ViewBag.AvertissementSuccursale = false;
             ViewBag.AvertissementDate = false;
 
+
+            List<string> TempDataVoiture = new List<string>();
+            TempDataVoiture.Add(voitureNumero.ToString());
+            TempDataVoiture.Add(location.Client.NuméroPermisConduire);
+
+            TempData["ClientData"] = TempDataVoiture;
+
+
             if (shouldArrive.Date != DateTime.Now.Date)
             {
                 ViewBag.AvertissementDate = true;
@@ -105,7 +113,7 @@ namespace TP_Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult FinaliserTraitement(RetourVoitureModèle p_voiture)
+        public IActionResult FinaliserTraitement(DossierAccident da)
         {
 
 
