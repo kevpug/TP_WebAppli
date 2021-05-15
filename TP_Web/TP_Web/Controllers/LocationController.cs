@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using TP_Web.Models;
 
 namespace TP_Web.Controllers
@@ -297,16 +296,18 @@ namespace TP_Web.Controllers
 
             if (ModelState.IsValid)
             {
-                dépôt.AjouterClient(new Client() { 
+                dépôt.AjouterClient(new Client()
+                {
                     NuméroPermisConduire = NuméroPermisConduire,
                     Nom = p_lvm.Nom,
                     Prénom = p_lvm.Prénom,
                     NuméroTéléphone = p_lvm.NuméroTéléphone
                 });
 
-                dépôt.AjouterLocation(new Location() { 
+                dépôt.AjouterLocation(new Location()
+                {
                     Client = dépôt.Clients.FirstOrDefault(c => c.NuméroPermisConduire == NuméroPermisConduire),
-                    SuccursaleDeRetour = dépôt.Succursales.FirstOrDefault(s =>s.CodeSuccursale.ToString() == CodeSuccursale),
+                    SuccursaleDeRetour = dépôt.Succursales.FirstOrDefault(s => s.CodeSuccursale.ToString() == CodeSuccursale),
                     DateDeLocation = DateTime.Now.Date,
                     NombreJoursLocation = int.Parse(NombreJoursLocation),
                     Voiture = dépôt.Voitures.FirstOrDefault(v => v.NuméroVoiture.ToString() == NuméroVoiture)

@@ -63,7 +63,8 @@ namespace TP_Web.Models
 
             contexteAutoLoco.SaveChanges();
         }
-        public void FermerDossierAccident(int id) {
+        public void FermerDossierAccident(int id)
+        {
             contexteAutoLoco.DossierAccidents.Find(id).DossierFermé = true;
             contexteAutoLoco.SaveChanges();
         }

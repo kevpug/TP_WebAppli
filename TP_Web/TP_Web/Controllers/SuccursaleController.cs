@@ -47,7 +47,7 @@ namespace TP_Web.Controllers
 
             if (!string.IsNullOrEmpty(p_succursale.NuméroTéléphone))
                 if (!Regex.Match(p_succursale.NuméroTéléphone, @"^[\d][\d][\d][\d][\d][\d][\d][\d][\d][\d]$").Success)
-                ModelState.AddModelError(nameof(Succursale.NuméroTéléphone), "Veuillez fournir un numéro de téléphone valide.");
+                    ModelState.AddModelError(nameof(Succursale.NuméroTéléphone), "Veuillez fournir un numéro de téléphone valide.");
 
 
             if (dépôt.Succursales.Any(s => s.NomRue == p_succursale.NomRue && s.CodePostal == p_succursale.CodePostal))

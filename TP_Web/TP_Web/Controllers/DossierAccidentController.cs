@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TP_Web.Models;
 
 namespace TP_Web.Controllers
@@ -38,7 +35,7 @@ namespace TP_Web.Controllers
                     if (!string.IsNullOrEmpty(p_fdam.NuméroPermisConduire))
                         if (dépôt.DossierAccidents.First(c => c.DossierID == p_fdam.DossierID).Client.NuméroPermisConduire != p_fdam.NuméroPermisConduire)
                             ModelState.AddModelError(nameof(FermerDossierAccidentModèle.NuméroPermisConduire), "Le numéro de dossier d’accident ne concerne pas une location du client!");
-                    if(p_fdam.NuméroVoiture is object)
+                    if (p_fdam.NuméroVoiture is object)
                         if (dépôt.DossierAccidents.First(c => c.DossierID == p_fdam.DossierID).Voiture.NuméroVoiture != p_fdam.NuméroVoiture)
                             ModelState.AddModelError(nameof(FermerDossierAccidentModèle.NuméroPermisConduire), "Le numéro de dossier d’accident ne concerne pas une location de la voiture identifiée!");
                 }
