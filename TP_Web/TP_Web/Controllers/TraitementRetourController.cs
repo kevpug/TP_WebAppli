@@ -131,7 +131,7 @@ namespace TP_Web.Controllers
             return View();
         }
 
-       [HttpPost]
+        [HttpPost]
         public IActionResult RapportAccident(DossierAccident da)
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";

@@ -59,6 +59,7 @@ namespace TP_Web.Models
                             NomVille = "VilleNomerea",
                             NuméroTéléphone = "1234504501",
                         });
+                contexte.SaveChanges();
             }
             if (!contexte.Voitures.Any())
             {
@@ -87,13 +88,14 @@ namespace TP_Web.Models
                         {
                             NuméroVoiture = 3,
                             EstDisponible = true,
-                            Succursale = contexte.Succursales.Last(),
+                            Succursale = contexte.Succursales.First(),
                             Année = 2012,
                             Groupe = Voiture.GroupeVoiture.Sedan,
                             Millage = 112020,
                             Modèle = "K-Te",
                         }
                         );
+                contexte.SaveChanges();
             }
             if (!contexte.Clients.Any())
             {
@@ -119,6 +121,7 @@ namespace TP_Web.Models
                                 NuméroPermisConduire = "22A4S212s3F1F",
                                 NuméroTéléphone = "5146157821",
                             });
+                contexte.SaveChanges();
             }
 
             if (!contexte.Locations.Any())
@@ -132,6 +135,7 @@ namespace TP_Web.Models
                         NombreJoursLocation = 4,
                         Voiture = contexte.Voitures.First()
                     });
+                contexte.SaveChanges();
             }
 
             if (!contexte.DossierAccidents.Any())
@@ -142,9 +146,9 @@ namespace TP_Web.Models
                                 Client = contexte.Clients.First(),
                                 DossierFermé = false,
                                 RapportAccident = "il allait vite",
-                                Voiture = contexte.Voitures.Last()
+                                Voiture = contexte.Voitures.First()
                             });
-
+                contexte.SaveChanges();
             }
 
 

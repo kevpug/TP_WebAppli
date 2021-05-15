@@ -64,7 +64,7 @@ namespace TP_Web
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
             });
-
+            PeuplerBD.Peupler(app);
             PeuplerIdentité.CréerCompteBD(app.ApplicationServices, Configuration);
         }
     }
