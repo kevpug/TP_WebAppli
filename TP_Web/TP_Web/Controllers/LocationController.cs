@@ -12,7 +12,6 @@ namespace TP_Web.Controllers
     public class LocationController : Controller
     {
         private IDépôt dépôt;
-        public bool modèleDispo;
 
         public LocationController(IDépôt p_dépôt)
         {
@@ -136,10 +135,10 @@ namespace TP_Web.Controllers
             if (p_lvm.NombreJoursLocation is object)
             {
                 if (p_lvm.NombreJoursLocation <= 0)
-                    ModelState.AddModelError(nameof(LocationVoitureModèle.NombreJoursLocation), "Veuillez entrer un nombre de jour en haut de 0.");
+                    ModelState.AddModelError(nameof(LocationVoitureModèle.NombreJoursLocation), "Veuillez entrer un nombre de jours en haut de 0.");
             }
             else
-                ModelState.AddModelError(nameof(LocationVoitureModèle.NombreJoursLocation), "Veuillez entrer un nombre de jour.");
+                ModelState.AddModelError(nameof(LocationVoitureModèle.NombreJoursLocation), "Veuillez entrer un nombre de jours.");
 
 
             if (!dépôt.Succursales.Any(s => s.CodeSuccursale == p_lvm.CodeSuccursaleRetour))
