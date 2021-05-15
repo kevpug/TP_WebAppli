@@ -64,8 +64,13 @@ namespace TP_Web.Controllers
             else
                 ModelState.AddModelError(nameof(FermerDossierAccidentModèle.NuméroVoiture), "Veuillez entrer un numéro de voiture.");
 
-            
-            return View();
+
+            if (ModelState.IsValid)
+            {
+                dépôt.FermerDossierAccident((int)p_fdam.DossierID);
+                return Redirect("../Home/Index");
+            }
+            return View(p_fdam);
         }
     }
 }
