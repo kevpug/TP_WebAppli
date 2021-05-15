@@ -56,7 +56,7 @@ namespace TP_Web.Models
 
         public void RetourVoiture(long? NoVoiture, long? codeSuccursale, int locationID)
         {
-            var voiture = contexteAutoLoco.Voitures.Find(NoVoiture);
+            var voiture = contexteAutoLoco.Voitures.First(v => v.NuméroVoiture == NoVoiture);
             voiture.EstDisponible = true;
             var succursale = contexteAutoLoco.Succursales.Find((int)codeSuccursale);
             voiture.Succursale = succursale;

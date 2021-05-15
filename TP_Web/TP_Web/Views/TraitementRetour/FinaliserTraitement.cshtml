@@ -6,7 +6,7 @@
 <div class="card">
     <div class="card-body">
         <h4 class="card-title">Traitement du retour</h4>
-        <form asp-action="FinaliserTraitement" method="post" class="m-2">
+        <form asp-action="RapportAccident" method="post" class="m-2">
             <div class="form-group">
                 <div class="form-group">
                     <label>Date de la location : @ViewBag.DateDeLocation</label>
@@ -46,7 +46,7 @@
                 <a asp-action="Index" asp-controller="Home" class="btn btn-primary">OK</a>
             </div>
             <div>
-                <button class="nav-link text-dark" asp-area="" asp-controller="TraitementRetour" asp-action="RapportAccident"><i class="fa fa-car"></i>Déclarer accident</button>
+                <a asp-action="RapportAccident" asp-controller="TraitementRetour" class="btn btn-primary">RapportAccident</a>
             </div>
         </form>
     </div>

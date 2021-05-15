@@ -124,6 +124,12 @@ namespace TP_Web.Controllers
             return View();
         }
 
+        public ViewResult CréerRapportAccient()
+        {
+            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+
+            return View("RapportAccident");
+        }
         public ViewResult RapportAccident()
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
@@ -131,7 +137,9 @@ namespace TP_Web.Controllers
             return View();
         }
 
+
         [HttpPost]
+        [Authorize(Roles = "Gerant, Commis")]
         public IActionResult RapportAccident(DossierAccident da)
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
@@ -157,7 +165,7 @@ namespace TP_Web.Controllers
             dépôt.AjouterDossier(DossierRentré);
 
 
-            return Redirect("Home/Index");
+            return Redirect("../Home/Index");
         }
     }
 }
