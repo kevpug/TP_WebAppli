@@ -9,7 +9,7 @@
         <form asp-action="FinaliserTraitement" method="post" class="m-2">
             <div class="form-group">
                 <div class="form-group">
-                    <label>Date de la location : @ViewBag.DateLocation</label>
+                    <label>Date de la location : @ViewBag.DateDeLocation</label>
                 </div>
                 <div class="form-group">
                     <label>Nombre de jour qui avait été loué : @ViewBag.NbJourRetour</label>
@@ -17,6 +17,31 @@
                 <div class="form-group">
                     <label>Succursale de retour prévue : @ViewBag.SuccursalePrevu</label>
                 </div>
+                <div class="form-group">
+                    <label>Numéro du permis client : @ViewBag.NumPermis</label>
+                </div>
+                <div class="form-group">
+                    <label>Nom client : @ViewBag.NomClient</label>
+                </div>
+                <div class="form-group">
+                    <label>Prénom client : @ViewBag.PrénomClient</label>
+                </div>
+                <div class="form-group">
+                    <label>Numéro de téléphone client : @ViewBag.TelClient</label>
+                </div>
+                @if (ViewBag.AvertissementDate)
+                {
+                    <div class="form-group">
+                        <p class="text-danger"> La voiture n'a pas été retourné à la bonne date</p>
+                    </div>
+                }
+                @if (ViewBag.AvertissementSuccursale)
+                {
+                    <div class="form-group">
+                        <p class="text-danger"> La voiture n'a pas été à la même succursale prévue</p>
+                    </div>
+                }
+
                 @*<div class="form-group">
                 <label asp-for="DateDeLocation">Numéro de la voiture:</label>
                 <input asp-for="DateDeLocation" class="form-control" />

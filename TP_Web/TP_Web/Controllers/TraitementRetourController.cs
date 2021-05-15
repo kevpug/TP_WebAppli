@@ -45,6 +45,9 @@ namespace TP_Web.Controllers
                 TempDataVoiture.Add(p_voiture.SuccursaleDeRetour.ToString());
 
                 TempData["VoitureInfo"] = TempDataVoiture;
+
+                dépôt.RetourVoiture(p_voiture.NuméroVoiture, p_voiture.SuccursaleDeRetour);
+
                 return RedirectToAction("FinaliserTraitement");
             }
             else
@@ -57,19 +60,35 @@ namespace TP_Web.Controllers
         [Authorize(Roles = "Gerant, Commis")]
         public ViewResult FinaliserTraitement()
         {
-            ContexteAutoLoco context = new ContexteAutoLoco();
 
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
             IEnumerable<string> voiture = (IEnumerable<string>)TempData["VoitureInfo"];
             long voitureNumero = long.Parse(voiture.First()); // J'ai accès au numéro de la voiture avec ça
+            long succursaleRetourné = long.Parse(voiture.ElementAt(3));
 
             var location = dépôt.Locations.Where(l => l.Voiture.NuméroVoiture == voitureNumero).FirstOrDefault();
-            string DateCourante = DateTime.Now.ToString();
 
-            string DateDeLocation = location.DateDeLocation.ToString();
-            ViewBag.LocationDate = DateDeLocation;
+            DateTime DateDeLocation = location.DateDeLocation;
+            DateTime shouldArrive = location.DateDeLocation.AddDays(location.NombreJoursLocation);
+
+            ViewBag.DateDeLocation = DateDeLocation.ToString();
             ViewBag.NbJourRetour = location.NombreJoursLocation;
             ViewBag.SuccursalePrevu = location.SuccursaleDeRetour.SuccursaleId;
+            ViewBag.NumPermis = location.Client.NuméroPermisConduire;
+            ViewBag.NomClient = location.Client.Nom;
+            ViewBag.PrénomClient = location.Client.Prénom;
+            ViewBag.TelClient = location.Client.NuméroTéléphone;
+
+            if (shouldArrive.Date != DateTime.Now.Date)
+            {
+                ViewBag.AvertissementDate = true;
+            }
+
+            if (succursaleRetourné != location.SuccursaleDeRetour.SuccursaleId)
+            {
+                ViewBag.AvertissementSuccursale = true;
+            }
+
             return View();
         }
 

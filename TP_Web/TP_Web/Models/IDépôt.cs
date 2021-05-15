@@ -19,6 +19,7 @@ namespace TP_Web.Models
         void AjouterClient(Client p_client);
         void AjouterLocation(Location p_location);
         void AjouterDossier(DossierAccident p_dossier);
+        void RetourVoiture(long? NoVoiture, long? codeSuccursale);
 
     }
 }

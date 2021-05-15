@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace TP_Web.Models
@@ -21,7 +22,7 @@ namespace TP_Web.Models
         public IQueryable<Succursale> Succursales => contexteAutoLoco.Succursales;
         public IQueryable<IdentityUser> Utilisateurs => contexteIdendité.Users;
         public IQueryable<Voiture> Voitures => contexteAutoLoco.Voitures;
-        public IQueryable<Location> Locations => contexteAutoLoco.Locations;
+        public IQueryable<Location> Locations => contexteAutoLoco.Locations.Include(v => v.Voiture).Include(s => s.SuccursaleDeRetour).Include(c => c.Client);
         public IQueryable<Client> Clients => contexteAutoLoco.Clients;
         public IQueryable<DossierAccident> DossierAccidents => contexteAutoLoco.DossierAccidents;
 
@@ -50,6 +51,16 @@ namespace TP_Web.Models
         public void AjouterDossier(DossierAccident p_dossier)
         {
             contexteAutoLoco.DossierAccidents.Add(p_dossier);
+            contexteAutoLoco.SaveChanges();
+        }
+
+        public void RetourVoiture(long? NoVoiture, long? codeSuccursale)
+        {
+            var voiture = contexteAutoLoco.Voitures.Find(NoVoiture);
+            voiture.EstDisponible = true;
+            var succursale = contexteAutoLoco.Succursales.Find(codeSuccursale);
+            voiture.Succursale = succursale;
+
             contexteAutoLoco.SaveChanges();
         }
     }
