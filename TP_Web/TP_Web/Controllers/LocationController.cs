@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TP_Web.Models;
 
@@ -259,15 +260,16 @@ namespace TP_Web.Controllers
             if (string.IsNullOrEmpty(p_lvm.Prénom))
                 ModelState.AddModelError(nameof(LocationVoitureModèle.Prénom), $"Veuillez entrer un prénom.");
 
-            if (!string.IsNullOrEmpty(p_lvm.Nom))
+            if (string.IsNullOrEmpty(p_lvm.Nom))
                 ModelState.AddModelError(nameof(LocationVoitureModèle.Nom), $"Veuillez entrer un nom.");
 
-            //if (p_lvm.NuméroTéléphone is object)
-            //    if (!string.IsNullOrEmpty(p_succursale.NuméroTéléphone))
-            //        if (!Regex.Match(p_succursale.NuméroTéléphone, @"^[\d][\d][\d][\d][\d][\d][\d][\d][\d][\d]$").Success)
-            //            ModelState.AddModelError(nameof(Succursale.NuméroTéléphone), "Veuillez fournir un numéro de téléphone valide.");
-            //        else
-            //    ModelState.AddModelError(nameof(LocationVoitureModèle.NuméroTéléphone), $"Veuillez entrer un nom.");
+            if (!string.IsNullOrEmpty(p_lvm.NuméroTéléphone))
+            {
+                if (!Regex.Match(p_lvm.NuméroTéléphone, @"^[\d][\d][\d][\d][\d][\d][\d][\d][\d][\d]$").Success)
+                    ModelState.AddModelError(nameof(LocationVoitureModèle.NuméroTéléphone), "Veuillez fournir un numéro de téléphone valide.");
+            }
+            else
+                ModelState.AddModelError(nameof(LocationVoitureModèle.NuméroTéléphone), $"Veuillez entrer un numéro de téléphone.");
 
             IEnumerable<string> locationInfo = (IEnumerable<string>)TempData["LocationInfo"];
             if (locationInfo is null)
@@ -296,8 +298,20 @@ namespace TP_Web.Controllers
 
             if (ModelState.IsValid)
             {
-                //Faire la création d'un client avec les champs dans p_lvm
-                //Faire une location avec les champs plus haut pogné du tempdata
+                dépôt.AjouterClient(new Client() { 
+                    NuméroPermisConduire = NuméroPermisConduire,
+                    Nom = p_lvm.Nom,
+                    Prénom = p_lvm.Prénom,
+                    NuméroTéléphone = p_lvm.NuméroTéléphone
+                });
+
+                dépôt.AjouterLocation(new Location() { 
+                    Client = dépôt.Clients.FirstOrDefault(c => c.NuméroPermisConduire == NuméroPermisConduire),
+                    SuccursaleDeRetour = dépôt.Succursales.FirstOrDefault(s =>s.CodeSuccursale.ToString() == CodeSuccursale),
+                    DateDeLocation = DateTime.Now.Date,
+                    NombreJoursLocation = int.Parse(NombreJoursLocation),
+                    Voiture = dépôt.Voitures.FirstOrDefault(v => v.NuméroVoiture.ToString() == NuméroVoiture)
+                });
                 return Redirect("../Home/Index");
             }
             return View(p_lvm);
