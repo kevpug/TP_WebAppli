@@ -29,21 +29,30 @@ namespace TP_Web.Controllers
         public IActionResult RetournerVoiture(RetourVoitureModèle p_voiture)
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
-
             var location = dépôt.Locations.Where(l => l.Voiture.NuméroVoiture == p_voiture.NuméroVoiture).FirstOrDefault();
 
 
-            if (location.Voiture.Millage > p_voiture.NouveauMillage)
-                ModelState.AddModelError(nameof(RetourVoitureModèle.NouveauMillage), "La voiture à un millage inférieur au moment où elle a été loué");
+            if (location is null)
+            {
+                ModelState.AddModelError(nameof(RetourVoitureModèle.NuméroVoiture), "Il n'y a pas de locations existantes pour cette voiture");
 
-            if (location.Client.NuméroPermisConduire != p_voiture.NuméroPermisConduire && dépôt.Locations.Any(v => v.Voiture.NuméroVoiture == p_voiture.NuméroVoiture))
-                ModelState.AddModelError(nameof(RetourVoitureModèle.NuméroPermisConduire), "La voiture n'est pas actuellement louée au client désigné");
+                return View();
+            }
+            else
+            {
+                if (location.Voiture.Millage > p_voiture.NouveauMillage)
+                    ModelState.AddModelError(nameof(RetourVoitureModèle.NouveauMillage), "La voiture à un millage inférieur au moment où elle a été loué");
 
-            if (!dépôt.Voitures.Any(v => v.NuméroVoiture == p_voiture.NuméroVoiture))
-                ModelState.AddModelError(nameof(RetourVoitureModèle.NuméroVoiture), "Aucune voiture trouvé associé à ce numéro");
+                if (location.Client.NuméroPermisConduire != p_voiture.NuméroPermisConduire && dépôt.Locations.Any(v => v.Voiture.NuméroVoiture == p_voiture.NuméroVoiture))
+                    ModelState.AddModelError(nameof(RetourVoitureModèle.NuméroPermisConduire), "La voiture n'est pas actuellement louée au client désigné");
 
-            if (!dépôt.Succursales.Any(v => v.SuccursaleId == p_voiture.SuccursaleDeRetour))
-                ModelState.AddModelError(nameof(RetourVoitureModèle.SuccursaleDeRetour), "Aucune succursale trouvé à ce numéro");
+                if (!dépôt.Voitures.Any(v => v.NuméroVoiture == p_voiture.NuméroVoiture))
+                    ModelState.AddModelError(nameof(RetourVoitureModèle.NuméroVoiture), "Aucune voiture trouvé associé à ce numéro");
+
+                if (!dépôt.Succursales.Any(v => v.SuccursaleId == p_voiture.SuccursaleDeRetour))
+                    ModelState.AddModelError(nameof(RetourVoitureModèle.SuccursaleDeRetour), "Aucune succursale trouvé à ce numéro");
+            }
+
 
 
             if (ModelState.IsValid)
@@ -55,8 +64,6 @@ namespace TP_Web.Controllers
                 TempDataVoiture.Add(p_voiture.SuccursaleDeRetour.ToString());
 
                 TempData["VoitureInfo"] = TempDataVoiture;
-
-                dépôt.RetourVoiture(p_voiture.NuméroVoiture, p_voiture.SuccursaleDeRetour); // On peut faire le changement de contexte avant l'affichage, puisque qu'il n'y pas de post apres
 
                 return RedirectToAction("FinaliserTraitement");
             }
@@ -93,11 +100,16 @@ namespace TP_Web.Controllers
 
 
             List<string> TempDataVoiture = new List<string>();
-            TempDataVoiture.Add(voitureNumero.ToString());
             TempDataVoiture.Add(location.Client.NuméroPermisConduire);
+            TempDataVoiture.Add(voitureNumero.ToString());
+            TempDataVoiture.Add(ViewBag.NomClient);
+            TempDataVoiture.Add(ViewBag.PrénomClient);
 
             TempData["ClientData"] = TempDataVoiture;
 
+
+
+            dépôt.RetourVoiture(location.Voiture.NuméroVoiture, succursaleRetourné, location.LocationId);
 
             if (shouldArrive.Date != DateTime.Now.Date)
             {
@@ -112,14 +124,40 @@ namespace TP_Web.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult FinaliserTraitement(DossierAccident da)
+        public ViewResult RapportAccident()
         {
-
-
-
+            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
 
             return View();
+        }
+
+       [HttpPost]
+        public IActionResult RapportAccident(DossierAccident da)
+        {
+            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
+
+            IEnumerable<string> client = (IEnumerable<string>)TempData["ClientData"];
+            var clientFauteux = client.ElementAt(0);
+            var voiture = client.ElementAt(1);
+
+            ViewBag.NomClient = client.ElementAt(2);
+            ViewBag.PrénomClient = client.ElementAt(3);
+            ViewBag.NumeroPermis = clientFauteux;
+            ViewBag.NumVoiture = voiture;
+
+            DossierAccident DossierRentré = new DossierAccident
+            {
+                RapportAccident = da.RapportAccident,
+                DossierFermé = false,
+                Client = dépôt.Clients.First(c => c.NuméroPermisConduire == clientFauteux),
+                Voiture = dépôt.Voitures.First(v => v.NuméroVoiture == long.Parse(voiture))
+
+            };
+
+            dépôt.AjouterDossier(DossierRentré);
+
+
+            return Redirect("Home/Index");
         }
     }
 }

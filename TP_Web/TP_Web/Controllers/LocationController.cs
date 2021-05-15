@@ -144,7 +144,7 @@ namespace TP_Web.Controllers
             {
                 ModelState.AddModelError(nameof(LocationVoitureModèle.CodeSuccursaleRetour), "Ce code de succursale n'existe pas!");
             }
-            if (dépôt.Locations.Any(l => l.DateDeLocation.Date == DateTime.Now.Date && l.Voiture.NuméroVoiture == p_lvm.NuméroVoiture))
+            if (dépôt.Locations.Any(l => l.DateDeLocation.Date == DateTime.Now.Date && l.Voiture.NuméroVoiture == p_lvm.NuméroVoiture && !l.Voiture.EstDisponible))
                 ModelState.AddModelError(nameof(LocationVoitureModèle.Modèle), "Ce véhicule a déjà été loué aujourd'hui.");
             if (p_lvm.NuméroPermisConduire is object)
             {

@@ -1,0 +1,31 @@
+﻿@model DossierAccident
+@{
+    ViewData["Title"] = "Fermeture dossier accident";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Ouverture d'un dossier d'accident</h4>
+        <form asp-action="DossierAccident" method="post" class="m-2">
+            <div class="form-group">
+                <label>Numéro du permis client : @ViewBag.NumeroPermis</label>
+            </div>
+            <div class="form-group">
+                <label>Nom client : @ViewBag.NomClient</label>
+            </div>
+            <div class="form-group">
+                <label>Prénom client : @ViewBag.PrénomClient</label>
+            </div>
+            <div class="form-group">
+                <label>Numéro de la voiture : @ViewBag.NumVoiture</label>
+            </div>
+            <div class="form-group">
+                <label asp-for="RapportAccident">Rapport de l'accident : </label>
+                <input asp-for="RapportAccident" class="form-control" />
+                <div><span asp-validation-for="RapportAccident" class="text-danger"></span></div>
+            </div>
+            <button type="submit" class="btn btn-primary">Finaliser le dossier</button>
+        </form>
+    </div>
+</div>
+

@@ -24,7 +24,7 @@ namespace TP_Web.Models
         public IQueryable<Voiture> Voitures => contexteAutoLoco.Voitures;
         public IQueryable<Location> Locations => contexteAutoLoco.Locations.Include(v => v.Voiture).Include(s => s.SuccursaleDeRetour).Include(c => c.Client);
         public IQueryable<Client> Clients => contexteAutoLoco.Clients;
-        public IQueryable<DossierAccident> DossierAccidents => contexteAutoLoco.DossierAccidents;
+        public IQueryable<DossierAccident> DossierAccidents => contexteAutoLoco.DossierAccidents.Include(v => v.Voiture).Include(c => c.Client);
 
 
         public void AjouterSuccursale(Succursale p_succursale)
@@ -54,12 +54,15 @@ namespace TP_Web.Models
             contexteAutoLoco.SaveChanges();
         }
 
-        public void RetourVoiture(long? NoVoiture, long? codeSuccursale)
+        public void RetourVoiture(long? NoVoiture, long? codeSuccursale, int locationID)
         {
             var voiture = contexteAutoLoco.Voitures.Find(NoVoiture);
             voiture.EstDisponible = true;
             var succursale = contexteAutoLoco.Succursales.Find((int)codeSuccursale);
             voiture.Succursale = succursale;
+
+            var location = contexteAutoLoco.Locations.Find(locationID);
+            contexteAutoLoco.Locations.Remove(location);
 
             contexteAutoLoco.SaveChanges();
         }
