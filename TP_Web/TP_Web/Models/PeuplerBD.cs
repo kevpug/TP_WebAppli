@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Linq;
 
 namespace TP_Web.Models
@@ -86,7 +87,7 @@ namespace TP_Web.Models
                         {
                             NuméroVoiture = 3,
                             EstDisponible = true,
-                            Succursale = contexte.Succursales.First(),
+                            Succursale = contexte.Succursales.Last(),
                             Année = 2012,
                             Groupe = Voiture.GroupeVoiture.Sedan,
                             Millage = 112020,
@@ -119,6 +120,34 @@ namespace TP_Web.Models
                                 NuméroTéléphone = "5146157821",
                             });
             }
+
+            if (!contexte.Locations.Any())
+            {
+                contexte.Locations.AddRange(
+                    new Location
+                    {
+                        DateDeLocation = DateTime.Now,
+                        SuccursaleDeRetour = contexte.Succursales.First(),
+                        Client = contexte.Clients.First(),
+                        NombreJoursLocation = 4,
+                        Voiture = contexte.Voitures.First()
+                    });
+            }
+
+            if (!contexte.DossierAccidents.Any())
+            {
+                contexte.DossierAccidents.AddRange(
+                            new DossierAccident
+                            {
+                                Client = contexte.Clients.First(),
+                                DossierFermé = false,
+                                RapportAccident = "il allait vite",
+                                Voiture = contexte.Voitures.Last()
+                            });
+
+            }
+
+
         }
     }
 }
