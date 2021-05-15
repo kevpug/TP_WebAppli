@@ -3,9 +3,11 @@
     public interface ReadMe
     {
         /*
-         * Créateurs
+         * Créateurs:
          * Arnaud Labrecque : 1679694
          * Kevin Pugliese : 1793507
+         * 
+         * Exigences:
          * SDK ASP.Net Core 3.1.407 
          * Bootstrap 4.6.0
          * FontAwesome 4.7.0
@@ -15,13 +17,14 @@
          * AspNetCore Identity 2.20
          * AspNetCore Identity Entity FrameWork Core 3.1.12
          * 
-         * Cette application web est le squelette pour une compagnie de location de voitures. Un utilisateur se connecte
-         * et selon ses permissions, peut ajouter un autre utilisateur à l'application (réservé aux gérants), ajouter une succursale ou 
-         * une voiture à une succursale particulière. Le projet est migré sur une base de donnée Code First, implémentant le contexte AutoLoco et ayant
-         * pour tables Voitures et Surccursale. L'application se sert aussi de l'API de Microsoft Identity afin de connecter et valider les Utilisateurs.
+         * Description:
+         * Dans le cadre du cours 420-4DW-HY Développement d'application Web, nous développons une application web qui 
+         * sert de squelette pour une compagnie de location de voitures. Dans cette application, un commis peut ajouter une voiture, louer une voiture,
+         * créer un client, effectuer un retour ainsi que ouvrir et fermer un dossier d'accident. Pour le gérant, il a peut faire tous ce qu'un commis peut faire
+         * et en plus peut créer des succursales et ajouter des utilisateurs. Le projet est migré sur une base de donnée Code First, implémentant le contexte AutoLoco et ayant
+         * pour tables Voitures, Clients, Locations, DossierAccidents  et Surccursale. L'application se sert aussi de l'API de Microsoft Identity afin de connecter et valider les Utilisateurs.
          * 
-         * Le projet est en développement en ce moment; la vérification de connexion est basée sur une variable static booléenne 
-         * et devrait changer dans le futur.
+         * Status du projet est terminé pour les TPs et en cours pour les versions futures.
          * 
          * Cette application est remis en format compressé .zip. Il faut le décompresser et ouvrir la solution afin de voir 
          * et tester le code. Touche F5 pour partir en mode debug une fois la solution ouverte.
@@ -37,10 +40,10 @@
          * 
          *      dotnet ef database drop --project 'nom du projet' --context 'nom du contexte'
          * 
-         * Lors de l'ouverture du programme, pour se connecter en tant que Gérant, il faut entrer le nom d'utilisateur : AdminI et le mot de passe InimdA23.
-         * Pour se connecter en tant que Commis, il faut entrer le nom d'utilisateur : CommisI et le mot de passe SimmoC23.
-         * Pour se connecter en tant qu'Utilisateur, il faut entrer le nom d'utilisateur : UtilisateurI et le mot de passe RuetasilitU23.
-         * 
+         * Usagers de base pour l'application :
+         * Gérant: AdminI - InimdA23.
+         * Commis : CommisI - SimmoC23.
+         * Utilisateur : UtilisateurI - RuetasilitU23.
          * 
          */
     }
