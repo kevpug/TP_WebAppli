@@ -38,6 +38,7 @@ namespace TP_Web.Models
         }
         public void AjouterLocation(Location p_location)
         {
+            p_location.Voiture.EstDisponible = false;
             contexteAutoLoco.Locations.Add(p_location);
             contexteAutoLoco.SaveChanges();
         }
