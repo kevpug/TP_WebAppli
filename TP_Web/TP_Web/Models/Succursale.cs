@@ -25,6 +25,8 @@ namespace TP_Web.Models
 
         public IEnumerable<Voiture> Voitures { get; set; }
 
+        public IEnumerable<Location> Locations { get; set; }
+
 
     }
 }

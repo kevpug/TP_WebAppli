@@ -143,7 +143,9 @@ namespace TP_Web.Migrations.ContexteAutoLocoMigrations
             migrationBuilder.CreateIndex(
                 name: "IX_Locations_ClientId",
                 table: "Locations",
-                column: "ClientId");
+                column: "ClientId",
+                unique: true,
+                filter: "[ClientId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Locations_SuccursaleDeRetourSuccursaleId",
@@ -153,7 +155,9 @@ namespace TP_Web.Migrations.ContexteAutoLocoMigrations
             migrationBuilder.CreateIndex(
                 name: "IX_Locations_VoitureId",
                 table: "Locations",
-                column: "VoitureId");
+                column: "VoitureId",
+                unique: true,
+                filter: "[VoitureId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Voitures_SuccursaleId",

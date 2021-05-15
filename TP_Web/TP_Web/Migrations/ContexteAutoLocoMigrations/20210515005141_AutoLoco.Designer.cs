@@ -10,7 +10,7 @@ using TP_Web.Models;
 namespace TP_Web.Migrations.ContexteAutoLocoMigrations
 {
     [DbContext(typeof(ContexteAutoLoco))]
-    [Migration("20210515001430_AutoLoco")]
+    [Migration("20210515005141_AutoLoco")]
     partial class AutoLoco
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -97,11 +97,15 @@ namespace TP_Web.Migrations.ContexteAutoLocoMigrations
 
                     b.HasKey("LocationId");
 
-                    b.HasIndex("ClientId");
+                    b.HasIndex("ClientId")
+                        .IsUnique()
+                        .HasFilter("[ClientId] IS NOT NULL");
 
                     b.HasIndex("SuccursaleDeRetourSuccursaleId");
 
-                    b.HasIndex("VoitureId");
+                    b.HasIndex("VoitureId")
+                        .IsUnique()
+                        .HasFilter("[VoitureId] IS NOT NULL");
 
                     b.ToTable("Locations");
                 });
@@ -195,16 +199,16 @@ namespace TP_Web.Migrations.ContexteAutoLocoMigrations
             modelBuilder.Entity("TP_Web.Models.Location", b =>
                 {
                     b.HasOne("TP_Web.Models.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId");
+                        .WithOne("Location")
+                        .HasForeignKey("TP_Web.Models.Location", "ClientId");
 
                     b.HasOne("TP_Web.Models.Succursale", "SuccursaleDeRetour")
-                        .WithMany()
+                        .WithMany("Locations")
                         .HasForeignKey("SuccursaleDeRetourSuccursaleId");
 
                     b.HasOne("TP_Web.Models.Voiture", "Voiture")
-                        .WithMany()
-                        .HasForeignKey("VoitureId");
+                        .WithOne("Location")
+                        .HasForeignKey("TP_Web.Models.Location", "VoitureId");
                 });
 
             modelBuilder.Entity("TP_Web.Models.Voiture", b =>

@@ -57,13 +57,9 @@ namespace TP_Web.Controllers
         [Authorize(Roles = "Gerant, Commis")]
         public ViewResult FinaliserTraitement()
         {
-            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
-            return View();
-        }
+            ContexteAutoLoco context = new ContexteAutoLoco();
 
-        [HttpPost]
-        public IActionResult FinaliserTraitement(RetourVoitureModèle p_voiture)
-        {
+            ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
             IEnumerable<string> voiture = (IEnumerable<string>)TempData["VoitureInfo"];
             long voitureNumero = long.Parse(voiture.First()); // J'ai accès au numéro de la voiture avec ça
 
@@ -74,6 +70,13 @@ namespace TP_Web.Controllers
             ViewBag.LocationDate = DateDeLocation;
             ViewBag.NbJourRetour = location.NombreJoursLocation;
             ViewBag.SuccursalePrevu = location.SuccursaleDeRetour.SuccursaleId;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult FinaliserTraitement(RetourVoitureModèle p_voiture)
+        {
+
 
             
 
