@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TP_Web.Models;
 
-namespace TP_Web.Migrations
+namespace TP_Web.Migrations.ContexteAutoLocoMigrations
 {
     [DbContext(typeof(ContexteAutoLoco))]
     partial class ContexteAutoLocoModelSnapshot : ModelSnapshot

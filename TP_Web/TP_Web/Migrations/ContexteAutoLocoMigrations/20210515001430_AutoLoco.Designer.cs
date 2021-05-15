@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TP_Web.Models;
 
-namespace TP_Web.Migrations
+namespace TP_Web.Migrations.ContexteAutoLocoMigrations
 {
     [DbContext(typeof(ContexteAutoLoco))]
-    [Migration("20210514223003_AutoLoco")]
+    [Migration("20210515001430_AutoLoco")]
     partial class AutoLoco
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

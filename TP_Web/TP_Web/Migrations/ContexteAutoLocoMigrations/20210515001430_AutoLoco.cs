@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace TP_Web.Migrations
+namespace TP_Web.Migrations.ContexteAutoLocoMigrations
 {
     public partial class AutoLoco : Migration
     {
