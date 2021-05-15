@@ -58,7 +58,7 @@ namespace TP_Web.Models
         {
             var voiture = contexteAutoLoco.Voitures.Find(NoVoiture);
             voiture.EstDisponible = true;
-            var succursale = contexteAutoLoco.Succursales.Find(codeSuccursale);
+            var succursale = contexteAutoLoco.Succursales.Find((int)codeSuccursale);
             voiture.Succursale = succursale;
 
             contexteAutoLoco.SaveChanges();

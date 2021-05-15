@@ -31,9 +31,20 @@ namespace TP_Web.Controllers
         {
             ViewBag.Noms = "Arnaud Labrecque & Kevin Pugliese";
 
+            var location = dépôt.Locations.Where(l => l.Voiture.NuméroVoiture == p_voiture.NuméroVoiture).FirstOrDefault();
+
+
+            if (location.Voiture.Millage > p_voiture.NouveauMillage)
+                ModelState.AddModelError(nameof(RetourVoitureModèle.NouveauMillage), "La voiture à un millage inférieur au moment où elle a été loué");
+
+            if (location.Client.NuméroPermisConduire != p_voiture.NuméroPermisConduire && dépôt.Locations.Any(v => v.Voiture.NuméroVoiture == p_voiture.NuméroVoiture))
+                ModelState.AddModelError(nameof(RetourVoitureModèle.NuméroPermisConduire), "La voiture n'est pas actuellement louée au client désigné");
 
             if (!dépôt.Voitures.Any(v => v.NuméroVoiture == p_voiture.NuméroVoiture))
                 ModelState.AddModelError(nameof(RetourVoitureModèle.NuméroVoiture), "Aucune voiture trouvé associé à ce numéro");
+
+            if (!dépôt.Succursales.Any(v => v.SuccursaleId == p_voiture.SuccursaleDeRetour))
+                ModelState.AddModelError(nameof(RetourVoitureModèle.SuccursaleDeRetour), "Aucune succursale trouvé à ce numéro");
 
 
             if (ModelState.IsValid)
@@ -46,7 +57,7 @@ namespace TP_Web.Controllers
 
                 TempData["VoitureInfo"] = TempDataVoiture;
 
-                dépôt.RetourVoiture(p_voiture.NuméroVoiture, p_voiture.SuccursaleDeRetour);
+                dépôt.RetourVoiture(p_voiture.NuméroVoiture, p_voiture.SuccursaleDeRetour); // On peut faire le changement de contexte avant l'affichage, puisque qu'il n'y pas de post apres
 
                 return RedirectToAction("FinaliserTraitement");
             }
@@ -78,6 +89,8 @@ namespace TP_Web.Controllers
             ViewBag.NomClient = location.Client.Nom;
             ViewBag.PrénomClient = location.Client.Prénom;
             ViewBag.TelClient = location.Client.NuméroTéléphone;
+            ViewBag.AvertissementSuccursale = false;
+            ViewBag.AvertissementDate = false;
 
             if (shouldArrive.Date != DateTime.Now.Date)
             {
@@ -97,7 +110,7 @@ namespace TP_Web.Controllers
         {
 
 
-            
+
 
             return View();
         }
